@@ -23,14 +23,45 @@ public class HistorialClinico {
         this.observacionesMedicas = observacionesMedicas;
     }
 
-    public String getDniPaciente() { return dniPaciente; }
-    public void setDniPaciente(String dniPaciente) { this.dniPaciente = dniPaciente; }
-    public String getTipoSangre() { return tipoSangre; }
-    public void setTipoSangre(String tipoSangre) { this.tipoSangre = tipoSangre; }
-    public String getAlergias() { return alergias; }
-    public void setAlergias(String allergies) { this.alergias = allergies; }
-    public String getEnfermedadesCronicas() { return enfermedadesCronicas; }
-    public void setEnfermedadesCronicas(String enf) { this.enfermedadesCronicas = enf; }
-    public String getObservacionesMedicas() { return observacionesMedicas; }
-    public void setObservacionesMedicas(String obs) { this.observacionesMedicas = obs; }
+    public String getDniPaciente() {
+        return dniPaciente;
+    }
+
+    public void setDniPaciente(String dniPaciente) {
+        this.dniPaciente = dniPaciente;
+    }
+
+    public String getTipoSangre() {
+        return tipoSangre;
+    }
+
+    public void setTipoSangre(String tipoSangre) {
+        this.tipoSangre = tipoSangre;
+    }
+
+    public String getAlergias() {
+        return alergias;
+    }
+
+    public void setAlergias(String alergias) {
+        this.alergias = alergias;
+    }
+
+    public String getEnfermedadesCronicas() {
+        return enfermedadesCronicas;
+    }
+
+    public void setEnfermedadesCronicas(String enfermedadesCronicas) {
+        this.enfermedadesCronicas = enfermedadesCronicas;
+    }
+
+    public String getObservacionesMedicas() {
+        return observacionesMedicas;
+    }
+
+    public void setObservacionesMedicas(String observacionesMedicas) {
+        this.observacionesMedicas = observacionesMedicas;
+    }
+
+    
 }
