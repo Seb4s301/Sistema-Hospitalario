@@ -1,4 +1,4 @@
-package sistema.hospitalario;
+package HorariosHospital_desarrollando;
 
 public class SistemaHospitalario {
     

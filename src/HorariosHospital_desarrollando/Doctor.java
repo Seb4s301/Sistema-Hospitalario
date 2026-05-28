@@ -1,4 +1,4 @@
-package sistema.hospitalario;
+package HorariosHospital_desarrollando;
 
 import com.sistemaHospitalario.ListaDoble.ListaDobleTurnos;
 import java.time.LocalTime;
