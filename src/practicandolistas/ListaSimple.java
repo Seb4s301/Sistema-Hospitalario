@@ -1,8 +1,10 @@
 package practicandolistas;
 
+import pruebaLitsa.nodoD;
+
 
 public class ListaSimple {
-    private Nodo ini, fin;
+    private nodoD ini, fin;
     
     public ListaSimple(){
         this.ini=null;
@@ -10,7 +12,7 @@ public class ListaSimple {
     }
     
     public void insertar(int dato){
-        Nodo nuevo = new Nodo(dato);
+        nodoD nuevo = new nodoD(dato);
         
         if(ini==null){
             ini=nuevo;
@@ -27,7 +29,7 @@ public class ListaSimple {
             System.out.println("Lista vacia");
             return;
         }
-        Nodo actual=ini;
+        nodoD actual=ini;
         System.out.println("");
         while(actual!=null){
             System.out.print("["+actual.getDato()+"]->");
@@ -45,8 +47,8 @@ public class ListaSimple {
             return;
         }
         
-        Nodo actual = ini.getSgte();
-        Nodo anterior=ini;
+        nodoD actual = ini.getSgte();
+        nodoD anterior=ini;
         
         while(actual!=null){
             
@@ -69,7 +71,7 @@ public class ListaSimple {
     public double promedio(){
         if(ini==null){ System.out.println("Lista vacia");return 0;}
         
-        Nodo actual = ini;
+        nodoD actual = ini;
         int cantidad=0;
         int total=0;
         double promedio;
@@ -91,7 +93,7 @@ public class ListaSimple {
     public int sumar(){
         if(ini==null){System.out.println("Lista vacia");return 0;}
         
-        Nodo actual =ini;
+        nodoD actual =ini;
         int total=0;
         
         while(actual!=null){
@@ -109,7 +111,7 @@ public class ListaSimple {
     public void MayorMenor(){
         if(ini==null){System.out.println("lista vacia");return;}
         
-        Nodo actual=ini;
+        nodoD actual=ini;
         int mayor=ini.getDato();
         int menor=ini.getDato();
         
@@ -139,7 +141,7 @@ public class ListaSimple {
         int mayor=0;
         double prom =promedio();
         
-        Nodo actual = ini;
+        nodoD actual = ini;
         
         while(actual!=null){
             
@@ -161,10 +163,10 @@ public class ListaSimple {
     public void ordenamiento(){
         if(ini==null){System.out.println("lista vacia");return;}
         
-        Nodo actual=ini;
+        nodoD actual=ini;
         
         while(actual!=null){
-            Nodo sgte = actual.getSgte();
+            nodoD sgte = actual.getSgte();
             
             while(sgte!=null){
                 if(actual.getDato()>sgte.getDato()){
@@ -185,7 +187,7 @@ public class ListaSimple {
     }
     
     public void insertarInicio(int dato){
-        Nodo nuevo = new Nodo(dato);
+        nodoD nuevo = new nodoD(dato);
         
         if(ini==null){
             ini=nuevo;
@@ -200,7 +202,7 @@ public class ListaSimple {
     public void InsertarEnPocision(int posicion,int dato){
         if(posicion==0){ insertarInicio(dato); return; }
         
-        Nodo actual=ini;
+        nodoD actual=ini;
         int contador=0;
         
         while(actual!=null&& contador < posicion-1){
@@ -218,7 +220,7 @@ public class ListaSimple {
             return;
         }
         
-        Nodo nuevo =new Nodo(dato);
+        nodoD nuevo =new nodoD(dato);
         
         nuevo.setSgte(actual.getSgte());
         actual.setSgte(nuevo);
