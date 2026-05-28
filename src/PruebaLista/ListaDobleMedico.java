@@ -10,8 +10,8 @@ package PruebaLista;
  */
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
-import prueba1.Medico;
-import prueba1.NodoMedico;
+import PruebaNodosClases.Medico;
+import PruebaNodosClases.NodoMedico;
 
 public class ListaDobleMedico {
     NodoMedico ini;

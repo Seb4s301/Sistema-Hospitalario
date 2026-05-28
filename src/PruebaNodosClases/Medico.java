@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package prueba1;
+package PruebaNodosClases;
 
 /**
  *
@@ -10,28 +10,30 @@ package prueba1;
  */
 import java.util.Date;
 
-public class Paciente {
-    private int dni; // Cambiado a String para soportar ceros a la izquierda y validaciones exactas
+public class Medico {
+    private String dni;
     private String nombres;
     private String apellidos;
     private Date fechaNacimiento;
     private String celular;
     private String seguro;
+    private String especialidad; // Se asigna desde el arreglo de especialidades global
 
-    public Paciente(int dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String seguro) {
+    public Medico(String dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String seguro, String especialidad) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
         this.seguro = seguro;
+        this.especialidad = especialidad;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -75,6 +77,13 @@ public class Paciente {
         this.seguro = seguro;
     }
 
-    
+    public String getEspecialidad() {
+        return especialidad;
+    }
 
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    
 }
