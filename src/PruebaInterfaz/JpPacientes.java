@@ -7,8 +7,8 @@ import PruebaLista.ListaDoblePaciente;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import PruebaNodosClases.NodoPaciente;
-import PruebaNodosClases.Paciente;
+import PruebaNodo.NodoPaciente;
+import PruebaClases.Paciente;
 
 /**
  *

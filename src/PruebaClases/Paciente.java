@@ -1,24 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package PruebaNodosClases;
+package PruebaClases;
 
-/**
- *
- * @author Jean
- */
 import java.util.Date;
 
 public class Paciente {
-    private int dni; // Cambiado a String para soportar ceros a la izquierda y validaciones exactas
+    private int dni; 
     private String nombres;
     private String apellidos;
-    private Date fechaNacimiento;
-    private String celular;
+    private Date fechaNacimiento; 
+    private int celular;
     private String seguro;
 
-    public Paciente(int dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String seguro) {
+    public Paciente(int dni, String nombres, String apellidos, Date fechaNacimiento, int celular, String seguro) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -59,11 +51,11 @@ public class Paciente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getCelular() {
+    public int getCelular() {
         return celular;
     }
 
-    public void setCelular(String celular) {
+    public void setCelular(int celular) {
         this.celular = celular;
     }
 
@@ -76,5 +68,4 @@ public class Paciente {
     }
 
     
-
 }

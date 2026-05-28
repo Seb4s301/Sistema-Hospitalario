@@ -9,8 +9,8 @@ package PruebaLista;
  * @author Jean
  */
 import javax.swing.table.DefaultTableModel;
-import PruebaNodosClases.HistorialClinico;
-import PruebaNodosClases.NodoHistorial;
+import PruebaClases.HistorialClinico;
+import PruebaNodo.NodoHistorial;
 
 public class ListaDobleHistorial {
     NodoHistorial ini;

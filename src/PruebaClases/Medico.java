@@ -1,25 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package PruebaNodosClases;
+package PruebaClases;
 
-/**
- *
- * @author Jean
- */
 import java.util.Date;
 
 public class Medico {
-    private String dni;
+    private int dni;
     private String nombres;
     private String apellidos;
     private Date fechaNacimiento;
-    private String celular;
+    private int celular;
     private String seguro;
-    private String especialidad; // Se asigna desde el arreglo de especialidades global
+    private String especialidad;
 
-    public Medico(String dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String seguro, String especialidad) {
+    public Medico(int dni, String nombres, String apellidos, Date fechaNacimiento, int celular, String seguro, String especialidad) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -29,11 +21,11 @@ public class Medico {
         this.especialidad = especialidad;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
@@ -61,11 +53,11 @@ public class Medico {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getCelular() {
+    public int getCelular() {
         return celular;
     }
 
-    public void setCelular(String celular) {
+    public void setCelular(int celular) {
         this.celular = celular;
     }
 
@@ -84,6 +76,7 @@ public class Medico {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-
+    
+    
     
 }
