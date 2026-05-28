@@ -10,6 +10,7 @@ import PruebaClases.Paciente;
  *
  * @author Jean
  */
+
 public class NodoPaciente {
     Paciente dato;
     NodoPaciente sgte;
@@ -21,10 +22,29 @@ public class NodoPaciente {
         this.ant = null;
     }
 
-    public Paciente getDato() { return dato; }
-    public void setDato(Paciente dato) { this.dato = dato; }
-    public NodoPaciente getSgte() { return sgte; }
-    public void setSgte(NodoPaciente sgte) { this.sgte = sgte; }
-    public NodoPaciente getAnt() { return ant; }
-    public void setAnt(NodoPaciente ant) { this.ant = ant; }
+    public Paciente getDato() {
+        return dato;
+    }
+
+    public void setDato(Paciente dato) {
+        this.dato = dato;
+    }
+
+    public NodoPaciente getSgte() {
+        return sgte;
+    }
+
+    public void setSgte(NodoPaciente sgte) {
+        this.sgte = sgte;
+    }
+
+    public NodoPaciente getAnt() {
+        return ant;
+    }
+
+    public void setAnt(NodoPaciente ant) {
+        this.ant = ant;
+    }
+
+    
 }

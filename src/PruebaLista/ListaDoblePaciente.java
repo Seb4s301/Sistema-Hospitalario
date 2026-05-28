@@ -1,21 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package PruebaLista;
+
+import PruebaClases.Paciente;
+import PruebaNodo.NodoPaciente;
+import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author Jean
  */
-import javax.swing.table.DefaultTableModel;
-import java.text.SimpleDateFormat;
-import PruebaNodo.NodoPaciente;
-import PruebaClases.Paciente;
 
 public class ListaDoblePaciente {
-    NodoPaciente ini;
-    NodoPaciente fin;
+    private NodoPaciente ini;
+    private NodoPaciente fin;
 
     public ListaDoblePaciente() {
         this.ini = null;
@@ -33,7 +30,6 @@ public class ListaDoblePaciente {
         }
     }
 
-    //Lista de columnas
     private String colPaciente[] = {
         "DNI", "Nombres", "Apellidos", "Fecha Nacimiento", "Celular", "Seguro"
     };
@@ -44,34 +40,34 @@ public class ListaDoblePaciente {
         
         for (NodoPaciente tmp = ini; tmp != null; tmp = tmp.getSgte()) {
             String[] fila = new String[6];
-            fila[0] = tmp.getDato().getDni();
+            fila[0] = String.valueOf(tmp.getDato().getDni());
             fila[1] = tmp.getDato().getNombres();
             fila[2] = tmp.getDato().getApellidos();
-            fila[3] = (tmp.getDato().getFechaNacimiento() != null) ? sdf.format(tmp.getDato().getFechaNacimiento()) : "";
-            fila[4] = tmp.getDato().getCelular();
+            fila[3] = tmp.getDato().getFechaNacimiento() != null ? sdf.format(tmp.getDato().getFechaNacimiento()) : "";
+            fila[4] = String.valueOf(tmp.getDato().getCelular());
             fila[5] = tmp.getDato().getSeguro();
             modeloPaciente.addRow(fila);
         }
         return modeloPaciente;
     }
 
-    public boolean modificar(String dni, String nuevosNombres, String nuevosApellidos, java.util.Date nuevaFecha, String nuevoCelular, String nuevoSeguro) {
+    public boolean modificar(int dni, String nuevosNombres, String nuevosApellidos, java.util.Date nuevaFecha, int nuevoCelular, String nuevoSeguro) {
         NodoPaciente nodo = buscar(dni);
         if (nodo != null) {
             Paciente p = nodo.getDato();
             p.setNombres(nuevosNombres);
             p.setApellidos(nuevosApellidos);
-            p.setFechaNacimiento(nuevaFecha);
-            p.setCelular(nuevoCelular);
+            p.setFechaNacimiento(nuevaFecha); 
+            p.setCelular(nuevoCelular); 
             p.setSeguro(nuevoSeguro);
             return true;
         }
         return false;
     }
 
-    public void eliminarID(String dni) {
+    public void eliminarID(int dni) {
         NodoPaciente tmp = ini;
-        while (tmp != null && !tmp.getDato().getDni().equals(dni)) {
+        while (tmp != null && tmp.getDato().getDni() != dni) {
             tmp = tmp.getSgte();
         }
         if (tmp == null) return;
@@ -90,16 +86,14 @@ public class ListaDoblePaciente {
         }
     }
 
-    public NodoPaciente buscar(String dni) {
+    public NodoPaciente buscar(int dni) {
         NodoPaciente tmp = ini;
         while (tmp != null) {
-            if (tmp.getDato().getDni().equals(dni)) {
+            if (tmp.getDato().getDni() == dni) {
                 return tmp;
             }
             tmp = tmp.getSgte();
         }
         return null;
     }
-
-    public NodoPaciente getIni() { return ini; }
 }

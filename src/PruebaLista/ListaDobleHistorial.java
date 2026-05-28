@@ -4,20 +4,26 @@
  */
 package PruebaLista;
 
-/**
- *
- * @author Jean
- */
 import javax.swing.table.DefaultTableModel;
 import PruebaClases.HistorialClinico;
 import PruebaNodo.NodoHistorial;
 
+/**
+ *
+ * @author Jean
+ */
+
+import PruebaClases.HistorialClinico;
+import PruebaNodo.NodoHistorial;
+import javax.swing.table.DefaultTableModel;
+
 public class ListaDobleHistorial {
-    NodoHistorial ini;
-    NodoHistorial fin;
+    private NodoHistorial ini;
+    private NodoHistorial fin;
 
     public ListaDobleHistorial() {
-        this.ini = fin = null;
+        this.ini = null;
+        this.fin = null;
     }
 
     public void insertar(HistorialClinico dato) {
@@ -30,8 +36,7 @@ public class ListaDobleHistorial {
             fin = nuevo;
         }
     }
-    
-    //Lista de columnas
+
     private String colHistorial[] = {
         "DNI Paciente", "Tipo Sangre", "Alergias", "Enfermedades Cronicas", "Observaciones"
     };
@@ -41,7 +46,7 @@ public class ListaDobleHistorial {
         
         for (NodoHistorial tmp = ini; tmp != null; tmp = tmp.getSgte()) {
             String[] fila = new String[5];
-            fila[0] = tmp.getDato().getDniPaciente();
+            fila[0] = String.valueOf(tmp.getDato().getDniPaciente());
             fila[1] = tmp.getDato().getTipoSangre();
             fila[2] = tmp.getDato().getAlergias();
             fila[3] = tmp.getDato().getEnfermedadesCronicas();
@@ -51,7 +56,7 @@ public class ListaDobleHistorial {
         return modeloHistorial;
     }
 
-    public boolean modificar(String dniPaciente, String nuevoTipoSangre, String nuevasAlergias, String nuevasEnfermedades, String nuevasObservaciones) {
+    public boolean modificar(int dniPaciente, String nuevoTipoSangre, String nuevasAlergias, String nuevasEnfermedades, String nuevasObservaciones) {
         NodoHistorial nodo = buscarPorDni(dniPaciente);
         if (nodo != null) {
             HistorialClinico h = nodo.getDato();
@@ -64,9 +69,9 @@ public class ListaDobleHistorial {
         return false;
     }
 
-    public void eliminarID(String dniPaciente) {
+    public void eliminarID(int dniPaciente) {
         NodoHistorial tmp = ini;
-        while (tmp != null && !tmp.getDato().getDniPaciente().equals(dniPaciente)) {
+        while (tmp != null && tmp.getDato().getDniPaciente() != dniPaciente) {
             tmp = tmp.getSgte();
         }
         if (tmp == null) return;
@@ -85,16 +90,14 @@ public class ListaDobleHistorial {
         }
     }
 
-    public NodoHistorial buscarPorDni(String dniPaciente) {
+    public NodoHistorial buscarPorDni(int dniPaciente) {
         NodoHistorial tmp = ini;
         while (tmp != null) {
-            if (tmp.getDato().getDniPaciente().equals(dniPaciente)) {
+            if (tmp.getDato().getDniPaciente() == dniPaciente) {
                 return tmp;
             }
             tmp = tmp.getSgte();
         }
         return null;
     }
-
-    public NodoHistorial getIni() { return ini; }
 }

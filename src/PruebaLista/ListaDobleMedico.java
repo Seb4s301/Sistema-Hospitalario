@@ -1,24 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package PruebaLista;
+
+import PruebaClases.Medico;
+import PruebaNodo.NodoMedico;
+import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author Jean
  */
-import javax.swing.table.DefaultTableModel;
-import java.text.SimpleDateFormat;
-import PruebaClases.Medico;
-import PruebaNodo.NodoMedico;
 
 public class ListaDobleMedico {
-    NodoMedico ini;
-    NodoMedico fin;
+    private NodoMedico ini;
+    private NodoMedico fin;
 
     public ListaDobleMedico() {
-        this.ini = fin = null;
+        this.ini = null;
+        this.fin = null;
     }
 
     public void insertar(Medico dato) {
@@ -31,7 +29,7 @@ public class ListaDobleMedico {
             fin = nuevo;
         }
     }
-    //Lista de columnas
+
     private String colMedico[] = {
         "DNI", "Nombres", "Apellidos", "Especialidad", "Fecha Nacimiento", "Celular", "Seguro"
     };
@@ -42,26 +40,26 @@ public class ListaDobleMedico {
         
         for (NodoMedico tmp = ini; tmp != null; tmp = tmp.getSgte()) {
             String[] fila = new String[7];
-            fila[0] = tmp.getDato().getDni();
+            fila[0] = String.valueOf(tmp.getDato().getDni());
             fila[1] = tmp.getDato().getNombres();
             fila[2] = tmp.getDato().getApellidos();
             fila[3] = tmp.getDato().getEspecialidad();
-            fila[4] = (tmp.getDato().getFechaNacimiento() != null) ? sdf.format(tmp.getDato().getFechaNacimiento()) : "";
-            fila[5] = tmp.getDato().getCelular();
+            fila[4] = tmp.getDato().getFechaNacimiento() != null ? sdf.format(tmp.getDato().getFechaNacimiento()) : "";
+            fila[5] = String.valueOf(tmp.getDato().getCelular()); // Mapeo de int a String para la tabla
             fila[6] = tmp.getDato().getSeguro();
             modeloMedico.addRow(fila);
         }
         return modeloMedico;
     }
 
-    public boolean modificar(String dni, String nuevosNombres, String nuevosApellidos, java.util.Date nuevaFecha, String nuevoCelular, String nuevoSeguro, String nuevaEspecialidad) {
+    public boolean modificar(int dni, String nuevosNombres, String nuevosApellidos, java.util.Date nuevaFecha, int nuevoCelular, String nuevoSeguro, String nuevaEspecialidad) {
         NodoMedico nodo = buscar(dni);
         if (nodo != null) {
             Medico m = nodo.getDato();
             m.setNombres(nuevosNombres);
             m.setApellidos(nuevosApellidos);
             m.setFechaNacimiento(nuevaFecha);
-            m.setCelular(nuevoCelular);
+            m.setCelular(nuevoCelular); // Asignacion como int
             m.setSeguro(nuevoSeguro);
             m.setEspecialidad(nuevaEspecialidad);
             return true;
@@ -69,9 +67,9 @@ public class ListaDobleMedico {
         return false;
     }
 
-    public void eliminarID(String dni) {
+    public void eliminarID(int dni) {
         NodoMedico tmp = ini;
-        while (tmp != null && !tmp.getDato().getDni().equals(dni)) {
+        while (tmp != null && tmp.getDato().getDni() != dni) {
             tmp = tmp.getSgte();
         }
         if (tmp == null) return;
@@ -90,16 +88,14 @@ public class ListaDobleMedico {
         }
     }
 
-    public NodoMedico buscar(String dni) {
+    public NodoMedico buscar(int dni) {
         NodoMedico tmp = ini;
         while (tmp != null) {
-            if (tmp.getDato().getDni().equals(dni)) {
+            if (tmp.getDato().getDni() == dni) {
                 return tmp;
             }
             tmp = tmp.getSgte();
         }
         return null;
     }
-
-    public NodoMedico getIni() { return ini; }
 }

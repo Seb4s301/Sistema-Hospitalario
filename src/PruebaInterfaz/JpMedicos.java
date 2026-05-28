@@ -212,7 +212,7 @@ public class JpMedicos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
-     String dni = txtEspecialidad.getText();
+    String dni = txtEspecialidad.getText();
     String nombres = txtNombres.getText();
     String apellidos = txtApellidos.getText();
     String especialidad = txtEspecialidad.getText();
