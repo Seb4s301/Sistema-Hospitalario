@@ -3,10 +3,6 @@ package sistema.hospitalario;
 import com.sistemaHospitalario.ListaDoble.ListaDobleTurnos;
 import java.time.LocalTime;
 
-/**
- *
- * @authores Sebastian Casavilca, 
- */
 public class Doctor {
     
     enum DiaSemana { LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO }
