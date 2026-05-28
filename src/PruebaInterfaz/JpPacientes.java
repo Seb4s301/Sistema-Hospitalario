@@ -2,21 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package prueba1;
+package PruebaInterfaz;
+import PruebaLista.ListaDoblePaciente;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import prueba1.NodoPaciente;
+import prueba1.Paciente;
 
 /**
  *
  * @author Jean
  */
-public class Pacientes extends javax.swing.JPanel {
+public class JpPacientes extends javax.swing.JPanel {
     private ListaDoblePaciente listaPacientes;
     /**
      * Creates new form Pacientes
      */
-    public Pacientes() {
+    public JpPacientes() {
         initComponents();
         listaPacientes = new ListaDoblePaciente();
         listar();
@@ -47,6 +50,8 @@ public class Pacientes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         btnPacInsertar = new javax.swing.JButton();
         btnPacModificar = new javax.swing.JButton();
         btnPacEliminar = new javax.swing.JButton();
@@ -55,7 +60,6 @@ public class Pacientes extends javax.swing.JPanel {
         txtDni = new javax.swing.JTextField();
         txtPacNombres = new javax.swing.JTextField();
         txtPacApellidos = new javax.swing.JTextField();
-        txtPacFechaNac = new javax.swing.JTextField();
         txtPacCelular = new javax.swing.JTextField();
         txtPacSeguro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -64,6 +68,11 @@ public class Pacientes extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        txtPacFechaNac = new javax.swing.JFormattedTextField();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -117,13 +126,6 @@ public class Pacientes extends javax.swing.JPanel {
             }
         });
 
-        txtPacFechaNac.setToolTipText("**/**/****");
-        txtPacFechaNac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPacFechaNacActionPerformed(evt);
-            }
-        });
-
         txtPacSeguro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPacSeguroActionPerformed(evt);
@@ -141,6 +143,12 @@ public class Pacientes extends javax.swing.JPanel {
         jLabel5.setText("Numero Celular");
 
         jLabel6.setText("Seguro");
+
+        try {
+            txtPacFechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**/**/****")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -164,11 +172,10 @@ public class Pacientes extends javax.swing.JPanel {
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPacCelular)
-                        .addComponent(txtPacSeguro))
-                    .addComponent(txtPacFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPacCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(txtPacSeguro)
+                    .addComponent(txtPacFechaNac))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnPacModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -177,7 +184,7 @@ public class Pacientes extends javax.swing.JPanel {
                 .addGap(38, 38, 38))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -205,8 +212,8 @@ public class Pacientes extends javax.swing.JPanel {
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPacFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(txtPacFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPacCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,10 +263,6 @@ public class Pacientes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error: Verifique el formato de la fecha (dd/mm/aaaa)");
         }
     }//GEN-LAST:event_btnPacInsertarActionPerformed
-
-    private void txtPacFechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPacFechaNacActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPacFechaNacActionPerformed
 
     private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
         // TODO add your handling code here:
@@ -342,11 +345,13 @@ public class Pacientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtPacApellidos;
     private javax.swing.JTextField txtPacCelular;
-    private javax.swing.JTextField txtPacFechaNac;
+    private javax.swing.JFormattedTextField txtPacFechaNac;
     private javax.swing.JTextField txtPacNombres;
     private javax.swing.JTextField txtPacSeguro;
     // End of variables declaration//GEN-END:variables

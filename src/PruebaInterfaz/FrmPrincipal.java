@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package prueba1;
+package PruebaInterfaz;
 
 /**
  *
@@ -11,8 +11,8 @@ package prueba1;
 public class FrmPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPrincipal.class.getName());
-    private Pacientes panelPacientes;
-    
+    private JpPacientes panelPacientes;
+    private JpMedicos panelMedicos;
     /**
      * Creates new form Principal
      */
@@ -22,17 +22,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     private void conectarPaneles() {
-        // 1. Instanciar el panel de pacientes que creaste
-        panelPacientes = new Pacientes();
+        // 1. Instanciar los paneles que creaste
+        panelPacientes = new JpPacientes();
+        panelMedicos = new JpMedicos(); // Asegurate de que la clase se llame exactamente asi
         
         // 2. Limpiar las pestañas por defecto para evitar duplicados
         jTabbedPane2.removeAll();
         
         // 3. Agregar los paneles reales asignandoles su titulo
-        jTabbedPane2.addTab("Principal", new javax.swing.JPanel()); // Panel vacio temporal
-        jTabbedPane2.addTab("Pacientes", panelPacientes);          // Conexión del panel real
-        jTabbedPane2.addTab("Medicos", new javax.swing.JPanel());   // Panel vacio temporal
-        jTabbedPane2.addTab("Historiales Clinicos", new javax.swing.JPanel()); // Panel vacio temporal
+        jTabbedPane2.addTab("Principal", new javax.swing.JPanel()); 
+        jTabbedPane2.addTab("Pacientes", panelPacientes);          
+        jTabbedPane2.addTab("Medicos", panelMedicos); // ¡CORREGIDO! Aqui iba tu variable, no un panel vacio
+        jTabbedPane2.addTab("Historiales Clinicos", new javax.swing.JPanel()); 
     }
     
     /**

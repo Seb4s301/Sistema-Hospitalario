@@ -11,14 +11,14 @@ package prueba1;
 import java.util.Date;
 
 public class Paciente {
-    private String dni; // Cambiado a String para soportar ceros a la izquierda y validaciones exactas
+    private int dni; // Cambiado a String para soportar ceros a la izquierda y validaciones exactas
     private String nombres;
     private String apellidos;
     private Date fechaNacimiento;
     private String celular;
     private String seguro;
 
-    public Paciente(String dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String seguro) {
+    public Paciente(int dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String seguro) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -27,11 +27,11 @@ public class Paciente {
         this.seguro = seguro;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 

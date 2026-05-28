@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package prueba1;
+package PruebaLista;
 
 /**
  *
@@ -10,6 +10,8 @@ package prueba1;
  */
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
+import prueba1.NodoPaciente;
+import prueba1.Paciente;
 
 public class ListaDoblePaciente {
     NodoPaciente ini;

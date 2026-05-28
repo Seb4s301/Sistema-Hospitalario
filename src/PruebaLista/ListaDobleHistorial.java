@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package prueba1;
+package PruebaLista;
 
 /**
  *
  * @author Jean
  */
 import javax.swing.table.DefaultTableModel;
+import prueba1.HistorialClinico;
+import prueba1.NodoHistorial;
 
 public class ListaDobleHistorial {
     NodoHistorial ini;

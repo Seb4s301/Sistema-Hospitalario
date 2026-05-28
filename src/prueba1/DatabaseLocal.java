@@ -4,6 +4,10 @@
  */
 package prueba1;
 
+import PruebaLista.ListaDoblePaciente;
+import PruebaLista.ListaDobleMedico;
+import PruebaLista.ListaDobleHistorial;
+
 /**
  *
  * @author Jean

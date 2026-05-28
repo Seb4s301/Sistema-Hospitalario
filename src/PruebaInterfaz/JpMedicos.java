@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package medicos;
+package PruebaInterfaz;
 
 /**
  *
  * @author Usuario
  */
-public class jpnMedicos extends javax.swing.JPanel {
+public class JpMedicos extends javax.swing.JPanel {
 
     /**
      * Creates new form jpnMedicos
      */
-    public jpnMedicos() {
+    public JpMedicos() {
         initComponents();
     }
 
@@ -52,9 +52,6 @@ public class jpnMedicos extends javax.swing.JPanel {
         tablaMedicos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtSeguro = new javax.swing.JTextPane();
-        jLabel5 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -134,10 +131,6 @@ public class jpnMedicos extends javax.swing.JPanel {
 
         jLabel2.setText("Nombres:");
 
-        jScrollPane1.setViewportView(txtSeguro);
-
-        jLabel5.setText("Seguro");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,13 +151,11 @@ public class jpnMedicos extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
                         .addGap(111, 111, 111)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
                             .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                             .addComponent(jScrollPane12)
                             .addComponent(txtFechaNac))
@@ -214,18 +205,14 @@ public class jpnMedicos extends javax.swing.JPanel {
                         .addComponent(btnModificar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminar)))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
-          String dni = txtEspecialidad.getText();
+     String dni = txtEspecialidad.getText();
     String nombres = txtNombres.getText();
     String apellidos = txtApellidos.getText();
     String especialidad = txtEspecialidad.getText();
@@ -265,12 +252,10 @@ public class jpnMedicos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane2;
@@ -284,6 +269,5 @@ public class jpnMedicos extends javax.swing.JPanel {
     private javax.swing.JTextPane txtEspecialidad;
     private javax.swing.JFormattedTextField txtFechaNac;
     private javax.swing.JTextPane txtNombres;
-    private javax.swing.JTextPane txtSeguro;
     // End of variables declaration//GEN-END:variables
 }
