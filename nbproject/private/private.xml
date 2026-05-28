@@ -3,17 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/sistema/hospitalario/Doctor.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/sistema/hospitalario/GestorDeTurnos.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/Interfaz/Principal.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/Interfaz/Login.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/Interfaz/Pacientes.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/practicandolistas/ListaDoble.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/sistema/hospitalario/SistemaHospitalario.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/practicandolistas/Practicandolistas.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/com/sistemaHospitalario/ListaDoble/ListaDobleTurnos.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/com/sistemaHospitalario/ListaDoble/NodoDobleTurno.java</file>
-            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/practicandolistas/ListaPersona.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaInterfaz/FrmPrincipal.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaInterfaz/JpMedicos.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaInterfaz/JpPacientes.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/Imagenes/IconoHospital.jpg</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaInterfaz/JpHistorialesClinicos.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaLista/ListaDobleHistorial.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaLista/ListaDobleMedico.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaNodo/NodoMedico.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaNodo/NodoHistorial.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/PruebaClases/DatabaseLocal.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/HorariosHospital_desarrollando/Historiales.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/HorariosHospital_desarrollando/Paciente.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/HorariosHospital_desarrollando/README</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/HorariosHospital_desarrollando/GestorDeTurnos.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/HorariosHospital_desarrollando/Doctor.java</file>
         </group>
     </open-files>
 </project-private>

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package PruebaInterfaz;
+import PruebaLista.ListaDobleMedico;
 
 /**
  *
@@ -10,6 +11,7 @@ package PruebaInterfaz;
  */
 public class JpMedicos extends javax.swing.JPanel {
 
+    ListaDobleMedico listaDobleMedico=new ListaDobleMedico();
     /**
      * Creates new form jpnMedicos
      */
@@ -125,6 +127,11 @@ public class JpMedicos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tablaMedicos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMedicosMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tablaMedicos);
 
         jLabel1.setText("DNI:");
@@ -135,11 +142,11 @@ public class JpMedicos extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane6)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -148,7 +155,7 @@ public class JpMedicos extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
                         .addGap(111, 111, 111)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -156,20 +163,20 @@ public class JpMedicos extends javax.swing.JPanel {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                             .addComponent(jScrollPane12)
                             .addComponent(txtFechaNac))
                         .addGap(122, 122, 122)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -205,41 +212,101 @@ public class JpMedicos extends javax.swing.JPanel {
                         .addComponent(btnModificar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminar)))
-                .addGap(27, 27, 27)
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
-    String dni = txtEspecialidad.getText();
-    String nombres = txtNombres.getText();
-    String apellidos = txtApellidos.getText();
-    String especialidad = txtEspecialidad.getText();
-    String celular = txtCelular.getText();
-    String fechaNac = txtFechaNac.getText();
-    String seguro = txtSeguro.getText();
+        try {
+            // Recoleccion y conversion de datos directa
+            int dni = Integer.parseInt(txtDni.getText());
+            String nombres = txtNombres.getText();
+            String apellidos = txtApellidos.getText();
+            String especialidad = txtEspecialidad.getText();
+            int celular = Integer.parseInt(txtCelular.getText());
+            
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date fechaNac = sdf.parse(txtFechaNac.getText());
+
+            // Insercion a la base de datos (pasando "" en el campo seguro)
+            PruebaClases.Medico nuevoMedico = new PruebaClases.Medico(dni, nombres, apellidos, fechaNac, celular, "", especialidad);
+            PruebaClases.DatabaseLocal.listaMedicos.insertar(nuevoMedico);
+            
+            // Actualizar tabla y limpiar
+            tablaMedicos.setModel(PruebaClases.DatabaseLocal.listaMedicos.imprimirIDMedico());
+            txtDni.setText(""); txtNombres.setText(""); txtApellidos.setText("");
+            txtEspecialidad.setText(""); txtCelular.setText(""); txtFechaNac.setText("");
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: Revise que DNI/Celular sean numeros y la fecha sea dd/MM/yyyy");
+        }
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        String dni = txtEspecialidad.getText();
-    String nombres = txtNombres.getText();
-    String apellidos = txtApellidos.getText();
-    String especialidad = txtEspecialidad.getText();
-    String celular = txtCelular.getText();
-    String fechaNac = txtFechaNac.getText();
-    String seguro = txtSeguro.getText();
+    try {
+            int dni = Integer.parseInt(txtDni.getText());
+            String nombres = txtNombres.getText();
+            String apellidos = txtApellidos.getText();
+            String especialidad = txtEspecialidad.getText();
+            int celular = Integer.parseInt(txtCelular.getText());
+            
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date fechaNac = sdf.parse(txtFechaNac.getText());
+
+            PruebaClases.DatabaseLocal.listaMedicos.modificar(dni, nombres, apellidos, fechaNac, celular, "", especialidad);
+            
+            tablaMedicos.setModel(PruebaClases.DatabaseLocal.listaMedicos.imprimirIDMedico());
+            txtDni.setText(""); txtNombres.setText(""); txtApellidos.setText("");
+            txtEspecialidad.setText(""); txtCelular.setText(""); txtFechaNac.setText("");
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error en los datos. Revise los campos numericos y de fecha.");
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        String dni = txtEspecialidad.getText();
-    String nombres = txtNombres.getText();
-    String apellidos = txtApellidos.getText();
-    String especialidad = txtEspecialidad.getText();
-    String celular = txtCelular.getText();
-    String fechaNac = txtFechaNac.getText();
-    String seguro = txtSeguro.getText();
+     try {
+            int dni = Integer.parseInt(txtDni.getText());
+            
+            PruebaClases.DatabaseLocal.listaMedicos.eliminarID(dni);
+            
+            tablaMedicos.setModel(PruebaClases.DatabaseLocal.listaMedicos.imprimirIDMedico());
+            txtDni.setText(""); txtNombres.setText(""); txtApellidos.setText("");
+            txtEspecialidad.setText(""); txtCelular.setText(""); txtFechaNac.setText("");
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: Ingrese un DNI valido para eliminar.");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void tablaMedicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMedicosMouseClicked
+        try {
+            int fila = tablaMedicos.getSelectedRow();
+            if (fila != -1) {
+                // Obtener el DNI de la fila seleccionada y pasarlo a entero
+                int dni = Integer.parseInt(tablaMedicos.getValueAt(fila, 0).toString());
+                
+                // Buscar el nodo en la lista
+                PruebaNodo.NodoMedico nodo = PruebaClases.DatabaseLocal.listaMedicos.buscar(dni);
+
+                if (nodo != null) {
+                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+                    
+                    // Colocar los datos directo en las cajas de texto
+                    txtDni.setText(String.valueOf(nodo.getDato().getDni()));
+                    txtNombres.setText(nodo.getDato().getNombres());
+                    txtApellidos.setText(nodo.getDato().getApellidos());
+                    txtEspecialidad.setText(nodo.getDato().getEspecialidad());
+                    txtCelular.setText(String.valueOf(nodo.getDato().getCelular()));
+                    txtFechaNac.setText(nodo.getDato().getFechaNacimiento() != null ? sdf.format(nodo.getDato().getFechaNacimiento()) : "");
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al seleccionar el medico de la tabla.");
+        }
+    }//GEN-LAST:event_tablaMedicosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
