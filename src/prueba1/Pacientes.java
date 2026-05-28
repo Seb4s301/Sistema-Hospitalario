@@ -3,19 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package prueba1;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jean
  */
 public class Pacientes extends javax.swing.JPanel {
-
+    private ListaDoblePaciente listaPacientes;
     /**
      * Creates new form Pacientes
      */
     public Pacientes() {
         initComponents();
+        listaPacientes = new ListaDoblePaciente();
+        listar();
     }
+    
+    private void listar() {
+        jTable1.setModel(listaPacientes.imprimirIDPaciente());
+    }
+
+    private void limpiarCajas() {
+        txtDni.setText("");
+        txtPacNombres.setText("");
+        txtPacApellidos.setText("");
+        txtPacFechaNac.setText("");
+        txtPacCelular.setText("");
+        txtPacSeguro.setText("");
+        txtDni.requestFocus();
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,6 +65,12 @@ public class Pacientes extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         btnPacInsertar.setText("Insertar");
         btnPacInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,8 +79,18 @@ public class Pacientes extends javax.swing.JPanel {
         });
 
         btnPacModificar.setText("Modificar");
+        btnPacModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPacModificarActionPerformed(evt);
+            }
+        });
 
         btnPacEliminar.setText("Eliminar");
+        btnPacEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPacEliminarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,6 +104,12 @@ public class Pacientes extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        txtDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDniActionPerformed(evt);
+            }
+        });
 
         txtPacApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,12 +230,105 @@ public class Pacientes extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPacApellidosActionPerformed
 
     private void btnPacInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacInsertarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String dni = txtDni.getText().trim();
+            String nombres = txtPacNombres.getText().trim();
+            String apellidos = txtPacApellidos.getText().trim();
+            String celular = txtPacCelular.getText().trim();
+            String seguro = txtPacSeguro.getText().trim();
+
+            if (dni.isEmpty() || nombres.isEmpty() || apellidos.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor complete los datos principales (DNI, Nombres, Apellidos)");
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date fecha = sdf.parse(txtPacFechaNac.getText().trim());
+
+            Paciente nuevoPaciente = new Paciente(dni, nombres, apellidos, fecha, celular, seguro);
+            listaPacientes.insertar(nuevoPaciente);
+
+            listar(); 
+            limpiarCajas();
+            JOptionPane.showMessageDialog(this, "Paciente registrado con exito");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: Verifique el formato de la fecha (dd/mm/aaaa)");
+        }
     }//GEN-LAST:event_btnPacInsertarActionPerformed
 
     private void txtPacFechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPacFechaNacActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPacFechaNacActionPerformed
+
+    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtDniActionPerformed
+
+    private void btnPacModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacModificarActionPerformed
+        try {
+            String dni = txtDni.getText().trim();
+            String nombres = txtPacNombres.getText().trim();
+            String apellidos = txtPacApellidos.getText().trim();
+            String celular = txtPacCelular.getText().trim();
+            String seguro = txtPacSeguro.getText().trim();
+
+            if (dni.isEmpty() || nombres.isEmpty() || apellidos.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor complete los datos principales (DNI, Nombres, Apellidos)");
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date fecha = sdf.parse(txtPacFechaNac.getText().trim());
+
+            Paciente nuevoPaciente = new Paciente(dni, nombres, apellidos, fecha, celular, seguro);
+            listaPacientes.insertar(nuevoPaciente);
+
+            listar(); 
+            limpiarCajas();
+            JOptionPane.showMessageDialog(this, "Paciente registrado con exito");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: Verifique el formato de la fecha (dd/mm/aaaa)");
+        }
+    }//GEN-LAST:event_btnPacModificarActionPerformed
+
+    private void btnPacEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacEliminarActionPerformed
+        String dni = txtDni.getText().trim();
+        if (dni.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente de la tabla o ingrese un DNI para eliminar");
+            return;
+        }
+
+        int confirmar = JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar al paciente con DNI " + dni + "?", "Confirmar eliminacion", JOptionPane.YES_NO_OPTION);
+        if (confirmar == JOptionPane.YES_OPTION) {
+            listaPacientes.eliminarID(dni);
+            listar(); 
+            limpiarCajas();
+            JOptionPane.showMessageDialog(this, "Paciente removido del sistema");
+        }
+    }//GEN-LAST:event_btnPacEliminarActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        int filaSeleccionada = jTable1.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            String dni = jTable1.getValueAt(filaSeleccionada, 0).toString();
+            NodoPaciente nodo = listaPacientes.buscar(dni);
+
+            if (nodo != null) {
+                Paciente p = nodo.getDato();
+                txtDni.setText(p.getDni());
+                txtPacNombres.setText(p.getNombres());
+                txtPacApellidos.setText(p.getApellidos());
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                txtPacFechaNac.setText(p.getFechaNacimiento() != null ? sdf.format(p.getFechaNacimiento()) : "");
+                txtPacCelular.setText(p.getCelular());
+                txtPacSeguro.setText(p.getSeguro()); // Corregido a txtPacSeguro segun tus variables del final
+            }
+        }
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
