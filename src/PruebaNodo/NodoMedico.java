@@ -1,15 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package PruebaNodo;
 
 import PruebaClases.Medico;
 
-/**
- *
- * @author Jean
- */
+import PruebaLista.ListaDobleMedico;
+import PruebaClases.Medico;
 
 public class NodoMedico {
     Medico dato;
@@ -18,8 +13,12 @@ public class NodoMedico {
 
     public NodoMedico(Medico dato) {
         this.dato = dato;
-        this.sgte = null;
-        this.ant = null;
+        sgte=ant=null;
+    }
+    
+    public NodoMedico() {
+        this.dato = new Medico();
+        sgte=ant=null;
     }
 
     public Medico getDato() {

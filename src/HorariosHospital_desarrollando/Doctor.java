@@ -1,6 +1,6 @@
 package HorariosHospital_desarrollando;
 
-import com.sistemaHospitalario.ListaDoble.ListaDobleTurnos;
+import PruebaLista.ListaDobleTurno;
 import java.time.LocalTime;
 
 public class Doctor {
@@ -51,12 +51,12 @@ public class Doctor {
     private String codigo, nombres, especialidad;
     private String numeroCMP, telefono;
     private EstadoMedico estado;
-    private ListaDobleTurnos horarios; 
+    private ListaDobleTurno horarios; 
 
-    public Doctor(String nombres, String especialidad, ListaDobleTurnos horarios) {
+    public Doctor(String nombres, String especialidad, ListaDobleTurno horarios) {
         this.nombres = nombres;
         this.especialidad = especialidad;
-        this.horarios = new ListaDobleTurnos();
+        this.horarios = new ListaDobleTurno();
     }
     
             

@@ -1,5 +1,9 @@
 package HorariosHospital_desarrollando;
 
+import HorariosHospital_desarrollando.Doctor.Turno;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Sebas301

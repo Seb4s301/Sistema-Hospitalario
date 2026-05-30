@@ -12,14 +12,18 @@ import PruebaClases.Paciente;
  */
 
 public class NodoPaciente {
-    Paciente dato;
-    NodoPaciente sgte;
-    NodoPaciente ant;
-
+    private Paciente dato;
+    private NodoPaciente sgte;
+    private NodoPaciente ant;
+    
     public NodoPaciente(Paciente dato) {
         this.dato = dato;
-        this.sgte = null;
-        this.ant = null;
+        sgte=ant=null;
+    }
+    
+    public NodoPaciente() {
+        this.dato = new Paciente();
+        sgte=ant=null;
     }
 
     public Paciente getDato() {

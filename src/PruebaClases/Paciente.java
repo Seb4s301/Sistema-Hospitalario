@@ -3,14 +3,23 @@ package PruebaClases;
 import java.util.Date;
 
 public class Paciente {
-    private int dni; 
+    private String dni; 
     private String nombres;
     private String apellidos;
-    private Date fechaNacimiento; 
-    private int celular;
+    private String fechaNacimiento; 
+    private String celular;
     private String seguro;
 
-    public Paciente(int dni, String nombres, String apellidos, Date fechaNacimiento, int celular, String seguro) {
+    public Paciente() {
+        dni="";
+        nombres="";
+        apellidos="";
+        fechaNacimiento="";
+        celular="";
+        seguro="";
+    }
+    
+    public Paciente(String dni, String nombres, String apellidos, String fechaNacimiento, String celular, String seguro) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -19,11 +28,11 @@ public class Paciente {
         this.seguro = seguro;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -43,19 +52,19 @@ public class Paciente {
         this.apellidos = apellidos;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 

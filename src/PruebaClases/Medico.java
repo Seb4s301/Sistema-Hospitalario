@@ -1,31 +1,40 @@
 package PruebaClases;
 
+import PruebaLista.ListaDobleMedico;
+import PruebaClases.Medico;
 import java.util.Date;
 
 public class Medico {
-    private int dni;
+    private String dni;
     private String nombres;
     private String apellidos;
-    private Date fechaNacimiento;
-    private int celular;
-    private String seguro;
+    private String fechaNacimiento;
+    private String celular;
     private String especialidad;
 
-    public Medico(int dni, String nombres, String apellidos, Date fechaNacimiento, int celular, String seguro, String especialidad) {
+    public Medico() {
+        this.dni = "";
+        this.nombres = "";
+        this.apellidos = "";
+        this.fechaNacimiento = "";
+        this.celular = "";
+        this.especialidad = "";
+    }
+
+    public Medico(String dni, String nombres, String apellidos, String fechaNacimiento, String celular, String especialidad) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
-        this.seguro = seguro;
         this.especialidad = especialidad;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -45,28 +54,20 @@ public class Medico {
         this.apellidos = apellidos;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
-    }
-
-    public String getSeguro() {
-        return seguro;
-    }
-
-    public void setSeguro(String seguro) {
-        this.seguro = seguro;
     }
 
     public String getEspecialidad() {
@@ -76,7 +77,7 @@ public class Medico {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-    
+
     
     
 }

@@ -3,7 +3,6 @@ package PruebaLista;
 import PruebaClases.Paciente;
 import PruebaNodo.NodoPaciente;
 import javax.swing.table.DefaultTableModel;
-import java.text.SimpleDateFormat;
 
 /**
  *
@@ -15,11 +14,27 @@ public class ListaDoblePaciente {
     private NodoPaciente fin;
 
     public ListaDoblePaciente() {
-        this.ini = null;
-        this.fin = null;
+        ini=fin=null;
     }
 
     public void insertar(Paciente dato) {
+            
+        if (dato == null) {
+            throw new IllegalArgumentException("El paciente no puede ser nulo.");
+        }
+
+        // Si dni no tiene 8 caracteres
+        if (dato.getDni() == null || dato.getDni().trim().length() != 8) {
+
+            throw new IllegalArgumentException("DNI inválido.");
+        }
+
+        // validar celular 9 caracteres
+        if (dato.getCelular() == null || dato.getCelular().trim().length() != 9) {
+
+            throw new IllegalArgumentException("Celular inválido.");
+        }
+        
         NodoPaciente nuevo = new NodoPaciente(dato);
         if (ini == null) {
             ini = fin = nuevo;
@@ -35,64 +50,76 @@ public class ListaDoblePaciente {
     };
 
     public DefaultTableModel imprimirIDPaciente() {
-        DefaultTableModel modeloPaciente = new DefaultTableModel(null, colPaciente);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        
-        for (NodoPaciente tmp = ini; tmp != null; tmp = tmp.getSgte()) {
-            String[] fila = new String[6];
-            fila[0] = String.valueOf(tmp.getDato().getDni());
-            fila[1] = tmp.getDato().getNombres();
-            fila[2] = tmp.getDato().getApellidos();
-            fila[3] = tmp.getDato().getFechaNacimiento() != null ? sdf.format(tmp.getDato().getFechaNacimiento()) : "";
-            fila[4] = String.valueOf(tmp.getDato().getCelular());
-            fila[5] = tmp.getDato().getSeguro();
-            modeloPaciente.addRow(fila);
+        String columnas[] = {
+            "DNI",
+            "NOMBRES",
+            "APELLIDOS",
+            "FECHA NAC.",
+            "CELULAR",
+            "SEGURO"
+        };
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        NodoPaciente tmp = ini;
+        while (tmp != null) {
+            modelo.addRow(new Object[]{
+                tmp.getDato().getDni(),
+                tmp.getDato().getNombres(),
+                tmp.getDato().getApellidos(),
+                tmp.getDato().getFechaNacimiento(),
+                tmp.getDato().getCelular(),
+                tmp.getDato().getSeguro()
+            });
+            tmp = tmp.getSgte();
         }
-        return modeloPaciente;
+        return modelo;
     }
-
-    public boolean modificar(int dni, String nuevosNombres, String nuevosApellidos, java.util.Date nuevaFecha, int nuevoCelular, String nuevoSeguro) {
+    
+    public boolean modificar(String dni,String nuevosNombres,String nuevosApellidos,String nuevaFecha,String nuevoCelular,String nuevoSeguro) {
         NodoPaciente nodo = buscar(dni);
         if (nodo != null) {
             Paciente p = nodo.getDato();
             p.setNombres(nuevosNombres);
             p.setApellidos(nuevosApellidos);
-            p.setFechaNacimiento(nuevaFecha); 
-            p.setCelular(nuevoCelular); 
+            p.setFechaNacimiento(nuevaFecha);
+            p.setCelular(nuevoCelular);
             p.setSeguro(nuevoSeguro);
             return true;
         }
         return false;
     }
 
-    public void eliminarID(int dni) {
+    public void eliminarID(String dni) {
         NodoPaciente tmp = ini;
-        while (tmp != null && tmp.getDato().getDni() != dni) {
-            tmp = tmp.getSgte();
-        }
-        if (tmp == null) return;
+        while (tmp != null) {
+            if (tmp.getDato().getDni().equals(dni)) {
 
-        if (ini == fin) {
-            ini = fin = null;
-        } else if (tmp == ini) {
-            ini = ini.getSgte();
-            ini.setAnt(null);
-        } else if (tmp == fin) {
-            fin = fin.getAnt();
-            fin.setSgte(null);
-        } else {
-            tmp.getAnt().setSgte(tmp.getSgte());
-            tmp.getSgte().setAnt(tmp.getAnt());
+                if (tmp == ini) {
+                    ini = ini.getSgte();
+                    if (ini != null) {
+                        ini.setAnt(null);
+                    }
+                } else if (tmp == fin) {
+                    fin = fin.getAnt();
+                    if (fin != null) {
+                        fin.setSgte(null);
+                    }
+                } else {
+                    tmp.getAnt().setSgte(tmp.getSgte());
+                    tmp.getSgte().setAnt(tmp.getAnt());
+                }
+                return;
+            }
+            tmp = tmp.getSgte();
         }
     }
 
-    public NodoPaciente buscar(int dni) {
-        NodoPaciente tmp = ini;
-        while (tmp != null) {
-            if (tmp.getDato().getDni() == dni) {
-                return tmp;
+    public NodoPaciente buscar(String dni) {
+        NodoPaciente aux = ini;
+        while (aux != null) {
+            if (aux.getDato().getDni().equals(dni)) {
+                return aux;
             }
-            tmp = tmp.getSgte();
+            aux = aux.getSgte();
         }
         return null;
     }
