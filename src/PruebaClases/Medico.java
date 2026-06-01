@@ -1,8 +1,5 @@
 package PruebaClases;
 
-import PruebaLista.ListaDobleMedico;
-import PruebaClases.Medico;
-import java.util.Date;
 
 public class Medico {
     private String dni;

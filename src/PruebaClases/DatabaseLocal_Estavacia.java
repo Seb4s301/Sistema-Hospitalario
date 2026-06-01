@@ -2,13 +2,13 @@ package PruebaClases;
 
 import PruebaLista.ListaDoblePaciente;
 import PruebaLista.ListaDobleMedico;
-import PruebaLista.ListaDobleHistorial;
+import PruebaLista.ListaDobleHistorial_desarrollando;
 
 /**
  *
  * @author Jean
  */
-public class DatabaseLocal {
+public class DatabaseLocal_Estavacia {
     public static final String[] Especialidades = {
         "Medicina General", 
         "Pediatria", 
@@ -21,5 +21,5 @@ public class DatabaseLocal {
     // Almacenamiento global en memoria de las listas dobles
     public static ListaDoblePaciente listaPacientes = new ListaDoblePaciente();
     public static ListaDobleMedico listaMedicos = new ListaDobleMedico();
-    public static ListaDobleHistorial listaHistoriales = new ListaDobleHistorial();
+    public static ListaDobleHistorial_desarrollando listaHistoriales = new ListaDobleHistorial_desarrollando();
 }

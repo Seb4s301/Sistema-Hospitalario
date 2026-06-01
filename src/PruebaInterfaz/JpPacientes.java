@@ -1,6 +1,5 @@
 package PruebaInterfaz;
 import PruebaLista.ListaDoblePaciente;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import PruebaNodo.NodoPaciente;
 import PruebaClases.Paciente;
@@ -9,7 +8,7 @@ import PruebaClases.Paciente;
  *
  * @author Jean, Sebastian
  */
-public class JpPacientes extends javax.swing.JPanel {
+public class JpPacientes extends javax.swing.JPanel { 
     
     ListaDoblePaciente listaPacientes=new ListaDoblePaciente();
     
@@ -26,17 +25,18 @@ public class JpPacientes extends javax.swing.JPanel {
         listar();
     }
     
+    //Uso de metodo imprimirIDPaciente
     private void listar() {
         tablaPaciente.setModel(listaPacientes.imprimirIDPaciente());
     }
 
     private void limpiarCajas() {
         txtDni.setText("");
-        txtPacNombres.setText("");
-        txtPacApellidos.setText("");
+        txtNombres.setText("");
+        txtApellidos.setText("");
         txtFechaNac.setText("");
-        txtPacCelular.setText("");
-        txtPacSeguro.setText("");
+        txtCelular.setText("");
+        txtSeguro.setText("");
         txtDni.requestFocus();
     }
     
@@ -46,16 +46,16 @@ public class JpPacientes extends javax.swing.JPanel {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        btnPacInsertar = new javax.swing.JButton();
-        btnPacModificar = new javax.swing.JButton();
-        btnPacEliminar = new javax.swing.JButton();
+        btnInsertar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPaciente = new javax.swing.JTable();
         txtDni = new javax.swing.JTextField();
-        txtPacNombres = new javax.swing.JTextField();
-        txtPacApellidos = new javax.swing.JTextField();
-        txtPacCelular = new javax.swing.JTextField();
-        txtPacSeguro = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
+        txtApellidos = new javax.swing.JTextField();
+        txtCelular = new javax.swing.JTextField();
+        txtSeguro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -74,24 +74,24 @@ public class JpPacientes extends javax.swing.JPanel {
             }
         });
 
-        btnPacInsertar.setText("Insertar");
-        btnPacInsertar.addActionListener(new java.awt.event.ActionListener() {
+        btnInsertar.setText("Insertar");
+        btnInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPacInsertarActionPerformed(evt);
+                btnInsertarActionPerformed(evt);
             }
         });
 
-        btnPacModificar.setText("Modificar");
-        btnPacModificar.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPacModificarActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
 
-        btnPacEliminar.setText("Eliminar");
-        btnPacEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPacEliminarActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -140,9 +140,9 @@ public class JpPacientes extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPacApellidos)
-                            .addComponent(txtPacNombres)
-                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                            .addComponent(txtApellidos)
+                            .addComponent(txtNombres)
+                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -150,21 +150,21 @@ public class JpPacientes extends javax.swing.JPanel {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPacCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                            .addComponent(txtPacSeguro, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(txtCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(txtSeguro, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                             .addComponent(txtFechaNac))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPacModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPacEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPacInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtPacCelular, txtPacSeguro});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtCelular, txtSeguro});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,11 +175,11 @@ public class JpPacientes extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPacNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPacApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -187,131 +187,143 @@ public class JpPacientes extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel4)
                                 .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnPacInsertar)
+                            .addComponent(btnInsertar)
                             .addComponent(txtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPacCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(btnPacModificar))
+                            .addComponent(btnModificar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPacSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(btnPacEliminar))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEliminar)))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtPacCelular, txtPacSeguro});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCelular, txtSeguro});
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPacInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacInsertarActionPerformed
-    try {
-        dni = txtDni.getText();
-        nombres = txtPacNombres.getText().trim();
-        apellidos = txtPacApellidos.getText().trim();
-        celular = txtPacCelular.getText().trim();
-        seguro = txtPacSeguro.getText().trim();
-        fecha = txtFechaNac.getText().trim();
-        if (dni.isEmpty()
-                || nombres.isEmpty()
-                || apellidos.isEmpty()) {
+    private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
+        try {
+            dni = txtDni.getText();
+            nombres = txtNombres.getText().trim();
+            apellidos = txtApellidos.getText().trim();
+            celular = txtCelular.getText().trim();
+            seguro = txtSeguro.getText().trim();
+            fecha = txtFechaNac.getText().trim();
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Complete los datos principales");
-            return;
-        }
-        if (!dni.matches("\\d{8}")) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "DNI invalido");
-            return;
-        }
-        if (!celular.matches("\\d{9}")) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Celular invalido");
-            return;
-        }
-        Paciente nuevoPaciente =
-                new Paciente(
-                        dni,
-                        nombres,
-                        apellidos,
-                        fecha,
-                        celular,
-                        seguro);
-        listaPacientes.insertar(nuevoPaciente);
-        listar();
-        limpiarCajas();
-        JOptionPane.showMessageDialog(
-                this,
-                "Paciente registrado con exito");
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(
-                this,
-                "Error real: " + e.getMessage());
-    }
-    }//GEN-LAST:event_btnPacInsertarActionPerformed
+            //Inicio validacion de restricciones
+            if (dni.isEmpty()
+                    || nombres.isEmpty() 
+                    || apellidos.isEmpty()
+                    || celular.isEmpty()
+                    || fecha.isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Complete los datos principales");
+                return;
+            }
+            if (!dni.matches("\\d{8}")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "DNI invalido");
+                return;
+            }
+            if (!celular.matches("\\d{9}")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Celular invalido");
+                return;
+            }//Fin validacion de restricciones
 
-    private void btnPacModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacModificarActionPerformed
-    dni = txtDni.getText().trim();
-    nombres =txtPacNombres.getText().trim();
-    apellidos =txtPacApellidos.getText().trim();
-    celular =txtPacCelular.getText().trim();
-    seguro =txtPacSeguro.getText().trim();
-    fecha =txtFechaNac.getText().trim();
-    
-    boolean modificado =listaPacientes.modificar(
-                    dni,
-                    nombres,
-                    apellidos,
-                    fecha,
-                    celular,
-                    seguro
+            //Uso de metodo insertar nuevo paciente
+            listaPacientes.insertar(new Paciente(
+                    dni,  
+                    nombres, 
+                    apellidos, 
+                    fecha, 
+                    celular, 
+                    seguro)
             );
-    if (modificado) {
-        listar();
-        limpiarCajas();
-        JOptionPane.showMessageDialog(
-                this,
-                "Paciente modificado correctamente");
-    } else {
-        JOptionPane.showMessageDialog(
-                this,
-                "Paciente no encontrado");
-    }
+           
+            //Listar y validar insercion exitosa
+            listar();
+            limpiarCajas();
+            JOptionPane.showMessageDialog(
+                    this, "Paciente registrado con exito");
             
-    }//GEN-LAST:event_btnPacModificarActionPerformed
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error real: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnInsertarActionPerformed
 
-    private void btnPacEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacEliminarActionPerformed
-    dni = txtDni.getText().trim();
-    if (dni.isEmpty()) {
-        JOptionPane.showMessageDialog(
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        dni = txtDni.getText().trim();
+        nombres =txtNombres.getText().trim();
+        apellidos =txtApellidos.getText().trim();
+        celular =txtCelular.getText().trim();
+        seguro =txtSeguro.getText().trim();
+        fecha =txtFechaNac.getText().trim();
+
+        //Uso de metodo modificar Paciente
+        boolean modificado = listaPacientes.modificar(
+                dni,
+                nombres,
+                apellidos,
+                fecha,
+                celular,
+                seguro);
+        
+        //Si es true
+        if (modificado) {
+            listar();
+            limpiarCajas();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Paciente modificado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Paciente no encontrado");
+        }  
+    }//GEN-LAST:event_btnModificarActionPerformed
+    
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        dni = txtDni.getText().trim();
+
+        if (dni.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Seleccione un paciente");
+            return;
+        }
+
+        int confirmar = JOptionPane.showConfirmDialog(
                 this,
-                "Seleccione un paciente");
-        return;
-    }
-    int confirmar = JOptionPane.showConfirmDialog(
-            this,
-            "Esta seguro de eliminar al paciente con DNI "
-            + dni + "?",
-            "Confirmar eliminacion",
-            JOptionPane.YES_NO_OPTION);
-    if (confirmar == JOptionPane.YES_OPTION) {
-        listaPacientes.eliminarID(dni);
-        listar();
-        limpiarCajas();
-        JOptionPane.showMessageDialog(
-                this,
-                "Paciente removido del sistema");
-    }
-    }//GEN-LAST:event_btnPacEliminarActionPerformed
+                "Esta seguro de eliminar al paciente con DNI "
+                + dni + "?",
+                "Confirmar eliminacion",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+            //Uso del metodo Eliminar Paciente
+            listaPacientes.eliminarID(dni);
+            listar();
+            limpiarCajas();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Paciente removido del sistema");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         int filaSeleccionada =
@@ -324,20 +336,20 @@ public class JpPacientes extends javax.swing.JPanel {
         if (nodo != null) {
             Paciente p = nodo.getDato();
             txtDni.setText(p.getDni());
-            txtPacNombres.setText(p.getNombres());
-            txtPacApellidos.setText(p.getApellidos());
+            txtNombres.setText(p.getNombres());
+            txtApellidos.setText(p.getApellidos());
             txtFechaNac.setText(p.getFechaNacimiento());
-            txtPacCelular.setText(p.getCelular());
-            txtPacSeguro.setText(p.getSeguro());
+            txtCelular.setText(p.getCelular());
+            txtSeguro.setText(p.getSeguro());
         }
     }
     }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPacEliminar;
-    private javax.swing.JButton btnPacInsertar;
-    private javax.swing.JButton btnPacModificar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnInsertar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -348,11 +360,11 @@ public class JpPacientes extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tablaPaciente;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtDni;
     private javax.swing.JFormattedTextField txtFechaNac;
-    private javax.swing.JTextField txtPacApellidos;
-    private javax.swing.JTextField txtPacCelular;
-    private javax.swing.JTextField txtPacNombres;
-    private javax.swing.JTextField txtPacSeguro;
+    private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtSeguro;
     // End of variables declaration//GEN-END:variables
 }

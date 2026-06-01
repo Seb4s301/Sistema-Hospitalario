@@ -18,24 +18,8 @@ public class ListaDoblePaciente {
     }
 
     public void insertar(Paciente dato) {
-            
-        if (dato == null) {
-            throw new IllegalArgumentException("El paciente no puede ser nulo.");
-        }
-
-        // Si dni no tiene 8 caracteres
-        if (dato.getDni() == null || dato.getDni().trim().length() != 8) {
-
-            throw new IllegalArgumentException("DNI inválido.");
-        }
-
-        // validar celular 9 caracteres
-        if (dato.getCelular() == null || dato.getCelular().trim().length() != 9) {
-
-            throw new IllegalArgumentException("Celular inválido.");
-        }
-        
         NodoPaciente nuevo = new NodoPaciente(dato);
+        
         if (ini == null) {
             ini = fin = nuevo;
         } else {
@@ -45,9 +29,7 @@ public class ListaDoblePaciente {
         }
     }
 
-    private String colPaciente[] = {
-        "DNI", "Nombres", "Apellidos", "Fecha Nacimiento", "Celular", "Seguro"
-    };
+
 
     public DefaultTableModel imprimirIDPaciente() {
         String columnas[] = {
@@ -58,8 +40,11 @@ public class ListaDoblePaciente {
             "CELULAR",
             "SEGURO"
         };
+        
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+         
         NodoPaciente tmp = ini;
+        
         while (tmp != null) {
             modelo.addRow(new Object[]{
                 tmp.getDato().getDni(),
@@ -75,7 +60,9 @@ public class ListaDoblePaciente {
     }
     
     public boolean modificar(String dni,String nuevosNombres,String nuevosApellidos,String nuevaFecha,String nuevoCelular,String nuevoSeguro) {
+        //Verificacion de que el paciente existe
         NodoPaciente nodo = buscar(dni);
+        
         if (nodo != null) {
             Paciente p = nodo.getDato();
             p.setNombres(nuevosNombres);
@@ -90,6 +77,8 @@ public class ListaDoblePaciente {
 
     public void eliminarID(String dni) {
         NodoPaciente tmp = ini;
+        
+        //El que entiende entiende
         while (tmp != null) {
             if (tmp.getDato().getDni().equals(dni)) {
 

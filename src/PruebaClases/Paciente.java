@@ -1,7 +1,5 @@
 package PruebaClases;
 
-import java.util.Date;
-
 public class Paciente {
     private String dni; 
     private String nombres;

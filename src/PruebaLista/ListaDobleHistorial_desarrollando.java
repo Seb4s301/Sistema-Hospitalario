@@ -13,11 +13,11 @@ import PruebaClases.HistorialClinico;
 import PruebaNodo.NodoHistorial;
 import javax.swing.table.DefaultTableModel;
 
-public class ListaDobleHistorial {
+public class ListaDobleHistorial_desarrollando {
     private NodoHistorial ini;
     private NodoHistorial fin;
 
-    public ListaDobleHistorial() {
+    public ListaDobleHistorial_desarrollando() {
         this.ini = null;
         this.fin = null;
     }

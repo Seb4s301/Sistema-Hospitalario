@@ -10,27 +10,29 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private JpPacientes panelPacientes;
     private JpMedicos panelMedicos;
     private JpHistorialesClinicos panelHistoriales; 
+    
     /**
      * Creates new form Principal
      */
+    
     public FrmPrincipal() {
         initComponents();
         conectarPaneles();
     }
 
     private void conectarPaneles() {
-        // 1. Instanciar los paneles que creaste
+        //Se instancia los paneles creados
         panelPacientes = new JpPacientes();
-        panelMedicos = new JpMedicos(); // Asegurate de que la clase se llame exactamente asi
+        panelMedicos = new JpMedicos(); 
         panelHistoriales = new JpHistorialesClinicos();
         
-        // 2. Limpiar las pestañas por defecto para evitar duplicados
+        
         jTabbedPane2.removeAll();
         
-        // 3. Agregar los paneles reales asignandoles su titulo
+        // Agregar los paneles reales
         jTabbedPane2.addTab("Principal", new javax.swing.JPanel()); 
         jTabbedPane2.addTab("Pacientes", panelPacientes);          
-        jTabbedPane2.addTab("Medicos", panelMedicos); // ¡CORREGIDO! Aqui iba tu variable, no un panel vacio
+        jTabbedPane2.addTab("Medicos", panelMedicos); 
         jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales); 
     }
     
@@ -56,13 +58,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

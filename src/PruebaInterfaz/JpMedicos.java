@@ -3,19 +3,42 @@ import PruebaLista.ListaDobleMedico;
 import PruebaClases.Medico;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Usuario
  */
+
 public class JpMedicos extends javax.swing.JPanel {
 
-    ListaDobleMedico listaDobleMedico=new ListaDobleMedico();
+       ListaDobleMedico listaDobleMedico=new ListaDobleMedico();
     
-    
+       private  String dni;
+       private String nombres;
+       private String apellidos;
+       private String especialidad;
+       private String celular;
+       private String fechaNac;
+        
     public JpMedicos() {
         initComponents();
+        listaDobleMedico= new ListaDobleMedico();
+        listar();
+    }
+    //Creacion del metodo imprimirIDPaciente para la tabla
+    private void listar() {
+        tablaMedicos.setModel(listaDobleMedico.imprimirIDMedico());
     }
 
+    private void limpiarCajas() {
+        txtDni.setText("");
+        txtNombres.setText("");
+        txtApellidos.setText("");
+        txtFechaNac.setText("");
+        txtCelular.setText("");
+        txtEspecialidad.setText("");
+        txtDni.requestFocus();
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -133,40 +156,39 @@ public class JpMedicos extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane6)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(txtFechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(94, 94, 94)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(txtFechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(94, 94, 94)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +205,7 @@ public class JpMedicos extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addGap(25, 25, 25)
                                 .addComponent(jLabel3)
-                                .addGap(64, 64, 64))
+                                .addGap(3, 3, 3))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9)
@@ -194,122 +216,147 @@ public class JpMedicos extends javax.swing.JPanel {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel11)
                                         .addComponent(txtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(61, 61, 61))))
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnInsertar)
                         .addGap(18, 18, 18)
                         .addComponent(btnModificar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(btnEliminar)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
-    String dni = txtDni.getText().trim();
-    String nombres = txtNombres.getText().trim();
-    String apellidos = txtApellidos.getText().trim();
-    String especialidad = txtEspecialidad.getText().trim();
-    String celular = txtCelular.getText().trim();
-    String fechaNac = txtFechaNac.getText().trim();
+    try {    
+        dni = txtDni.getText().trim();
+        nombres = txtNombres.getText().trim();
+        apellidos = txtApellidos.getText().trim();
+        especialidad = txtEspecialidad.getText().trim();
+        celular = txtCelular.getText().trim();
+        fechaNac = txtFechaNac.getText().trim();
 
-    if (dni.isEmpty() || nombres.isEmpty() 
-            || apellidos.isEmpty()
-            || especialidad.isEmpty()
-            || celular.isEmpty()
-            || fechaNac.isEmpty()) {
+        //Inicio validacion de restricciones
+        if (dni.isEmpty() 
+                || nombres.isEmpty() 
+                || apellidos.isEmpty()
+                || especialidad.isEmpty()
+                || celular.isEmpty()
+                || fechaNac.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Complete todos los campos");
+            return;
+        }
+        if (!dni.matches("\\d{8}")) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "DNI invalido");
+            return;
+        }
+        if (!celular.matches("\\d{9}")) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Celular invalido");
+            return;
+        }
+        try {
+            SimpleDateFormat formato =
+                    new SimpleDateFormat("dd/MM/yyyy");
+            formato.setLenient(false);
+            formato.parse(fechaNac);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Fecha invalida. Use dd/MM/yyyy");
+            return;
+        }//Fin validacion de restricciones
+        
+        //Uso de metodo insertar nuevo Medico
+        listaDobleMedico.insertar(new Medico(
+                        dni,
+                        nombres,
+                        apellidos,
+                        fechaNac,
+                        celular,
+                        especialidad)
+        );
+        
+        //Listar y validar insercion exitosa
+        listar();
+        limpiarCajas();
         JOptionPane.showMessageDialog(
                 null,
-                "Complete todos los campos");
-        return;
-    }
-    if (!dni.matches("\\d{8}")) {
-        JOptionPane.showMessageDialog(
-                null,
-                "DNI invalido");
-        return;
-    }
-    if (!celular.matches("\\d{9}")) {
-        JOptionPane.showMessageDialog(
-                null,
-                "Celular invalido");
-        return;
-    }
-    try {
-        SimpleDateFormat formato =
-                new SimpleDateFormat("dd/MM/yyyy");
-        formato.setLenient(false);
-        formato.parse(fechaNac);
+                "Medico registrado correctamente");
+        
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(
-                null,
-                "Fecha invalida. Use dd/MM/yyyy");
-        return;
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error real: " + e.getMessage());
     }
-
-    listaDobleMedico.insertar(
-            new Medico(
-                    dni,
-                    nombres,
-                    apellidos,
-                    fechaNac,
-                    celular,
-                    especialidad
-            )
-    );
-    tablaMedicos.setModel(
-            listaDobleMedico.imprimirIDMedico());
-
-    JOptionPane.showMessageDialog(
-            null,
-            "Medico registrado correctamente");
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-    String dni = txtDni.getText().trim();
-    String nombres = txtNombres.getText().trim();
-    String apellidos = txtApellidos.getText().trim();
-    String especialidad =txtEspecialidad.getText().trim();
-    String celular =txtCelular.getText().trim();
-    String fechaNac =txtFechaNac.getText().trim();
-    boolean modificado =listaDobleMedico.modificar(
-                    dni,
-                    nombres,
-                    apellidos,
-                    fechaNac,
-                    celular,
-                    especialidad
-            );
-    if (modificado) {
-        tablaMedicos.setModel(
-                listaDobleMedico.imprimirIDMedico());
-        JOptionPane.showMessageDialog(
-                null,
-                "Medico modificado correctamente");
-    } else {
-        JOptionPane.showMessageDialog(
-                null,
-                "No se encontro el medico");
-    }
+        dni = txtDni.getText().trim();
+        nombres = txtNombres.getText().trim();
+        apellidos = txtApellidos.getText().trim();
+        especialidad =txtEspecialidad.getText().trim();
+        celular =txtCelular.getText().trim();
+        fechaNac =txtFechaNac.getText().trim();
+
+        //Uso de metodo modificar Medico
+        boolean modificado =listaDobleMedico.modificar(
+                        dni,
+                        nombres,
+                        apellidos,
+                        fechaNac,
+                        celular,
+                        especialidad
+                );
+        
+        //Si es true
+        if (modificado) {
+            listar();
+            limpiarCajas();
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Medico modificado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No se encontro el medico");
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-    String dni = txtDni.getText().trim();
-    if (dni.isEmpty()) {
-        JOptionPane.showMessageDialog(
-                null,
-                "Ingrese un DNI");
-        return;
-    }
-    listaDobleMedico.eliminarID(dni);
-    tablaMedicos.setModel(
-            listaDobleMedico.imprimirIDMedico());
-    JOptionPane.showMessageDialog(
-            null,
-            "Medico eliminado");
+        dni = txtDni.getText().trim();
+
+        if (dni.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Ingrese un DNI");
+            return;
+        }
+
+        int confirmar = JOptionPane.showConfirmDialog(
+                    this,
+                    "Esta seguro de eliminar al medico con DNI "
+                    + dni + "?",
+                    "Confirmar eliminacion",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmar == JOptionPane.YES_OPTION) {
+                //Uso del metodo Eliminar Medico
+                listaDobleMedico.eliminarID(dni);
+                listar();
+                limpiarCajas();
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Medico removido del sistema");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
 
