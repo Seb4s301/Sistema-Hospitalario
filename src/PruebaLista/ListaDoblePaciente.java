@@ -59,19 +59,34 @@ public class ListaDoblePaciente {
         return modelo;
     }
     
-    public boolean modificar(String dni,String nuevosNombres,String nuevosApellidos,String nuevaFecha,String nuevoCelular,String nuevoSeguro) {
-        //Verificacion de que el paciente existe
+    public boolean modificar(String dni, String nuevosNombres,String nuevosApellidos, String nuevaFecha,String nuevoCelular, String nuevoSeguro) {
+
         NodoPaciente nodo = buscar(dni);
-        
+
         if (nodo != null) {
+            //Verificamos de que el paciente existe
             Paciente p = nodo.getDato();
-            p.setNombres(nuevosNombres);
-            p.setApellidos(nuevosApellidos);
-            p.setFechaNacimiento(nuevaFecha);
-            p.setCelular(nuevoCelular);
-            p.setSeguro(nuevoSeguro);
+            //Si el valor de la variable tratando de modificar:
+            //esta vacia -> true -> false = NO entra
+            //esta llena -> false -> true = entra y modifica el valor de la variable anterior por la nueva
+            if (!nuevosNombres.trim().isEmpty()) {
+                p.setNombres(nuevosNombres);
+            }
+            if (!nuevosApellidos.trim().isEmpty()) {
+                p.setApellidos(nuevosApellidos);
+            }
+            if (!nuevaFecha.replace("/", "").trim().isEmpty()) {
+                p.setFechaNacimiento(nuevaFecha);
+            }
+            if (!nuevoCelular.trim().isEmpty()) {
+                p.setCelular(nuevoCelular);
+            }
+            if (!nuevoSeguro.trim().isEmpty()) {
+                p.setSeguro(nuevoSeguro);
+            }
             return true;
         }
+
         return false;
     }
 

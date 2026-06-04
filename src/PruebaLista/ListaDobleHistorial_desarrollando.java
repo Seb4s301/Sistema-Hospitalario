@@ -52,14 +52,26 @@ public class ListaDobleHistorial_desarrollando {
         return modeloHistorial;
     }
 
-    public boolean modificar(int dniPaciente, String nuevoTipoSangre, String nuevasAlergias, String nuevasEnfermedades, String nuevasObservaciones) {
+    public boolean modificar(int dniPaciente, String nuevoTipoSangre,String nuevasAlergias, String nuevasEnfermedades,String nuevasObservaciones) {
+        //Verifcar si historial existe
         NodoHistorial nodo = buscarPorDni(dniPaciente);
+
         if (nodo != null) {
+
             HistorialClinico h = nodo.getDato();
-            h.setTipoSangre(nuevoTipoSangre);
-            h.setAlergias(nuevasAlergias);
-            h.setEnfermedadesCronicas(nuevasEnfermedades);
-            h.setObservacionesMedicas(nuevasObservaciones);
+
+            if (!nuevoTipoSangre.trim().isEmpty()) {
+                h.setTipoSangre(nuevoTipoSangre);
+            }
+            if (!nuevasAlergias.trim().isEmpty()) {
+                h.setAlergias(nuevasAlergias);
+            }
+            if (!nuevasEnfermedades.trim().isEmpty()) {
+                h.setEnfermedadesCronicas(nuevasEnfermedades);
+            }
+            if (!nuevasObservaciones.trim().isEmpty()) {
+                h.setObservacionesMedicas(nuevasObservaciones);
+            }
             return true;
         }
         return false;

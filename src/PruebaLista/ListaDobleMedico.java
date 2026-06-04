@@ -58,16 +58,31 @@ public class ListaDobleMedico {
     }
 
     public boolean modificar(String dni,String nuevosNombres,String nuevosApellidos,String nuevaFecha,String nuevoCelular,String nuevaEspecialidad) {
+
         //Verificacion de que el medico existe
         NodoMedico nodo = buscar(dni);
-        
+
         if (nodo != null) {
+
             Medico m = nodo.getDato();
-            m.setNombres(nuevosNombres);
-            m.setApellidos(nuevosApellidos);
-            m.setFechaNacimiento(nuevaFecha);
-            m.setCelular(nuevoCelular);
-            m.setEspecialidad(nuevaEspecialidad);
+            //Si el valor de la variable tratando de modificar:
+            //esta vacia -> true -> false = NO entra
+            //esta llena -> false -> true = entra y modifica el valor de la variable anterior por la nueva
+            if (!nuevosNombres.trim().isEmpty()) {
+                m.setNombres(nuevosNombres);
+            }
+            if (!nuevosApellidos.trim().isEmpty()) {
+                m.setApellidos(nuevosApellidos);
+            }
+            if (!nuevaFecha.replace("/", "").trim().isEmpty()) {
+                m.setFechaNacimiento(nuevaFecha);
+            }
+            if (!nuevoCelular.trim().isEmpty()) {
+                m.setCelular(nuevoCelular);
+            }
+            if (!nuevaEspecialidad.trim().isEmpty()) {
+                m.setEspecialidad(nuevaEspecialidad);
+            }
             return true;
         }
         return false;
