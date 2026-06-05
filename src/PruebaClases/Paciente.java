@@ -1,10 +1,12 @@
 package PruebaClases;
 
+import java.util.Date;
+
 public class Paciente {
     private String dni; 
     private String nombres;
     private String apellidos;
-    private String fechaNacimiento; 
+    private Date fechaNacimiento; 
     private String celular;
     private String seguro;
 
@@ -12,12 +14,12 @@ public class Paciente {
         dni="";
         nombres="";
         apellidos="";
-        fechaNacimiento="";
+        fechaNacimiento= new Date();
         celular="";
         seguro="";
     }
     
-    public Paciente(String dni, String nombres, String apellidos, String fechaNacimiento, String celular, String seguro) {
+    public Paciente(String dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String seguro) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -50,11 +52,11 @@ public class Paciente {
         this.apellidos = apellidos;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

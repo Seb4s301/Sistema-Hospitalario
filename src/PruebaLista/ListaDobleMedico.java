@@ -3,6 +3,7 @@ package PruebaLista;
 import PruebaNodo.NodoMedico;
 import javax.swing.table.DefaultTableModel;
 import PruebaClases.Medico;
+import java.util.Date;
 
 /**
  *
@@ -57,7 +58,7 @@ public class ListaDobleMedico {
         return modelo;
     }
 
-    public boolean modificar(String dni,String nuevosNombres,String nuevosApellidos,String nuevaFecha,String nuevoCelular,String nuevaEspecialidad) {
+    public boolean modificar(String dni,String nuevosNombres,String nuevosApellidos,Date nuevaFecha,String nuevoCelular,String nuevaEspecialidad) {
 
         //Verificacion de que el medico existe
         NodoMedico nodo = buscar(dni);
@@ -73,9 +74,6 @@ public class ListaDobleMedico {
             }
             if (!nuevosApellidos.trim().isEmpty()) {
                 m.setApellidos(nuevosApellidos);
-            }
-            if (!nuevaFecha.replace("/", "").trim().isEmpty()) {
-                m.setFechaNacimiento(nuevaFecha);
             }
             if (!nuevoCelular.trim().isEmpty()) {
                 m.setCelular(nuevoCelular);

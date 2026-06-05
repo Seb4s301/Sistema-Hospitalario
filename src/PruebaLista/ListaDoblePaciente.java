@@ -29,8 +29,6 @@ public class ListaDoblePaciente {
         }
     }
 
-
-
     public DefaultTableModel imprimirIDPaciente() {
         String columnas[] = {
             "DNI",
@@ -59,35 +57,29 @@ public class ListaDoblePaciente {
         return modelo;
     }
     
-    public boolean modificar(String dni, String nuevosNombres,String nuevosApellidos, String nuevaFecha,String nuevoCelular, String nuevoSeguro) {
-
-        NodoPaciente nodo = buscar(dni);
-
-        if (nodo != null) {
-            //Verificamos de que el paciente existe
-            Paciente p = nodo.getDato();
-            //Si el valor de la variable tratando de modificar:
-            //esta vacia -> true -> false = NO entra
-            //esta llena -> false -> true = entra y modifica el valor de la variable anterior por la nueva
-            if (!nuevosNombres.trim().isEmpty()) {
-                p.setNombres(nuevosNombres);
+    public NodoPaciente buscar(String dni) {
+        NodoPaciente aux = ini;
+        while (aux != null) {
+            if (aux.getDato().getDni().equals(dni)) {
+                return aux;
             }
-            if (!nuevosApellidos.trim().isEmpty()) {
-                p.setApellidos(nuevosApellidos);
-            }
-            if (!nuevaFecha.replace("/", "").trim().isEmpty()) {
-                p.setFechaNacimiento(nuevaFecha);
-            }
-            if (!nuevoCelular.trim().isEmpty()) {
-                p.setCelular(nuevoCelular);
-            }
-            if (!nuevoSeguro.trim().isEmpty()) {
-                p.setSeguro(nuevoSeguro);
-            }
-            return true;
+            aux = aux.getSgte();
         }
-
-        return false;
+        return null;
+    }
+    
+    public boolean modificar(String dni, String nuevosNombres, String nuevosApellidos, java.util.Date nuevaFecha, String nuevoCelular, String nuevoSeguro) {
+        NodoPaciente nodo = buscar(dni);
+        if (nodo != null) {
+            ;
+            nodo.getDato().setNombres(nuevosNombres);
+            nodo.getDato().setApellidos(nuevosApellidos);
+            nodo.getDato().setFechaNacimiento(nuevaFecha);
+            nodo.getDato().setCelular(nuevoCelular);
+            nodo.getDato().setSeguro(nuevoSeguro);
+            return true; 
+        }
+        return false; 
     }
 
     public void eliminarID(String dni) {
@@ -115,16 +107,5 @@ public class ListaDoblePaciente {
             }
             tmp = tmp.getSgte();
         }
-    }
-
-    public NodoPaciente buscar(String dni) {
-        NodoPaciente aux = ini;
-        while (aux != null) {
-            if (aux.getDato().getDni().equals(dni)) {
-                return aux;
-            }
-            aux = aux.getSgte();
-        }
-        return null;
     }
 }

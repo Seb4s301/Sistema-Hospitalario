@@ -3,6 +3,7 @@ import PruebaLista.ListaDobleMedico;
 import PruebaClases.Medico;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -279,7 +280,7 @@ public class JpMedicos extends javax.swing.JPanel {
                         dni,
                         nombres,
                         apellidos,
-                        fechaNac,
+                        new Date(fechaNac),
                         celular,
                         especialidad)
         );
@@ -312,7 +313,7 @@ public class JpMedicos extends javax.swing.JPanel {
                         dni,
                         nombres,
                         apellidos,
-                        fechaNac,
+                        new Date(fechaNac),
                         celular,
                         especialidad
                 );

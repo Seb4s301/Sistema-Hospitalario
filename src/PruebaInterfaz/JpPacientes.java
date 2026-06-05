@@ -3,6 +3,7 @@ import PruebaLista.ListaDoblePaciente;
 import javax.swing.JOptionPane;
 import PruebaNodo.NodoPaciente;
 import PruebaClases.Paciente;
+import java.util.Date;
 
 /**
  *
@@ -247,7 +248,7 @@ public class JpPacientes extends javax.swing.JPanel {
                     dni,  
                     nombres, 
                     apellidos, 
-                    fecha, 
+                    new Date(fecha), 
                     celular, 
                     seguro)
             );
@@ -279,7 +280,7 @@ public class JpPacientes extends javax.swing.JPanel {
                 dni,
                 nombres,
                 apellidos,
-                fecha,
+                new Date(fecha),
                 celular,
                 seguro);
         
@@ -338,7 +339,7 @@ public class JpPacientes extends javax.swing.JPanel {
             txtDni.setText(p.getDni());
             txtNombres.setText(p.getNombres());
             txtApellidos.setText(p.getApellidos());
-            txtFechaNac.setText(p.getFechaNacimiento());
+            txtFechaNac.setText(p.getFechaNacimiento().toLocaleString());
             txtCelular.setText(p.getCelular());
             txtSeguro.setText(p.getSeguro());
         }
