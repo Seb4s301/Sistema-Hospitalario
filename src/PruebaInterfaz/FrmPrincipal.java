@@ -1,5 +1,7 @@
 package PruebaInterfaz;
 
+import PruebaLista.ListaDoblePaciente;
+
 /**
  *
  * @author Jean
@@ -7,9 +9,11 @@ package PruebaInterfaz;
 public class FrmPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPrincipal.class.getName());
+    private ListaDoblePaciente listaPacientesCompartida; 
     private JpPacientes panelPacientes;
     private JpMedicos panelMedicos;
     private JpHistorialesClinicos panelHistoriales; 
+    private JpAgendarCita panelAgendar;
     
     /**
      * Creates new form Principal
@@ -21,11 +25,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     private void conectarPaneles() {
+        listaPacientesCompartida = new ListaDoblePaciente();
         //Se instancia los paneles creados
-        panelPacientes = new JpPacientes();
+        panelPacientes = new JpPacientes();       
+        panelPacientes.setListaPacientes(listaPacientesCompartida);  // ✅ PASAR LA LISTA
+
         panelMedicos = new JpMedicos(); 
         panelHistoriales = new JpHistorialesClinicos();
         
+        panelAgendar = new JpAgendarCita();  
+        panelAgendar.setListaPacientes(listaPacientesCompartida);  
+
         
         jTabbedPane2.removeAll();
         
@@ -33,7 +43,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jTabbedPane2.addTab("Principal", new javax.swing.JPanel()); 
         jTabbedPane2.addTab("Pacientes", panelPacientes);          
         jTabbedPane2.addTab("Medicos", panelMedicos); 
-        jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales); 
+        jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
+        jTabbedPane2.addTab("Agendar", panelAgendar);
     }
     
     

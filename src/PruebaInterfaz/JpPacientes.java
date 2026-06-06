@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class JpPacientes extends javax.swing.JPanel { 
     
-    ListaDoblePaciente listaPacientes=new ListaDoblePaciente();
+    ListaDoblePaciente listaPacientes;
     
     private String dni;
     private String nombres;
@@ -22,13 +22,16 @@ public class JpPacientes extends javax.swing.JPanel {
     
     public JpPacientes() {
         initComponents();
-        listaPacientes = new ListaDoblePaciente();
+        
         listar();
     }
-    
+    public void setListaPacientes(ListaDoblePaciente lista) {
+        this.listaPacientes = lista;
+        listar();  // Actualizar tabla con la lista compartida
+    }
     //Uso de metodo imprimirIDPaciente
     private void listar() {
-        tablaPaciente.setModel(listaPacientes.imprimirIDPaciente());
+        if(listaPacientes != null)tablaPaciente.setModel(listaPacientes.imprimirIDPaciente());
     }
 
     private void limpiarCajas() {
@@ -225,21 +228,15 @@ public class JpPacientes extends javax.swing.JPanel {
                     || apellidos.isEmpty()
                     || celular.isEmpty()
                     || fecha.isEmpty()) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Complete los datos principales");
+                JOptionPane.showMessageDialog(this,"Complete los datos principales");
                 return;
             }
             if (!dni.matches("\\d{8}")) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "DNI invalido");
+                JOptionPane.showMessageDialog( this,"DNI invalido");
                 return;
             }
             if (!celular.matches("\\d{9}")) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Celular invalido");
+                JOptionPane.showMessageDialog(this,"Celular invalido");
                 return;
             }//Fin validacion de restricciones
 
