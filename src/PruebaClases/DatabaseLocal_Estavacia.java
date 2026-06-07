@@ -19,7 +19,7 @@ public class DatabaseLocal_Estavacia {
     };
 
     // Almacenamiento global en memoria de las listas dobles
-    public static ListaDoblePaciente listaPacientes = new ListaDoblePaciente();
-    public static ListaDobleMedico listaMedicos = new ListaDobleMedico();
+    public static ListaDoblePaciente listaPacientes = ListaDoblePaciente.getInstancia();
+    public static ListaDobleMedico listaMedicos = ListaDobleMedico.getInstancia();
     public static ListaDobleHistorial_desarrollando listaHistoriales = new ListaDobleHistorial_desarrollando();
 }

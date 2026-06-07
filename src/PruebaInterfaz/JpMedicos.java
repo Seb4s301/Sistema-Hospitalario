@@ -12,9 +12,9 @@ import java.util.Date;
 
 public class JpMedicos extends javax.swing.JPanel {
 
-       ListaDobleMedico listaDobleMedico=new ListaDobleMedico();
+       ListaDobleMedico listaDobleMedico = ListaDobleMedico.getInstancia();
     
-       private  String dni;
+       private String dni;
        private String nombres;
        private String apellidos;
        private String especialidad;
@@ -23,7 +23,6 @@ public class JpMedicos extends javax.swing.JPanel {
         
     public JpMedicos() {
         initComponents();
-        listaDobleMedico= new ListaDobleMedico();
         listar();
     }
     //Creacion del metodo imprimirIDPaciente para la tabla
@@ -37,7 +36,7 @@ public class JpMedicos extends javax.swing.JPanel {
         txtApellidos.setText("");
         txtFechaNac.setText("");
         txtCelular.setText("");
-        txtEspecialidad.setText("");
+        txtEspecialidad.setSelectedIndex(0);
         txtDni.requestFocus();
     }
     
@@ -57,8 +56,6 @@ public class JpMedicos extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDni = new javax.swing.JTextPane();
         jLabel11 = new javax.swing.JLabel();
-        jScrollPane18 = new javax.swing.JScrollPane();
-        txtEspecialidad = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNombres = new javax.swing.JTextPane();
         txtFechaNac = new javax.swing.JFormattedTextField();
@@ -71,6 +68,7 @@ public class JpMedicos extends javax.swing.JPanel {
         tablaMedicos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        txtEspecialidad = new javax.swing.JComboBox<>();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -91,8 +89,6 @@ public class JpMedicos extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtDni);
 
         jLabel11.setText("Fecha de Nacimiento:");
-
-        jScrollPane18.setViewportView(txtEspecialidad);
 
         jScrollPane3.setViewportView(txtNombres);
 
@@ -150,6 +146,8 @@ public class JpMedicos extends javax.swing.JPanel {
 
         jLabel2.setText("Nombres:");
 
+        txtEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--", "Traumatología", "Pediatria", "Oftalmología", "Neurología", "Endocrinología", "Oncología", "Dermatología", "Cardiología", "Gastroenterología" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,9 +170,9 @@ public class JpMedicos extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                     .addComponent(txtFechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,8 +196,8 @@ public class JpMedicos extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel4)))
-                            .addComponent(jScrollPane18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEspecialidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -233,7 +231,7 @@ public class JpMedicos extends javax.swing.JPanel {
         dni = txtDni.getText().trim();
         nombres = txtNombres.getText().trim();
         apellidos = txtApellidos.getText().trim();
-        especialidad = txtEspecialidad.getText().trim();
+        especialidad = txtEspecialidad.getSelectedItem().toString();
         celular = txtCelular.getText().trim();
         fechaNac = txtFechaNac.getText().trim();
 
@@ -261,34 +259,6 @@ public class JpMedicos extends javax.swing.JPanel {
                     "Celular invalido");
             return;
         }
-        try {
-            SimpleDateFormat formato =
-                    new SimpleDateFormat("dd/MM/yyyy");
-            formato.setLenient(false);
-            formato.parse(fechaNac);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Fecha invalida. Use dd/MM/yyyy");
-            return;
-        }//Fin validacion de restricciones
-        
-        //Uso de metodo insertar nuevo Medico
-        listaDobleMedico.insertar(new Medico(
-                        dni,
-                        nombres,
-                        apellidos,
-                        new Date(fechaNac),
-                        celular,
-                        especialidad)
-        );
-        
-        //Listar y validar insercion exitosa
-        listar();
-        limpiarCajas();
-        JOptionPane.showMessageDialog(
-                null,
-                "Medico registrado correctamente");
         
     } catch (Exception e) {
             e.printStackTrace();
@@ -296,22 +266,50 @@ public class JpMedicos extends javax.swing.JPanel {
                     this,
                     "Error real: " + e.getMessage());
     }
+    
+    try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaParsada = formato.parse(fechaNac);
+            
+            //Uso de metodo insertar nuevo Medico
+            listaDobleMedico.insertar(new Medico(
+                        dni,
+                        nombres,
+                        apellidos,
+                        fechaParsada,
+                        celular,
+                        especialidad)
+        );
+        
+        //Listar y validar insercion exitosa
+        listar();
+        limpiarCajas();
+        JOptionPane.showMessageDialog(null,"Medico registrado correctamente");
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: "+e.getMessage());
+        }
+    
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         dni = txtDni.getText().trim();
         nombres = txtNombres.getText().trim();
         apellidos = txtApellidos.getText().trim();
-        especialidad =txtEspecialidad.getText().trim();
+        especialidad =txtEspecialidad.getSelectedItem().toString();
         celular =txtCelular.getText().trim();
         fechaNac =txtFechaNac.getText().trim();
-
-        //Uso de metodo modificar Medico
+        try{
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaParsada = formato.parse(fechaNac);
+            
+            //Uso de metodo modificar Medico
         boolean modificado =listaDobleMedico.modificar(
                         dni,
                         nombres,
                         apellidos,
-                        new Date(fechaNac),
+                        fechaParsada,
                         celular,
                         especialidad
                 );
@@ -327,6 +325,11 @@ public class JpMedicos extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(
                     null,
                     "No se encontro el medico");
+        }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error real: " +e.getMessage());
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -374,7 +377,6 @@ public class JpMedicos extends javax.swing.JPanel {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -383,7 +385,7 @@ public class JpMedicos extends javax.swing.JPanel {
     private javax.swing.JTextPane txtApellidos;
     private javax.swing.JTextPane txtCelular;
     private javax.swing.JTextPane txtDni;
-    private javax.swing.JTextPane txtEspecialidad;
+    private javax.swing.JComboBox<String> txtEspecialidad;
     private javax.swing.JFormattedTextField txtFechaNac;
     private javax.swing.JTextPane txtNombres;
     // End of variables declaration//GEN-END:variables

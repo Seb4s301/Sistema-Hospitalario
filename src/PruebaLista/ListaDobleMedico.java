@@ -13,11 +13,19 @@ import java.util.Date;
 public class ListaDobleMedico {
     private NodoMedico ini;
     private NodoMedico fin;
-
-    public ListaDobleMedico() {
+    private static ListaDobleMedico lista;
+    
+    private ListaDobleMedico() {
         ini=fin=null;
     }
 
+    public static  ListaDobleMedico getInstancia() {
+        if (lista == null) {
+            lista = new ListaDobleMedico();
+        }
+        return lista;
+    }
+    
     public void insertar(Medico dato) {
         NodoMedico nuevo = new NodoMedico(dato);
         
@@ -31,14 +39,7 @@ public class ListaDobleMedico {
     }
 
     public DefaultTableModel imprimirIDMedico() {
-        String columnas[] = {
-            "DNI",
-            "NOMBRES",
-            "APELLIDOS",
-            "FECHA NAC.",
-            "CELULAR",
-            "ESPECIALIDAD"
-        };
+        String columnas[] = {"DNI","NOMBRES","APELLIDOS","FECHA NAC.","CELULAR","ESPECIALIDAD"};
         
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         

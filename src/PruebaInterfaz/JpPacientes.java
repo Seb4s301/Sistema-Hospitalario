@@ -3,7 +3,9 @@ import PruebaLista.ListaDoblePaciente;
 import javax.swing.JOptionPane;
 import PruebaNodo.NodoPaciente;
 import PruebaClases.Paciente;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,7 +13,7 @@ import java.util.Date;
  */
 public class JpPacientes extends javax.swing.JPanel { 
     
-    ListaDoblePaciente listaPacientes;
+    ListaDoblePaciente listaPacientes = ListaDoblePaciente.getInstancia();
     
     private String dni;
     private String nombres;
@@ -21,17 +23,15 @@ public class JpPacientes extends javax.swing.JPanel {
     private String fecha;
     
     public JpPacientes() {
-        initComponents();
-        
+        initComponents();   
         listar();
-    }
-    public void setListaPacientes(ListaDoblePaciente lista) {
-        this.listaPacientes = lista;
-        listar();  // Actualizar tabla con la lista compartida
     }
     //Uso de metodo imprimirIDPaciente
     private void listar() {
-        if(listaPacientes != null)tablaPaciente.setModel(listaPacientes.imprimirIDPaciente());
+        if(listaPacientes !=null){
+        DefaultTableModel modeloPacientes = listaPacientes.imprimirIDPaciente();
+        tablaPaciente.setModel(modeloPacientes);
+        }
     }
 
     private void limpiarCajas() {
@@ -239,13 +239,16 @@ public class JpPacientes extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this,"Celular invalido");
                 return;
             }//Fin validacion de restricciones
+            
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaParsada = formato.parse(fecha);
 
             //Uso de metodo insertar nuevo paciente
             listaPacientes.insertar(new Paciente(
                     dni,  
                     nombres, 
                     apellidos, 
-                    new Date(fecha), 
+                    fechaParsada, 
                     celular, 
                     seguro)
             );
@@ -272,12 +275,16 @@ public class JpPacientes extends javax.swing.JPanel {
         seguro =txtSeguro.getText().trim();
         fecha =txtFechaNac.getText().trim();
 
+        try{
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaParsada = formato.parse(fecha);
+        
         //Uso de metodo modificar Paciente
         boolean modificado = listaPacientes.modificar(
                 dni,
                 nombres,
                 apellidos,
-                new Date(fecha),
+                fechaParsada,
                 celular,
                 seguro);
         
@@ -292,7 +299,11 @@ public class JpPacientes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(
                     this,
                     "Paciente no encontrado");
-        }  
+        }
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: "+e.getMessage());
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
     
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -324,8 +335,7 @@ public class JpPacientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        int filaSeleccionada =
-            tablaPaciente.getSelectedRow();
+        int filaSeleccionada = tablaPaciente.getSelectedRow();
     if (filaSeleccionada != -1) {
         dni =tablaPaciente.getValueAt(
                         filaSeleccionada,
@@ -336,7 +346,10 @@ public class JpPacientes extends javax.swing.JPanel {
             txtDni.setText(p.getDni());
             txtNombres.setText(p.getNombres());
             txtApellidos.setText(p.getApellidos());
-            txtFechaNac.setText(p.getFechaNacimiento().toLocaleString());
+            
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            txtFechaNac.setText(formato.format(p.getFechaNacimiento()));
+            
             txtCelular.setText(p.getCelular());
             txtSeguro.setText(p.getSeguro());
         }

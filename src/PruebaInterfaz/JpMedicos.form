@@ -62,9 +62,9 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane18" pref="187" max="32767" attributes="0"/>
                   <Component id="txtFechaNac" alignment="1" pref="187" max="32767" attributes="0"/>
                   <Component id="jScrollPane12" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtEspecialidad" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -95,8 +95,8 @@
                                   <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane18" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEspecialidad" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -178,17 +178,6 @@
         <Property name="text" type="java.lang.String" value="Fecha de Nacimiento:"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane18">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTextPane" name="txtEspecialidad">
-        </Component>
-      </SubComponents>
-    </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -317,6 +306,27 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombres:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="txtEspecialidad">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="10">
+            <StringItem index="0" value="--Seleccione--"/>
+            <StringItem index="1" value="Traumatolog&#xed;a"/>
+            <StringItem index="2" value="Pediatria"/>
+            <StringItem index="3" value="Oftalmolog&#xed;a"/>
+            <StringItem index="4" value="Neurolog&#xed;a"/>
+            <StringItem index="5" value="Endocrinolog&#xed;a"/>
+            <StringItem index="6" value="Oncolog&#xed;a"/>
+            <StringItem index="7" value="Dermatolog&#xed;a"/>
+            <StringItem index="8" value="Cardiolog&#xed;a"/>
+            <StringItem index="9" value="Gastroenterolog&#xed;a"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

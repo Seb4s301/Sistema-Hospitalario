@@ -12,11 +12,19 @@ import javax.swing.table.DefaultTableModel;
 public class ListaDoblePaciente {
     private NodoPaciente ini;
     private NodoPaciente fin;
-
-    public ListaDoblePaciente() {
+    private static ListaDoblePaciente lista;
+    
+    private ListaDoblePaciente() {
         ini=fin=null;
     }
 
+    public static ListaDoblePaciente getInstancia(){
+        if(lista == null){
+            lista = new ListaDoblePaciente();
+        }
+        return lista;
+    }
+    
     public void insertar(Paciente dato) {
         NodoPaciente nuevo = new NodoPaciente(dato);
         
@@ -30,15 +38,7 @@ public class ListaDoblePaciente {
     }
 
     public DefaultTableModel imprimirIDPaciente() {
-        String columnas[] = {
-            "DNI",
-            "NOMBRES",
-            "APELLIDOS",
-            "FECHA NAC.",
-            "CELULAR",
-            "SEGURO"
-        };
-        
+        String columnas[] = {"DNI","NOMBRES","APELLIDOS","FECHA NAC.","CELULAR","SEGURO"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
          
         NodoPaciente tmp = ini;

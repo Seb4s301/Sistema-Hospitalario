@@ -8,8 +8,7 @@ import PruebaLista.ListaDoblePaciente;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPrincipal.class.getName());
-    private ListaDoblePaciente listaPacientesCompartida; 
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()); 
     private JpPacientes panelPacientes;
     private JpMedicos panelMedicos;
     private JpHistorialesClinicos panelHistoriales; 
@@ -25,16 +24,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     private void conectarPaneles() {
-        listaPacientesCompartida = new ListaDoblePaciente();
+        
         //Se instancia los paneles creados
-        panelPacientes = new JpPacientes();       
-        panelPacientes.setListaPacientes(listaPacientesCompartida);  // ✅ PASAR LA LISTA
-
+        panelPacientes = new JpPacientes();
         panelMedicos = new JpMedicos(); 
         panelHistoriales = new JpHistorialesClinicos();
-        
-        panelAgendar = new JpAgendarCita();  
-        panelAgendar.setListaPacientes(listaPacientesCompartida);  
+        panelAgendar = new JpAgendarCita(); 
 
         
         jTabbedPane2.removeAll();
