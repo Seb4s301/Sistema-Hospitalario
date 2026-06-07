@@ -1,4 +1,4 @@
-package PruebaClases;
+package Clases;
 
 import java.util.Date;
 

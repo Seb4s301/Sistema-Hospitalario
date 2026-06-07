@@ -1,4 +1,4 @@
-package PruebaClases;
+package Clases;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ public class Medico {
     private String dni;
     private String nombres;
     private String apellidos;
-    private Date fechaNacimiento;
+    private Date turno;
     private String celular;
     private String especialidad;
 
@@ -15,16 +15,16 @@ public class Medico {
         this.dni = "";
         this.nombres = "";
         this.apellidos = "";
-        this.fechaNacimiento = new Date();
+        this.turno = new Date();
         this.celular = "";
         this.especialidad = "";
     }
 
-    public Medico(String dni, String nombres, String apellidos, Date fechaNacimiento, String celular, String especialidad) {
+    public Medico(String dni, String nombres, String apellidos, Date turno, String celular, String especialidad) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.fechaNacimiento = new Date();
+        this.turno = turno;
         this.celular = celular;
         this.especialidad = especialidad;
     }
@@ -53,12 +53,12 @@ public class Medico {
         this.apellidos = apellidos;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public Date getTurno() {
+        return turno;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setTurno(Date turno) {
+        this.turno = turno;
     }
 
     public String getCelular() {

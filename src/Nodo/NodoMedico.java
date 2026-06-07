@@ -1,10 +1,10 @@
 
-package PruebaNodo;
+package Nodo;
 
-import PruebaClases.Medico;
+import Clases.Medico;
 
-import PruebaLista.ListaDobleMedico;
-import PruebaClases.Medico;
+import Lista.ListaDobleMedico;
+import Clases.Medico;
 
 public class NodoMedico {
     Medico dato;

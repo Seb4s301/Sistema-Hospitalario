@@ -1,6 +1,6 @@
-package PruebaInterfaz;
+package Interfaz;
 
-import PruebaLista.ListaDoblePaciente;
+import Lista.ListaDoblePaciente;
 
 /**
  *

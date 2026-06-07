@@ -1,16 +1,16 @@
-package PruebaLista;
+package Lista;
 
 import javax.swing.table.DefaultTableModel;
-import PruebaClases.HistorialClinico;
-import PruebaNodo.NodoHistorial;
+import Clases.HistorialClinico;
+import Nodo.NodoHistorial;
 
 /**
  *
  * @author Jean
  */
 
-import PruebaClases.HistorialClinico;
-import PruebaNodo.NodoHistorial;
+import Clases.HistorialClinico;
+import Nodo.NodoHistorial;
 import javax.swing.table.DefaultTableModel;
 
 public class ListaDobleHistorial_desarrollando {

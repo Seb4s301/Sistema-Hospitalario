@@ -1,6 +1,6 @@
-package HorariosHospital_desarrollando;
+package HorariosHospital;
 
-import PruebaLista.ListaDobleTurno;
+import Lista.ListaDobleTurno;
 import java.time.LocalTime;
 
 public class Doctor {

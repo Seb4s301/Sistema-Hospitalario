@@ -1,8 +1,8 @@
-package PruebaLista;
+package Lista;
 
-import PruebaNodo.NodoMedico;
+import Nodo.NodoMedico;
 import javax.swing.table.DefaultTableModel;
-import PruebaClases.Medico;
+import Clases.Medico;
 import java.util.Date;
 
 /**
@@ -15,6 +15,7 @@ public class ListaDobleMedico {
     private NodoMedico fin;
     private static ListaDobleMedico lista;
     
+    //PATRON SINGLETON
     private ListaDobleMedico() {
         ini=fin=null;
     }
@@ -39,7 +40,7 @@ public class ListaDobleMedico {
     }
 
     public DefaultTableModel imprimirIDMedico() {
-        String columnas[] = {"DNI","NOMBRES","APELLIDOS","FECHA NAC.","CELULAR","ESPECIALIDAD"};
+        String columnas[] = {"DNI","NOMBRES","APELLIDOS","TURNO","CELULAR","ESPECIALIDAD"};
         
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         
@@ -50,7 +51,7 @@ public class ListaDobleMedico {
                 tmp.getDato().getDni(),
                 tmp.getDato().getNombres(),
                 tmp.getDato().getApellidos(),
-                tmp.getDato().getFechaNacimiento(),
+                tmp.getDato().getTurno(),
                 tmp.getDato().getCelular(),
                 tmp.getDato().getEspecialidad()
             });
@@ -119,6 +120,17 @@ public class ListaDobleMedico {
         while (tmp != null) {
             if (tmp.getDato().getDni().equals(dni)) {
 
+                return tmp;
+            }
+            tmp = tmp.getSgte();
+        }
+        return null;
+    }
+    
+    public NodoMedico buscarTurno(Date turno) {
+        NodoMedico tmp = ini;
+        while (tmp != null) {
+            if (tmp.getDato().getTurno().equals(turno)) {
                 return tmp;
             }
             tmp = tmp.getSgte();

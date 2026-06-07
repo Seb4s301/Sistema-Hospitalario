@@ -1,4 +1,4 @@
-package PruebaInterfaz;
+package Interfaz;
 
 /**
  *

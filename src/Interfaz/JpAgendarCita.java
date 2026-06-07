@@ -1,9 +1,12 @@
-package PruebaInterfaz;
+package Interfaz;
 
-import PruebaLista.ListaDobleMedico;
-import PruebaLista.ListaDoblePaciente;
-import PruebaNodo.NodoMedico;
-import PruebaNodo.NodoPaciente;
+import Lista.ListaDobleMedico;
+import Lista.ListaDoblePaciente;
+import Nodo.NodoMedico;
+import Nodo.NodoPaciente;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +18,8 @@ public class JpAgendarCita extends javax.swing.JPanel {
     
     ListaDoblePaciente listaPacientes = ListaDoblePaciente.getInstancia();
     ListaDobleMedico listaDobleMedico = ListaDobleMedico.getInstancia();
+    
+    private String fecha;
     
     public JpAgendarCita() {
         initComponents();
@@ -45,17 +50,45 @@ public class JpAgendarCita extends javax.swing.JPanel {
     }
     
         private void imprimirMedico(){
+          try{   
+            fecha = txtTurno.getText();
+                    
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date fechaParsada = formato.parse(fecha);
+            
+            if (txtTurno.getText().isEmpty()){
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaMedico.getModel();
         NodoMedico nodo = listaDobleMedico.buscar(txtDniMedico.getText());
         modeloTabla.addRow(new Object[]{
         nodo.getDato().getDni(),
         nodo.getDato().getNombres(),
         nodo.getDato().getApellidos(),
-        nodo.getDato().getFechaNacimiento(),
+        nodo.getDato().getTurno(),
         nodo.getDato().getCelular(),
         nodo.getDato().getEspecialidad(),
             }
         );
+            }else if(txtDniMedico.getText().isEmpty()){
+            
+                    DefaultTableModel modeloTabla = (DefaultTableModel) tablaMedico.getModel();
+                    NodoMedico nodo = listaDobleMedico.buscarTurno(fechaParsada);
+                    modeloTabla.addRow(new Object[]{
+                        nodo.getDato().getDni(),
+                        nodo.getDato().getNombres(),
+                        nodo.getDato().getApellidos(),
+                        nodo.getDato().getTurno(),
+                        nodo.getDato().getCelular(),
+                        nodo.getDato().getEspecialidad(),
+                    }
+                    );
+                
+            }else{
+               JOptionPane.showMessageDialog(this, "RELLENA ALGUNO PS IDIOTA");
+            }
+            }catch(Exception e){
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this,"Error real: " + e.getMessage());
+                }
     }
     
     @SuppressWarnings("unchecked")
@@ -73,6 +106,8 @@ public class JpAgendarCita extends javax.swing.JPanel {
         tablaMedico = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtDniMedico = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtTurno = new javax.swing.JFormattedTextField();
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +155,14 @@ public class JpAgendarCita extends javax.swing.JPanel {
 
         jLabel2.setText("Codigo Doctor");
 
+        jLabel3.setText("Horario");
+
+        try {
+            txtTurno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,7 +171,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,6 +185,10 @@ public class JpAgendarCita extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDniMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnBuscarMedico)
                                 .addGap(18, 18, 18)
@@ -163,7 +210,9 @@ public class JpAgendarCita extends javax.swing.JPanel {
                     .addComponent(btnAgendar)
                     .addComponent(btnBuscarMedico)
                     .addComponent(jLabel2)
-                    .addComponent(txtDniMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDniMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(111, Short.MAX_VALUE))
@@ -185,11 +234,13 @@ public class JpAgendarCita extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscarMedico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaMedico;
     private javax.swing.JTable tablaPaciente;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDniMedico;
+    private javax.swing.JFormattedTextField txtTurno;
     // End of variables declaration//GEN-END:variables
 }

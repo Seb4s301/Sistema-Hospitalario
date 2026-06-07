@@ -1,6 +1,6 @@
-package PruebaNodo;
+package Nodo;
 
-import PruebaLista.ListaDobleTurno;
+import Lista.ListaDobleTurno;
 
 /**
  *

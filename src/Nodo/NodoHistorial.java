@@ -1,6 +1,6 @@
-package PruebaNodo;
+package Nodo;
 
-import PruebaClases.HistorialClinico;
+import Clases.HistorialClinico;
 
 /**
  *

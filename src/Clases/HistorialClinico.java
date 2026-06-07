@@ -1,4 +1,4 @@
-package PruebaClases;
+package Clases;
 
 public class HistorialClinico {
     private int dniPaciente; 

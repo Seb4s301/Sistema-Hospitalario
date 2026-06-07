@@ -1,5 +1,5 @@
 
-package HorariosHospital_desarrollando;
+package HorariosHospital;
 
 import java.util.Date;
 

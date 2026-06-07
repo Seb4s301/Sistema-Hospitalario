@@ -1,8 +1,8 @@
-package PruebaClases;
+package Clases;
 
-import PruebaLista.ListaDoblePaciente;
-import PruebaLista.ListaDobleMedico;
-import PruebaLista.ListaDobleHistorial_desarrollando;
+import Lista.ListaDoblePaciente;
+import Lista.ListaDobleMedico;
+import Lista.ListaDobleHistorial_desarrollando;
 
 /**
  *

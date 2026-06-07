@@ -1,7 +1,7 @@
-package PruebaLista;
+package Lista;
 
-import PruebaClases.Paciente;
-import PruebaNodo.NodoPaciente;
+import Clases.Paciente;
+import Nodo.NodoPaciente;
 import javax.swing.table.DefaultTableModel;
 
 /**

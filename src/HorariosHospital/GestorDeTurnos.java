@@ -1,6 +1,6 @@
-package HorariosHospital_desarrollando;
+package HorariosHospital;
 
-import HorariosHospital_desarrollando.Doctor.Turno;
+import HorariosHospital.Doctor.Turno;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package PruebaInterfaz;
-import PruebaLista.ListaDobleMedico;
-import PruebaClases.Medico;
+package Interfaz;
+import Lista.ListaDobleMedico;
+import Clases.Medico;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -88,12 +88,12 @@ public class JpMedicos extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(txtDni);
 
-        jLabel11.setText("Fecha de Nacimiento:");
+        jLabel11.setText("Turno:");
 
         jScrollPane3.setViewportView(txtNombres);
 
         try {
-            txtFechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtFechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -123,17 +123,17 @@ public class JpMedicos extends javax.swing.JPanel {
 
         tablaMedicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "Nombres", "Apellidos", "Especialidad", "Celular", "Fecha de Nacimiento", "Seguro"
+                "DNI", "Nombres", "Apellidos", "Especialidad", "Celular", "Turno"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -160,9 +160,9 @@ public class JpMedicos extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                     .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -170,7 +170,7 @@ public class JpMedicos extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(txtFechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(94, 94, 94)
@@ -260,15 +260,7 @@ public class JpMedicos extends javax.swing.JPanel {
             return;
         }
         
-    } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Error real: " + e.getMessage());
-    }
-    
-    try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date fechaParsada = formato.parse(fechaNac);
             
             //Uso de metodo insertar nuevo Medico
@@ -286,10 +278,14 @@ public class JpMedicos extends javax.swing.JPanel {
         limpiarCajas();
         JOptionPane.showMessageDialog(null,"Medico registrado correctamente");
             
-        }catch(Exception e){
+        
+        
+    } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error: "+e.getMessage());
-        }
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error real: " + e.getMessage());
+    }       
     
     }//GEN-LAST:event_btnInsertarActionPerformed
 

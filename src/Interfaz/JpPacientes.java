@@ -1,8 +1,8 @@
-package PruebaInterfaz;
-import PruebaLista.ListaDoblePaciente;
+package Interfaz;
+import Lista.ListaDoblePaciente;
 import javax.swing.JOptionPane;
-import PruebaNodo.NodoPaciente;
-import PruebaClases.Paciente;
+import Nodo.NodoPaciente;
+import Clases.Paciente;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
@@ -220,7 +220,7 @@ public class JpPacientes extends javax.swing.JPanel {
             apellidos = txtApellidos.getText().trim();
             celular = txtCelular.getText().trim();
             seguro = txtSeguro.getText().trim();
-            fecha = txtFechaNac.getText().trim();
+            fecha = txtFechaNac.getText();
 
             //Inicio validacion de restricciones
             if (dni.isEmpty()
