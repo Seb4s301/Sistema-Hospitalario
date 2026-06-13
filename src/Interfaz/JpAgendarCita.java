@@ -1,5 +1,7 @@
 package Interfaz;
 
+import Clases.Cita;
+import Lista.ListaDobleAgendar;
 import Lista.ListaDobleMedico;
 import Lista.ListaDoblePaciente;
 import Nodo.NodoMedico;
@@ -132,6 +134,11 @@ public class JpAgendarCita extends javax.swing.JPanel {
         jLabel1.setText("DNI");
 
         btnAgendar.setText("Agendar");
+        btnAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgendarActionPerformed(evt);
+            }
+        });
 
         btnBuscarMedico.setText("Buscar Doctor");
         btnBuscarMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +233,56 @@ public class JpAgendarCita extends javax.swing.JPanel {
     private void btnBuscarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicoActionPerformed
         imprimirMedico();
     }//GEN-LAST:event_btnBuscarMedicoActionPerformed
+
+    private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
+        if (tablaPaciente.getSelectedRow() == -1) {
+        JOptionPane.showMessageDialog(this, "Seleccione un paciente de la tabla superior.");
+        return;
+        }
+        
+        if (tablaMedico.getSelectedRow() == -1) {
+        JOptionPane.showMessageDialog(this, "Seleccione un médico de la tabla inferior.");
+        return;
+        }
+        
+        try {
+        String dniPaciente = tablaPaciente.getValueAt(tablaPaciente.getSelectedRow(), 0).toString();
+        String dniMedico = tablaMedico.getValueAt(tablaMedico.getSelectedRow(), 0).toString();
+
+   
+        NodoPaciente nodoP = listaPacientes.buscar(dniPaciente);
+        NodoMedico nodoM = listaDobleMedico.buscar(dniMedico);
+
+        if (nodoP == null || nodoM == null) {
+            JOptionPane.showMessageDialog(this, "Error de consistencia en las listas de memoria.");
+            return;
+        }
+
+        Cita nuevaCita = new Cita();
+        nuevaCita.setDniPaciente(nodoP.getDato().getDni());
+        nuevaCita.setNombrePaciente(nodoP.getDato().getNombres());
+        nuevaCita.setApellidoPaciente(nodoP.getDato().getApellidos());
+        nuevaCita.setDniMedico(nodoM.getDato().getDni());
+        nuevaCita.setNombreMedico(nodoM.getDato().getNombres());
+        nuevaCita.setApellidoMedico(nodoM.getDato().getApellidos());
+        nuevaCita.setEspecialidad(nodoM.getDato().getEspecialidad());
+        nuevaCita.setFecha(nodoM.getDato().getTurno());
+
+        ListaDobleAgendar.getInstancia().insertar(nuevaCita);
+
+        
+        JOptionPane.showMessageDialog(this, "Cita agendada con exito");
+
+        txtDni.setText("");
+        txtDniMedico.setText("");
+        txtTurno.setValue(null);
+        ((DefaultTableModel) tablaPaciente.getModel()).setRowCount(0);
+        ((DefaultTableModel) tablaMedico.getModel()).setRowCount(0);
+
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al agendar: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnAgendarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
