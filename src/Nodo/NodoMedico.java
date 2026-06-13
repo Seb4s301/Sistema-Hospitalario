@@ -1,9 +1,7 @@
 
 package Nodo;
 
-import Clases.Medico;
 
-import Lista.ListaDobleMedico;
 import Clases.Medico;
 
 public class NodoMedico {

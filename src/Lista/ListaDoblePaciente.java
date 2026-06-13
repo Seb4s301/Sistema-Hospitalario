@@ -71,7 +71,6 @@ public class ListaDoblePaciente {
     public boolean modificar(String dni, String nuevosNombres, String nuevosApellidos, java.util.Date nuevaFecha, String nuevoCelular, String nuevoSeguro) {
         NodoPaciente nodo = buscar(dni);
         if (nodo != null) {
-            ;
             nodo.getDato().setNombres(nuevosNombres);
             nodo.getDato().setApellidos(nuevosApellidos);
             nodo.getDato().setFechaNacimiento(nuevaFecha);
