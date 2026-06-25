@@ -20,6 +20,30 @@ public class ListaDobleMedico {
         ini=fin=null;
     }
 
+    public NodoMedico getIni() {
+        return ini;
+    }
+
+    public void setIni(NodoMedico ini) {
+        this.ini = ini;
+    }
+
+    public NodoMedico getFin() {
+        return fin;
+    }
+
+    public void setFin(NodoMedico fin) {
+        this.fin = fin;
+    }
+
+    public static ListaDobleMedico getLista() {
+        return lista;
+    }
+
+    public static void setLista(ListaDobleMedico lista) {
+        ListaDobleMedico.lista = lista;
+    }
+    
     public static  ListaDobleMedico getInstancia() {
         if (lista == null) {
             lista = new ListaDobleMedico();
@@ -76,6 +100,9 @@ public class ListaDobleMedico {
             }
             if (!nuevosApellidos.trim().isEmpty()) {
                 m.setApellidos(nuevosApellidos);
+            }
+            if (nuevaFecha != null) {
+            m.setTurno(nuevaFecha); 
             }
             if (!nuevoCelular.trim().isEmpty()) {
                 m.setCelular(nuevoCelular);

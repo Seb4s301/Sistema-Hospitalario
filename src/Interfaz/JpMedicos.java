@@ -1,6 +1,7 @@
 package Interfaz;
-import Lista.ListaDobleMedico;
+import Arbol.ArbolMedico;
 import Clases.Medico;
+import Lista.ListaDobleMedico;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,8 +12,9 @@ import java.util.Date;
  */
 
 public class JpMedicos extends javax.swing.JPanel {
-
+    
        ListaDobleMedico listaDobleMedico = ListaDobleMedico.getInstancia();
+       ArbolMedico arbolMedico = ArbolMedico.getInstancia();
     
        private String dni;
        private String nombres;
@@ -27,7 +29,7 @@ public class JpMedicos extends javax.swing.JPanel {
     }
     //Creacion del metodo imprimirIDPaciente para la tabla
     private void listar() {
-        tablaMedicos.setModel(listaDobleMedico.imprimirIDMedico());
+            tablaMedicos.setModel(listaDobleMedico.imprimirIDMedico());
     }
 
     private void limpiarCajas() {
@@ -264,14 +266,16 @@ public class JpMedicos extends javax.swing.JPanel {
             Date fechaParsada = formato.parse(fechaNac);
             
             //Uso de metodo insertar nuevo Medico
-            listaDobleMedico.insertar(new Medico(
-                        dni,
-                        nombres,
-                        apellidos,
-                        fechaParsada,
-                        celular,
-                        especialidad)
-        );
+            Medico nuevoMedico = new Medico(
+                dni,
+                nombres,
+                apellidos,
+                fechaParsada,
+                celular,
+                especialidad);
+
+            listaDobleMedico.insertar(nuevoMedico);
+            arbolMedico.insertar(nuevoMedico);
         
         //Listar y validar insercion exitosa
         listar();
@@ -297,7 +301,7 @@ public class JpMedicos extends javax.swing.JPanel {
         celular =txtCelular.getText().trim();
         fechaNac =txtFechaNac.getText().trim();
         try{
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date fechaParsada = formato.parse(fechaNac);
             
             //Uso de metodo modificar Medico
@@ -312,6 +316,7 @@ public class JpMedicos extends javax.swing.JPanel {
         
         //Si es true
         if (modificado) {
+            arbolMedico.reconstruir(listaDobleMedico.getIni()); 
             listar();
             limpiarCajas();
             JOptionPane.showMessageDialog(
@@ -349,6 +354,7 @@ public class JpMedicos extends javax.swing.JPanel {
             if (confirmar == JOptionPane.YES_OPTION) {
                 //Uso del metodo Eliminar Medico
                 listaDobleMedico.eliminarID(dni);
+                arbolMedico.reconstruir(listaDobleMedico.getIni());
                 listar();
                 limpiarCajas();
                 JOptionPane.showMessageDialog(

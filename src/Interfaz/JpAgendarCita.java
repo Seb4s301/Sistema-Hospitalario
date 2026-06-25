@@ -1,6 +1,8 @@
 package Interfaz;
 
+import Arbol.ArbolMedico;
 import Clases.Cita;
+import Clases.Medico;
 import Lista.ListaDobleAgendar;
 import Lista.ListaDobleMedico;
 import Lista.ListaDoblePaciente;
@@ -21,6 +23,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
     ListaDoblePaciente listaPacientes = ListaDoblePaciente.getInstancia();
     ListaDobleMedico listaDobleMedico = ListaDobleMedico.getInstancia();
     ListaDobleAgendar listaDobleAgendar = ListaDobleAgendar.getInstancia();
+    ArbolMedico arbolMedico = ArbolMedico.getInstancia();
     
     private String fecha;
     
@@ -61,14 +64,19 @@ public class JpAgendarCita extends javax.swing.JPanel {
             
             if (txtTurno.getValue() == null || !txtTurno.isEditValid()){
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaMedico.getModel();
-        NodoMedico nodo = listaDobleMedico.buscar(txtDniMedico.getText());
+        Medico nodo = arbolMedico.buscar(txtDniMedico.getText());
+        
+        if (nodo == null) {
+                JOptionPane.showMessageDialog(this, "Medico no encontrado");
+                return;
+            }
         modeloTabla.addRow(new Object[]{
-        nodo.getDato().getDni(),
-        nodo.getDato().getNombres(),
-        nodo.getDato().getApellidos(),
-        nodo.getDato().getTurno(),
-        nodo.getDato().getCelular(),
-        nodo.getDato().getEspecialidad(),
+        nodo.getDni(),
+        nodo.getNombres(),
+        nodo.getApellidos(),
+        nodo.getTurno(),
+        nodo.getCelular(),
+        nodo.getEspecialidad(),
             }
         );
             }else if(txtDniMedico.getText().isEmpty()){
