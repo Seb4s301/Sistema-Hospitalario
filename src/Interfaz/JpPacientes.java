@@ -23,14 +23,31 @@ public class JpPacientes extends javax.swing.JPanel {
     private String fecha;
     
     public JpPacientes() {
-        initComponents();   
+        initComponents();
+        insertarPacientesPrecargados();
         listar();
+        
     }
     //Uso de metodo imprimirIDPaciente
     private void listar() {
         if(listaPacientes !=null){
         DefaultTableModel modeloPacientes = listaPacientes.imprimirIDPaciente();
         tablaPaciente.setModel(modeloPacientes);
+        }
+    }
+    
+    public void insertarPacientesPrecargados(){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        try{
+            Date fecha2 = formato.parse("30/10/2006");
+            Paciente p = new Paciente("60856849", "Sebastian", "Casavilca", fecha2, "904234234", "SIS");
+            listaPacientes.insertar(p);
+            
+            fecha2 = formato.parse("02/07/2001");
+            Paciente p2 = new Paciente("43563465", "Jose", "Casillas", fecha2, "924234564", "N/A");
+            listaPacientes.insertar(p2);
+        }catch(Exception e){
+            System.out.println("Error en la fecha "+e.getMessage());
         }
     }
 
@@ -214,6 +231,7 @@ public class JpPacientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
+        
         try {
             dni = txtDni.getText();
             nombres = txtNombres.getText().trim();
