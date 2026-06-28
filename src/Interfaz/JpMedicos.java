@@ -1,7 +1,6 @@
 package Interfaz;
 import Arbol.ArbolMedico;
 import Clases.Medico;
-import Lista.ListaDobleMedico;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +12,6 @@ import java.util.Date;
 
 public class JpMedicos extends javax.swing.JPanel {
     
-       ListaDobleMedico listaDobleMedico = ListaDobleMedico.getInstancia();
        ArbolMedico arbolMedico = ArbolMedico.getInstancia();
     
        private String dni;
@@ -30,22 +28,22 @@ public class JpMedicos extends javax.swing.JPanel {
     }
     //Creacion del metodo imprimirIDPaciente para la tabla
     private void listar() {
-            tablaMedicos.setModel(listaDobleMedico.imprimirIDMedico());
+            tablaMedicos.setModel(arbolMedico.ListaInorden());
     }
     public void insertarMedicosPredeterminados(){
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         try{
             Date fecha2 = formato.parse("30/07/2026 15:00");
-            Medico p = new Medico("45754634", "Adrian", "Mamani", fecha2, "904234234", "Pediatría");
-            listaDobleMedico.insertar(p);
+            Medico nuevomedico1 = new Medico("45754634", "Adrian", "Mamani", fecha2, "904234234", "Pediatría");
+            arbolMedico.insertar(nuevomedico1);
             
             fecha2 = formato.parse("02/07/2026 18:00");
-            Medico p2 = new Medico("43563465", "Fabian", "Huari", fecha2, "924234564", "Traumatología");
-            listaDobleMedico.insertar(p2);
+            Medico nuevomedico2 = new Medico("43563465", "Fabian", "Huari", fecha2, "924234564", "Traumatología");
+            arbolMedico.insertar(nuevomedico2);
             
             fecha2 = formato.parse("01/07/2026 16:00");
-            Medico p3 = new Medico("589025","Jonathan","Casas",fecha2, "977454321","Oncología");
-            listaDobleMedico.insertar(p3);
+            Medico nuevomedico3 = new Medico("589025","Jonathan","Casas",fecha2, "977454321","Oncología");
+            arbolMedico.insertar(nuevomedico3);
         }catch(Exception e){
             System.out.println("Error en la fecha "+e.getMessage());
         }
@@ -168,6 +166,11 @@ public class JpMedicos extends javax.swing.JPanel {
         jLabel2.setText("Nombres:");
 
         txtEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--", "Traumatología", "Pediatria", "Oftalmología", "Neurología", "Endocrinología", "Oncología", "Dermatología", "Cardiología", "Gastroenterología" }));
+        txtEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEspecialidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -283,7 +286,6 @@ public class JpMedicos extends javax.swing.JPanel {
                 celular,
                 especialidad);
 
-            listaDobleMedico.insertar(nuevoMedico);
             arbolMedico.insertar(nuevoMedico);
         
         //Listar y validar insercion exitosa
@@ -309,12 +311,21 @@ public class JpMedicos extends javax.swing.JPanel {
         especialidad =txtEspecialidad.getSelectedItem().toString();
         celular =txtCelular.getText().trim();
         turno =txtTurno.getText().trim();
+        
+        if(dni.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese algún DNI de un Médico");
+            return;
+        }
+        
         try{
+            Date fechaParsada = null;
+            if(!turno.replace("/", "").replace(" ", "").replace(":", "").isEmpty()){
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            Date fechaParsada = formato.parse(turno);
+            fechaParsada = formato.parse(turno);
+            }
             
             //Uso de metodo modificar Medico
-        boolean modificado =listaDobleMedico.modificar(
+        boolean modificado =arbolMedico.modificar(
                         dni,
                         nombres,
                         apellidos,
@@ -324,8 +335,7 @@ public class JpMedicos extends javax.swing.JPanel {
                 );
         
         //Si es true
-        if (modificado) {
-            arbolMedico.reconstruir(listaDobleMedico.getIni()); 
+        if (modificado) {           
             listar();
             limpiarCajas();
             JOptionPane.showMessageDialog(null,"Medico modificado correctamente");
@@ -358,13 +368,16 @@ public class JpMedicos extends javax.swing.JPanel {
 
             if (confirmar == JOptionPane.YES_OPTION) {
                 //Uso del metodo Eliminar Medico
-                listaDobleMedico.eliminarID(dni);
-                arbolMedico.reconstruir(listaDobleMedico.getIni());
+                arbolMedico.eliminar(dni);
                 listar();
                 limpiarCajas();
                 JOptionPane.showMessageDialog(this,"Medico removido del sistema");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEspecialidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEspecialidadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

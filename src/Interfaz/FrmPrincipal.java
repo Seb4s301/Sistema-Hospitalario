@@ -38,6 +38,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jTabbedPane2.addTab("Medicos", panelMedicos); 
         jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
         jTabbedPane2.addTab("Agendar", panelAgendar);
+        jTabbedPane2.addChangeListener(e->{
+            if(jTabbedPane2.getSelectedIndex()==4){
+                panelAgendar.listar();
+            }        
+        });
     }
     
     @SuppressWarnings("unchecked")

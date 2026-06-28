@@ -2,6 +2,7 @@
 package Arbol;
 
 import Clases.Medico;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import Nodo.NodoMedico;
 
@@ -28,6 +29,7 @@ public class ArbolMedico {
         return instancia;
     }
     
+    //Método INSERTAR
     public void insertar(Medico dato){
         raiz = insertarRec(raiz, dato);
     }
@@ -54,6 +56,7 @@ public class ArbolMedico {
         }
     }
     
+    //Método para BUSCAR por DNI
     private NodoArbolMedico buscarRec(NodoArbolMedico nodo, String dni) {
         if (nodo == null) return null;
         if (dni.compareTo(nodo.getDato().getDni()) == 0) return nodo;
@@ -68,14 +71,16 @@ public class ArbolMedico {
          
         InordenRec(raiz, modelo);
         
+        
+        System.out.println("Filas en modelo: " + modelo.getRowCount());
+        
         return modelo;
     }
     
     private void InordenRec(NodoArbolMedico nodo, DefaultTableModel modelo){
-        if(nodo == null){
-            InordenRec(nodo.getIzq(), modelo);
-        }
-        
+        if(nodo == null) return;
+
+        InordenRec(nodo.getIzq(), modelo); 
         modelo.addRow(new Object[]{
             nodo.getDato().getDni(),
             nodo.getDato().getNombres(),
@@ -87,14 +92,62 @@ public class ArbolMedico {
         InordenRec(nodo.getDer(), modelo);
     }
     
-    public void reconstruir(NodoMedico ini) {
-    raiz = null;
-    NodoMedico tmp = ini;
-    while (tmp != null) {
-        insertar(tmp.getDato());
-        tmp = tmp.getSgte();
+    //Método para Eliminar
+    public void eliminar(String dni){
+        raiz = eliminarRec(raiz, dni);
     }
-}
-}
     
+     private NodoArbolMedico eliminarRec(NodoArbolMedico nodo, String dni){
+        if(nodo == null){
+            return null;
+        }        
+        if (dni.compareTo(nodo.getDato().getDni()) < 0){
+            nodo.setIzq(eliminarRec(nodo.getIzq(), dni));
+        }
+        else if (dni.compareTo(nodo.getDato().getDni()) > 0){
+            nodo.setDer(eliminarRec(nodo.getDer(), dni));
+        }else{
+            if(nodo.getIzq() == null && nodo.getDer() == null) return null;
+            
+            if(nodo.getIzq() == null)return nodo.getDer();
+            if(nodo.getDer() == null)return nodo.getIzq();
+            
+            NodoArbolMedico sucesor = minimonodo(nodo.getDer());
+            nodo.setDato(sucesor.getDato());
+            nodo.setDer(eliminarRec(nodo.getDer(), sucesor.getDato().getDni()));
+        }
+        return nodo;
+    }
+     
+    private NodoArbolMedico minimonodo(NodoArbolMedico nodo){
+        while(nodo.getIzq() != null){
+            nodo = nodo.getIzq();
+        }
+        return null;
+    }
+     
+    public boolean modificar(String dni, String nombres, String apellidos, Date fecha, String celular, String especialidad){
+        NodoArbolMedico nodo = buscarRec(raiz, dni);
+        Medico medico = nodo.getDato();
+        if(!nombres.trim().isEmpty()) medico.setNombres(nombres);
+        if(!apellidos.trim().isEmpty()) medico.setApellidos(apellidos);
+        if(fecha != null) medico.setTurno(fecha);
+        if(!celular.trim().isEmpty()) medico.setCelular(celular);
+        if(!especialidad.trim().isEmpty()) medico.setEspecialidad(especialidad);
+        return true;        
+    }
     
+    //Método para poder BUSCAR
+    public Medico buscarTurno(Date turno) {
+        return buscarTurnoRec(raiz, turno);
+    }
+    
+    private Medico buscarTurnoRec(NodoArbolMedico nodo, Date turno) {
+        if (nodo == null) return null;
+        if (nodo.getDato().getTurno().equals(turno)) return nodo.getDato();
+        Medico izq = buscarTurnoRec(nodo.getIzq(), turno);
+        if (izq != null) return izq;
+        return buscarTurnoRec(nodo.getDer(), turno);
+    }
+
+}  

@@ -4,7 +4,6 @@ import Arbol.ArbolMedico;
 import Clases.Cita;
 import Clases.Medico;
 import Lista.ListaDobleAgendar;
-import Lista.ListaDobleMedico;
 import Lista.ListaDoblePaciente;
 import Nodo.NodoMedico;
 import Nodo.NodoPaciente;
@@ -21,7 +20,6 @@ public class JpAgendarCita extends javax.swing.JPanel {
     
     
     ListaDoblePaciente listaPacientes = ListaDoblePaciente.getInstancia();
-    ListaDobleMedico listaDobleMedico = ListaDobleMedico.getInstancia();
     ListaDobleAgendar listaDobleAgendar = ListaDobleAgendar.getInstancia();
     ArbolMedico arbolMedico = ArbolMedico.getInstancia();
     
@@ -36,7 +34,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
         DefaultTableModel modeloPacientes = listaPacientes.imprimirIDPaciente();
         tablaPaciente.setModel(modeloPacientes);
         
-        DefaultTableModel modeloMedicos = listaDobleMedico.imprimirIDMedico();
+        DefaultTableModel modeloMedicos = arbolMedico.ListaInorden();
         tablaMedico.setModel(modeloMedicos);
         
         DefaultTableModel modeloCitas = listaDobleAgendar.imprimirAgenda();
@@ -59,9 +57,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
     }
     
     private void imprimirMedico(){
-          try{   
-           
-            
+          try{             
             if (txtTurno.getValue() == null || !txtTurno.isEditValid()){
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaMedico.getModel();
         Medico nodo = arbolMedico.buscar(txtDniMedico.getText());
@@ -84,16 +80,21 @@ public class JpAgendarCita extends javax.swing.JPanel {
                     
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     Date fechaParsada = formato.parse(fecha);
-                
+                    Medico nodo = arbolMedico.buscarTurno(fechaParsada);
+                    
+                    if(nodo == null){
+                        JOptionPane.showMessageDialog(this, "Médico no encontrado");
+                    }
+                    
                     DefaultTableModel modeloTabla = (DefaultTableModel) tablaMedico.getModel();
-                    NodoMedico nodo = listaDobleMedico.buscarTurno(fechaParsada);
+                    
                     modeloTabla.addRow(new Object[]{
-                        nodo.getDato().getDni(),
-                        nodo.getDato().getNombres(),
-                        nodo.getDato().getApellidos(),
-                        nodo.getDato().getTurno(),
-                        nodo.getDato().getCelular(),
-                        nodo.getDato().getEspecialidad(),
+                        nodo.getDni(),
+                        nodo.getNombres(),
+                        nodo.getApellidos(),
+                        nodo.getTurno(),
+                        nodo.getCelular(),
+                        nodo.getEspecialidad(),
                     }
                     );
                 
@@ -297,20 +298,20 @@ public class JpAgendarCita extends javax.swing.JPanel {
 
    
         NodoPaciente nodoP = listaPacientes.buscar(dniPaciente);
-        NodoMedico nodoM = listaDobleMedico.buscar(dniMedico);
+        Medico medico = arbolMedico.buscar(dniMedico);
 
-        if (nodoP == null || nodoM == null) {
+        if (nodoP == null || medico == null) {
             JOptionPane.showMessageDialog(this, "Error de consistencia en las listas de memoria.");
             return;
         }
         String dniP = nodoP.getDato().getDni();
         String NombreP = nodoP.getDato().getNombres();
         String ApellidoP = nodoP.getDato().getApellidos();
-        String dniM = nodoM.getDato().getDni();
-        String nombreM = nodoM.getDato().getNombres();
-        String apellidoM = nodoM.getDato().getApellidos();
-        String especialidadM = nodoM.getDato().getEspecialidad();
-        Date fechaM = nodoM.getDato().getTurno();
+        String dniM = medico.getDni();
+        String nombreM = medico.getNombres();
+        String apellidoM = medico.getApellidos();
+        String especialidadM = medico.getEspecialidad();
+        Date fechaM = medico.getTurno();
 
         listaDobleAgendar.insertar(new Cita(dniP, NombreP, ApellidoP, dniM, nombreM,
                                     apellidoM, especialidadM, fechaM));
