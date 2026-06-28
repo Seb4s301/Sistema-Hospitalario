@@ -1,12 +1,5 @@
 package Interfaz;
 
-import Arbol.ArbolMedico;
-import Clases.Paciente;
-import Lista.ListaDobleMedico;
-import Lista.ListaDoblePaciente;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  *
  * @author Jean
@@ -18,10 +11,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private JpMedicos panelMedicos;
     private JpHistorialesClinicos panelHistoriales; 
     private JpAgendarCita panelAgendar;
-    
-    
-    ListaDobleMedico listaDobleMedico = ListaDobleMedico.getInstancia(); 
-    ArbolMedico arbolMedico = ArbolMedico.getInstancia();
     
     /**
      * Creates new form Principal
@@ -49,9 +38,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jTabbedPane2.addTab("Medicos", panelMedicos); 
         jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
         jTabbedPane2.addTab("Agendar", panelAgendar);
-    }
-    public void insertarMedicos(){
-        
     }
     
     @SuppressWarnings("unchecked")

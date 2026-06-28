@@ -25,13 +25,32 @@ public class JpMedicos extends javax.swing.JPanel {
         
     public JpMedicos() {
         initComponents();
+        insertarMedicosPredeterminados();
         listar();
     }
     //Creacion del metodo imprimirIDPaciente para la tabla
     private void listar() {
             tablaMedicos.setModel(listaDobleMedico.imprimirIDMedico());
     }
-
+    public void insertarMedicosPredeterminados(){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        try{
+            Date fecha2 = formato.parse("30/07/2026 15:00");
+            Medico p = new Medico("45754634", "Adrian", "Mamani", fecha2, "904234234", "Pediatría");
+            listaDobleMedico.insertar(p);
+            
+            fecha2 = formato.parse("02/07/2026 18:00");
+            Medico p2 = new Medico("43563465", "Fabian", "Huari", fecha2, "924234564", "Traumatología");
+            listaDobleMedico.insertar(p2);
+            
+            fecha2 = formato.parse("01/07/2026 16:00");
+            Medico p3 = new Medico("589025","Jonathan","Casas",fecha2, "977454321","Oncología");
+            listaDobleMedico.insertar(p3);
+        }catch(Exception e){
+            System.out.println("Error en la fecha "+e.getMessage());
+        }
+    }
+    
     private void limpiarCajas() {
         txtDni.setText("");
         txtNombres.setText("");
