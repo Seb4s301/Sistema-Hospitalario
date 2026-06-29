@@ -1,11 +1,8 @@
 package Interfaz;
 
 import Arbol.ArbolMedico;
-import Clases.Cita;
-import Clases.Medico;
-import Lista.ListaDobleAgendar;
-import Lista.ListaDoblePaciente;
-import Nodo.NodoMedico;
+import Clases.*;
+import Lista.*;
 import Nodo.NodoPaciente;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,8 +36,15 @@ public class JpAgendarCita extends javax.swing.JPanel {
         
         DefaultTableModel modeloCitas = listaDobleAgendar.imprimirAgenda();
         tablaCita.setModel(modeloCitas);
+        limpiar();
     }
-    
+    public void limpiar(){
+        txtDni.setText("");
+        txtDniMedico.setText("");
+        txtTurno.setValue(null);
+        ((DefaultTableModel) tablaPaciente.getModel()).setRowCount(0);
+        ((DefaultTableModel) tablaMedico.getModel()).setRowCount(0);
+    }
     
     private void imprimirPaciente(){
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPaciente.getModel();
@@ -320,11 +324,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(this, "Cita agendada con exito");
 
-        txtDni.setText("");
-        txtDniMedico.setText("");
-        txtTurno.setValue(null);
-        ((DefaultTableModel) tablaPaciente.getModel()).setRowCount(0);
-        ((DefaultTableModel) tablaMedico.getModel()).setRowCount(0);
+        limpiar();
 
         } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al agendar: " + e.getMessage());
