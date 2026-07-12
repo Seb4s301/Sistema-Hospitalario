@@ -1,15 +1,13 @@
 package vistas;
 
-import estructuras.ListaDobleMedico;
-import controladores.GestorTablas;
+import facade.HospitalFacade;
 import modelos.Medico;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class JpMedicos extends javax.swing.JPanel {
-    private ListaDobleMedico listaMedicos = ListaDobleMedico.getInstancia();
-    private GestorTablas gestorTablas = new GestorTablas();
+    private HospitalFacade facade = HospitalFacade.getInstancia();
     
     private String dni,nombres, apellidos,especialidad, celular,turno;
        
@@ -19,9 +17,7 @@ public class JpMedicos extends javax.swing.JPanel {
     }
     
     public void listar() {
-        if(listaMedicos != null){
-            tablaMedicos.setModel(gestorTablas.modeloTablaMedicos(listaMedicos.obtenerTodos()));
-        }
+        tablaMedicos.setModel(facade.modeloTablaMedicos());
     }
     
     private void limpiarCajas() {
@@ -251,7 +247,7 @@ public class JpMedicos extends javax.swing.JPanel {
             Date fechaParsada = formato.parse(turno);
             
             Medico nuevoMedico = new Medico(dni, nombres, apellidos, fechaParsada, celular, especialidad);
-            listaMedicos.insertar(nuevoMedico);
+            facade.insertarMedico(nuevoMedico);
             
             listar();
             limpiarCajas();
@@ -279,7 +275,7 @@ public class JpMedicos extends javax.swing.JPanel {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date fechaParsada = formato.parse(turno);
             
-            boolean modificado = listaMedicos.modificar(new Medico(dni, nombres, apellidos, fechaParsada, celular, especialidad));
+            boolean modificado = facade.modificarMedico(new Medico(dni, nombres, apellidos, fechaParsada, celular, especialidad));
             
             if (modificado) {            
                 listar();
@@ -305,7 +301,7 @@ public class JpMedicos extends javax.swing.JPanel {
         int confirmar = JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar al medico con DNI " + dni + "?", "Confirmar eliminacion", JOptionPane.YES_NO_OPTION);
 
         if (confirmar == JOptionPane.YES_OPTION) {
-            boolean eliminado = listaMedicos.eliminar(dni);
+            boolean eliminado = facade.eliminarMedico(dni);
             if(eliminado){
                 listar();
                 limpiarCajas();

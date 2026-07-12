@@ -1,18 +1,12 @@
 package vistas;
 
-import controladores.GestorTablas;
-import arbol.ArbolPaciente;
-import estructuras.ListaDobleMedico;
-import estructuras.ListaDobleCita;
+import facade.HospitalFacade;
 import modelos.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class JpAgendarCita extends javax.swing.JPanel {
-    private GestorTablas gestorTablas = new GestorTablas();
-    private ArbolPaciente arbolPacientes = ArbolPaciente.getInstancia();
-    private ListaDobleMedico listaMedicos = ListaDobleMedico.getInstancia();
-    private ListaDobleCita listaCitas = ListaDobleCita.getInstancia();
+    private HospitalFacade facade = HospitalFacade.getInstancia();
     
     public JpAgendarCita() {
         initComponents();
@@ -20,15 +14,9 @@ public class JpAgendarCita extends javax.swing.JPanel {
     }
     
     public void listar(){
-        if(arbolPacientes != null) {
-            tablaPaciente.setModel(gestorTablas.modeloTablaPacientes(arbolPacientes.obtenerTodos()));
-        }
-        if(listaMedicos != null) {
-            tablaMedico.setModel(gestorTablas.modeloTablaMedicos(listaMedicos.obtenerTodos()));
-        }
-        if(listaCitas != null) {
-            tablaCita.setModel(gestorTablas.modeloTablaCitas(listaCitas.obtenerTodos()));
-        }
+        tablaPaciente.setModel(facade.modeloTablaPacientes());
+        tablaMedico.setModel(facade.modeloTablaMedicos());
+        tablaCita.setModel(facade.modeloTablaCitas());
         limpiar();
     }
     
@@ -45,11 +33,11 @@ public class JpAgendarCita extends javax.swing.JPanel {
             return;
         }
         
-        Paciente p = arbolPacientes.buscar(dniBusqueda);
+        Paciente p = facade.buscarPaciente(dniBusqueda);
         if (p != null) {
             ArrayList<Paciente> listaUnica = new ArrayList<>();
             listaUnica.add(p);
-            tablaPaciente.setModel(gestorTablas.modeloTablaPacientes(listaUnica));
+            tablaPaciente.setModel(facade.modeloTablaPacientes(listaUnica));
         } else {
             JOptionPane.showMessageDialog(this, "Paciente no encontrado");
         }
@@ -62,11 +50,11 @@ public class JpAgendarCita extends javax.swing.JPanel {
             return;
         }
         
-        Medico m = listaMedicos.buscar(dniBusqueda);
+        Medico m = facade.buscarMedico(dniBusqueda);
         if (m != null) {
             ArrayList<Medico> listaUnica = new ArrayList<>();
             listaUnica.add(m);
-            tablaMedico.setModel(gestorTablas.modeloTablaMedicos(listaUnica));
+            tablaMedico.setModel(facade.modeloTablaMedicos(listaUnica));
         } else {
             JOptionPane.showMessageDialog(this, "Medico no encontrado");
         }

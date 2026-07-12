@@ -1,7 +1,6 @@
 package vistas;
 
-import arbol.ArbolPaciente;
-import controladores.GestorTablas;
+import facade.HospitalFacade;
 import modelos.Paciente;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,8 +11,7 @@ import javax.swing.JOptionPane;
  * @author Jean, Sebastian
  */
 public class JpPacientes extends javax.swing.JPanel {
-    private ArbolPaciente arbolPaciente = ArbolPaciente.getInstancia();
-    private GestorTablas gestorTablas = new GestorTablas();
+    private HospitalFacade facade = HospitalFacade.getInstancia();
     
     private String dni,  nombres,apellidos,celular,seguro,fecha;
     
@@ -23,9 +21,7 @@ public class JpPacientes extends javax.swing.JPanel {
     }
     
     public void listar() {
-        if(arbolPaciente != null){
-            tablaPaciente.setModel(gestorTablas.modeloTablaPacientes(arbolPaciente.obtenerTodos()));
-        }
+        tablaPaciente.setModel(facade.modeloTablaPacientes());
     }
 
     private void limpiarCajas() {
@@ -229,7 +225,7 @@ public class JpPacientes extends javax.swing.JPanel {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date fechaParsada = formato.parse(fecha);
 
-            arbolPaciente.insertar(new Paciente(dni, nombres, apellidos, fechaParsada, celular, seguro));
+            facade.insertarPaciente(new Paciente(dni, nombres, apellidos, fechaParsada, celular, seguro));
             
             listar();
             limpiarCajas();
@@ -256,7 +252,7 @@ public class JpPacientes extends javax.swing.JPanel {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date fechaParsada = formato.parse(fecha);
 
-            boolean modificado = arbolPaciente.modificar(new Paciente(dni, nombres, apellidos, fechaParsada, celular, seguro));
+            boolean modificado = facade.modificarPaciente(new Paciente(dni, nombres, apellidos, fechaParsada, celular, seguro));
 
             if (modificado) {
                 listar();
@@ -280,7 +276,7 @@ public class JpPacientes extends javax.swing.JPanel {
         int confirmar = JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar al paciente?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
         if (confirmar == JOptionPane.YES_OPTION) {
-            boolean eliminado = arbolPaciente.eliminar(dni);
+            boolean eliminado = facade.eliminarPaciente(dni);
             if (eliminado) {
                 listar();
                 limpiarCajas();

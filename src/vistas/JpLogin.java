@@ -1,11 +1,11 @@
 package vistas;
 
-import controladores.GestorAutenticacion;
+import facade.HospitalFacade;
 import modelos.Usuario;
 import javax.swing.JOptionPane;
 
 public class JpLogin extends javax.swing.JPanel {
-    private GestorAutenticacion gestorAuth = new GestorAutenticacion();
+    private HospitalFacade facade = HospitalFacade.getInstancia();
     private FrmPrincipal ventanaPadre; 
     
     public JpLogin(FrmPrincipal padre) {
@@ -182,9 +182,9 @@ public class JpLogin extends javax.swing.JPanel {
         String user = txtUsuario.getText().trim();
         String pass = new String(txtPassword.getPassword());
 
-        Usuario usuario = gestorAuth.validarLogin(user, pass);
+        Usuario usuario = facade.login(user, pass);
         if (usuario != null) {
-            ventanaPadre.iniciarSesion(usuario); // llama al FrmPrincipal
+            ventanaPadre.iniciarSesion(usuario);
         } else {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas");
         }

@@ -1,8 +1,6 @@
 package vistas;
-import arbol.ArbolPaciente;
-import estructuras.ListaDobleCita;
-import controladores.GestorReportes;
 
+import facade.HospitalFacade;
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +13,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class JpAdmin extends javax.swing.JPanel {
-    private ArbolPaciente arbolPaciente = ArbolPaciente.getInstancia();
-    private ListaDobleCita listaCitas = ListaDobleCita.getInstancia();
-    private GestorReportes gestorReportes = new GestorReportes();
+    private HospitalFacade facade = HospitalFacade.getInstancia();
 
     public JpAdmin() {
         initComponents();
@@ -87,52 +83,42 @@ public class JpAdmin extends javax.swing.JPanel {
         add(jPanel2, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
     private void generarGraficoEspecialidades() {
-        // A) Obtener la data procesada del gestor
-        HashMap<String, Integer> datosEspecialidad = gestorReportes.obtenerDemandaPorEspecialidad(listaCitas.obtenerTodos());
-
-        // B) Alimentar el Dataset de JFreeChart
+        HashMap<String, Integer> datosEspecialidad = facade.obtenerDemandaPorEspecialidad();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Map.Entry<String, Integer> entry : datosEspecialidad.entrySet()) {
             dataset.addValue(entry.getValue(), "Citas", entry.getKey());
         }
 
-        // C) Crear el gráfico de barras
         JFreeChart graficoBarras = ChartFactory.createBarChart(
-                "Demanda por Especialidad Médica", // Título del gráfico
-                "Especialidad",                    // Etiqueta Eje X
-                "Cantidad de Citas",               // Etiqueta Eje Y
-                dataset                            // Datos
+                "Demanda por Especialidad Médica",
+                "Especialidad",
+                "Cantidad de Citas",
+                dataset
         );
 
-        // D) Renderizar en el JPanel de la interfaz
         ChartPanel chartPanel = new ChartPanel(graficoBarras);
-        panelGraficoEspecialidades.removeAll(); // Limpiar gráfico anterior
+        panelGraficoEspecialidades.removeAll();
         panelGraficoEspecialidades.add(chartPanel, BorderLayout.CENTER);
         panelGraficoEspecialidades.validate();
     }
     
     private void generarGraficoSeguros() {
-        // A) Obtener la data procesada del gestor
-        HashMap<String, Integer> datosSeguro = gestorReportes.obtenerPacientesPorSeguro(arbolPaciente.obtenerTodos());
-
-        // B) Alimentar el Dataset circular de JFreeChart
+        HashMap<String, Integer> datosSeguro = facade.obtenerPacientesPorSeguro();
         DefaultPieDataset dataset = new DefaultPieDataset();
         for (Map.Entry<String, Integer> entry : datosSeguro.entrySet()) {
             dataset.setValue(entry.getKey(), entry.getValue());
         }
 
-        // C) Crear el gráfico circular (Pie Chart)
         JFreeChart graficoCircular = ChartFactory.createPieChart(
-                "Distribucion de Pacientes por Seguro", // Título
-                dataset,                                // Datos
-                true,                                   // Leyenda
-                true,                                   // Tooltips
-                false                                   // URLs
+                "Distribucion de Pacientes por Seguro",
+                dataset,
+                true,
+                true,
+                false
         );
 
-        // D) Renderizar en el JPanel de la interfaz
         ChartPanel chartPanel = new ChartPanel(graficoCircular);
-        panelGraficoSeguros.removeAll(); // Limpiar gráfico anterior
+        panelGraficoSeguros.removeAll();
         panelGraficoSeguros.add(chartPanel, BorderLayout.CENTER);
         panelGraficoSeguros.validate();
     }

@@ -1,17 +1,13 @@
 package vistas;
 
-import arbol.ArbolPaciente;
-import estructuras.ListaDobleHistorial;
-import controladores.GestorTablas;
+import facade.HospitalFacade;
 import modelos.HistorialClinico;
 import modelos.Paciente;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
 public class JpHistorialesClinicos extends javax.swing.JPanel {
-    private ArbolPaciente arbolPaciente = ArbolPaciente.getInstancia();
-    private ListaDobleHistorial listaHistoriales = ListaDobleHistorial.getInstancia();
-    private GestorTablas gestorTablas = new GestorTablas();
+    private HospitalFacade facade = HospitalFacade.getInstancia();
 
     public JpHistorialesClinicos() {
         initComponents();
