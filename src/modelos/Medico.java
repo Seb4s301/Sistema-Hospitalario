@@ -20,7 +20,7 @@ public class Medico {
     }
 
     public Medico(String codigo, String nombres, String apellidos, Date turno, String celular, String especialidad) {
-        this.codigo = "M"+codigo;
+        this.codigo = "M" + codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.turno = turno;
@@ -28,12 +28,20 @@ public class Medico {
         this.especialidad = especialidad;
     }
 
-    public String getDni() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setDni(String codigo) {
-        this.codigo = codigo;
+    public void setCodigo(String codigo) {
+        this.codigo = "M" + codigo;
+    }
+
+    public String getDni() {
+        return codigo.replace("M", "");
+    }
+
+    public void setDni(String dni) {
+        this.codigo = "M" + dni;
     }
 
     public String getNombres() {
@@ -75,6 +83,4 @@ public class Medico {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-
-    
 }

@@ -1,9 +1,6 @@
 package controladores;
 
-import modelos.Paciente;
-import modelos.Cita;
-import modelos.HistorialClinico;
-import modelos.Medico;
+import modelos.*;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +29,7 @@ public class GestorTablas {
     }
     
     public DefaultTableModel modeloTablaMedicos(ArrayList<Medico> lista) {
-        String[] columnas = {"DNI", "Nombres", "Apellidos", "Turno", "Celular", "Especialidad"};
+        String[] columnas = {"Código", "Nombres", "Apellidos", "Turno", "Celular", "Especialidad"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         
         for (Medico m : lista) {
@@ -51,7 +48,7 @@ public class GestorTablas {
     }
     
     public DefaultTableModel modeloTablaCitas(ArrayList<Cita> lista) {
-        String[] columnas = {"DNI Paciente", "Paciente", "DNI Medico", "Medico", "Especialidad", "Fecha"};
+        String[] columnas = {"DNI Paciente", "Paciente", "Codigo Medico", "Medico", "Especialidad", "Fecha"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         
         for (Cita c : lista) {

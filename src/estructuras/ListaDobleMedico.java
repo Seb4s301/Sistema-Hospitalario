@@ -42,6 +42,17 @@ public class ListaDobleMedico {
         return null;
     }
 
+    public Medico buscarPorCodigo(String codigo) {
+        NodoMedico actual = ini;
+        while (actual != null) {
+            if (actual.getDato().getCodigo().equals(codigo)) {
+                return actual.getDato();
+            }
+            actual = actual.getSgte();
+        }
+        return null;
+    }
+
     public boolean modificar(Medico MedicoModificado) {
         NodoMedico actual = ini;
         while (actual != null) {

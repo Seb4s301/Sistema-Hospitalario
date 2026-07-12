@@ -53,6 +53,17 @@ public class ListaDobleRecepcionista {
         return null;
     }
 
+    public Recepcionista buscarPorCodigo(String codigo) {
+        NodoRecepcionista actual = ini;
+        while (actual != null) {
+            if (actual.getDato().getCodigo().equals(codigo)) {
+                return actual.getDato();
+            }
+            actual = actual.getSgte();
+        }
+        return null;
+    }
+
     public boolean modificar(Recepcionista recepcionistaModificado) {
         NodoRecepcionista actual = ini;
         while (actual != null) {

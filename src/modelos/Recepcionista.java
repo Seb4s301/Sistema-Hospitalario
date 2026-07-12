@@ -3,7 +3,7 @@ package modelos;
 import java.util.Date;
 
 public class Recepcionista {
-    private String dni;
+    private String codigo;
     private String nombres;
     private String apellidos;
     private Date fechaIngreso;
@@ -11,7 +11,7 @@ public class Recepcionista {
     private String turno;
 
     public Recepcionista() {
-        this.dni = "";
+        this.codigo = "";
         this.nombres = "";
         this.apellidos = "";
         this.fechaIngreso = new Date();
@@ -20,7 +20,7 @@ public class Recepcionista {
     }
 
     public Recepcionista(String dni, String nombres, String apellidos, Date fechaIngreso, String celular, String turno) {
-        this.dni = "R" + dni;
+        this.codigo = "R" + dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fechaIngreso = fechaIngreso;
@@ -28,12 +28,20 @@ public class Recepcionista {
         this.turno = turno;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = "R" + codigo;
+    }
+
     public String getDni() {
-        return dni;
+        return codigo.replace("R", "");
     }
 
     public void setDni(String dni) {
-        this.dni = "R" + dni;
+        this.codigo = "R" + dni;
     }
 
     public String getNombres() {

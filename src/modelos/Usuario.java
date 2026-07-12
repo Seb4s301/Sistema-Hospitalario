@@ -1,25 +1,25 @@
 package modelos;
 
 public class Usuario {
-    private String username;
+    private String codigo;
     private String password;
     private String rol; 
 
     public Usuario() {
     }
 
-    public Usuario(String username, String password, String rol) {
-        this.username = username;
+    public Usuario(String codigo, String password, String rol) {
+        this.codigo = codigo;
         this.password = password;
         this.rol = rol;
     }
 
     public String getUsername() {
-        return username;
+        return codigo;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getPassword() {

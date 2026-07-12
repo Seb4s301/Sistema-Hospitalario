@@ -4,11 +4,7 @@ import controladores.GestorTablas;
 import arbol.ArbolPaciente;
 import estructuras.ListaDobleMedico;
 import estructuras.ListaDobleCita;
-import modelos.Paciente;
-import modelos.Medico;
-import modelos.Cita;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import modelos.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
