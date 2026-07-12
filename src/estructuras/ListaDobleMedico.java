@@ -1,7 +1,7 @@
 package estructuras;
 
 import modelos.Medico;
-import nodo.NodoMedico;
+import nodos.NodoMedico;
 
 public class ListaDobleMedico {
     private NodoMedico ini;
@@ -84,7 +84,7 @@ public class ListaDobleMedico {
     // puente
     public java.util.ArrayList<modelos.Medico> obtenerTodos() {
         java.util.ArrayList<modelos.Medico> listaExportada = new java.util.ArrayList<>();
-        nodo.NodoMedico actual = ini;
+        nodos.NodoMedico actual = ini;
         
         while (actual != null) {
             listaExportada.add(actual.getDato());

@@ -1,7 +1,7 @@
 package arbol;
 
 import modelos.Paciente;
-import nodo.NodoArbolPaciente;
+import nodos.NodoArbolPaciente;
 import java.util.ArrayList;
 
 public class ArbolPaciente {

@@ -1,7 +1,7 @@
 package estructuras;
 
 import modelos.Cita;
-import nodo.NodoCita;
+import nodos.NodoCita;
 
 public class ListaDobleCita {
     private NodoCita ini;
@@ -83,7 +83,7 @@ public class ListaDobleCita {
     
     public java.util.ArrayList<modelos.Cita> obtenerTodos() {
         java.util.ArrayList<modelos.Cita> listaExportada = new java.util.ArrayList<>();
-        nodo.NodoCita actual = ini;
+        nodos.NodoCita actual = ini;
         
         while (actual != null) {
             listaExportada.add(actual.getDato());

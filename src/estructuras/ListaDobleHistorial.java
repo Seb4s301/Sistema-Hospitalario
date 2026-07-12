@@ -1,7 +1,7 @@
 package estructuras;
 
 import modelos.HistorialClinico;
-import nodo.NodoHistorial;
+import nodos.NodoHistorial;
 
 public class ListaDobleHistorial {
     private NodoHistorial ini;

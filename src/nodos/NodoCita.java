@@ -1,4 +1,4 @@
-package nodo;
+package nodos;
 
 import modelos.Cita;
 
