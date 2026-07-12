@@ -2,38 +2,38 @@ package modelos;
 
 import java.util.Date;
 
-public class Medico {
-    private String codigo;
+public class Recepcionista {
+    private String dni;
     private String nombres;
     private String apellidos;
-    private Date turno;
+    private Date fechaIngreso;
     private String celular;
-    private String especialidad;
+    private String turno;
 
-    public Medico() {
-        this.codigo = "";
+    public Recepcionista() {
+        this.dni = "";
         this.nombres = "";
         this.apellidos = "";
-        this.turno = new Date();
+        this.fechaIngreso = new Date();
         this.celular = "";
-        this.especialidad = "";
+        this.turno = "";
     }
 
-    public Medico(String codigo, String nombres, String apellidos, Date turno, String celular, String especialidad) {
-        this.codigo = "M"+codigo;
+    public Recepcionista(String dni, String nombres, String apellidos, Date fechaIngreso, String celular, String turno) {
+        this.dni = "R" + dni;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.turno = turno;
+        this.fechaIngreso = fechaIngreso;
         this.celular = celular;
-        this.especialidad = especialidad;
+        this.turno = turno;
     }
 
     public String getDni() {
-        return codigo;
+        return dni;
     }
 
-    public void setDni(String codigo) {
-        this.codigo = codigo;
+    public void setDni(String dni) {
+        this.dni = "R" + dni;
     }
 
     public String getNombres() {
@@ -52,12 +52,12 @@ public class Medico {
         this.apellidos = apellidos;
     }
 
-    public Date getTurno() {
-        return turno;
+    public Date getFechaIngreso() {
+        return fechaIngreso;
     }
 
-    public void setTurno(Date turno) {
-        this.turno = turno;
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
     }
 
     public String getCelular() {
@@ -68,13 +68,11 @@ public class Medico {
         this.celular = celular;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
-
-    
 }

@@ -2,38 +2,38 @@ package modelos;
 
 import java.util.Date;
 
-public class Medico {
+public class Admin {
     private String codigo;
     private String nombres;
     private String apellidos;
-    private Date turno;
+    private Date fechaIngreso;
     private String celular;
-    private String especialidad;
+    private String cargo;
 
-    public Medico() {
+    public Admin() {
         this.codigo = "";
         this.nombres = "";
         this.apellidos = "";
-        this.turno = new Date();
+        this.fechaIngreso = new Date();
         this.celular = "";
-        this.especialidad = "";
+        this.cargo = "Administrador";
     }
 
-    public Medico(String codigo, String nombres, String apellidos, Date turno, String celular, String especialidad) {
-        this.codigo = "M"+codigo;
+    public Admin(String codigo, String nombres, String apellidos, Date fechaIngreso, String celular, String cargo) {
+        this.codigo = "A" + codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.turno = turno;
+        this.fechaIngreso = fechaIngreso;
         this.celular = celular;
-        this.especialidad = especialidad;
+        this.cargo = cargo;
     }
 
-    public String getDni() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setDni(String codigo) {
-        this.codigo = codigo;
+    public void setCodigo(String codigo) {
+        this.codigo = "A" + codigo;
     }
 
     public String getNombres() {
@@ -52,12 +52,12 @@ public class Medico {
         this.apellidos = apellidos;
     }
 
-    public Date getTurno() {
-        return turno;
+    public Date getFechaIngreso() {
+        return fechaIngreso;
     }
 
-    public void setTurno(Date turno) {
-        this.turno = turno;
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
     }
 
     public String getCelular() {
@@ -68,13 +68,15 @@ public class Medico {
         this.celular = celular;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    
+    public String getDni() {
+        return codigo.replace("A", "");
+    }
 }

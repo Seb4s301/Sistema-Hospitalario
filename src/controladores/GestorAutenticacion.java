@@ -3,19 +3,29 @@ package controladores;
 import modelos.Usuario;
 
 public class GestorAutenticacion {
-    private Usuario[] usuariosPermitidos;
+    private AutenticacionStrategy[] estrategias;
 
     public GestorAutenticacion() {
-        usuariosPermitidos = new Usuario[3];
-        usuariosPermitidos[0] = new Usuario("admin", "12345", "Administrador");
-        usuariosPermitidos[1] = new Usuario("recepcion", "12345", "Recepcionista");
-        usuariosPermitidos[2] = new Usuario("medico", "12345", "Medico");
+        estrategias = new AutenticacionStrategy[3];
+        estrategias[0] = new AdminAutenticacionStrategy();
+        estrategias[1] = new RecepcionistaAutenticacionStrategy();
+        estrategias[2] = new MedicoAutenticacionStrategy();
     }
-    
-    public Usuario validarLogin(String username, String password) {
-        for (Usuario u : usuariosPermitidos) {
-            if (u != null && u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                return u;
+
+    public Usuario validarLogin(String codigo, String password) {
+        for (AutenticacionStrategy estrategia : estrategias) {
+            Usuario usuario = estrategia.autenticar(codigo, password);
+            if (usuario != null) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    public AutenticacionStrategy getEstrategia(String rol) {
+        for (AutenticacionStrategy estrategia : estrategias) {
+            if (estrategia.getRol().equalsIgnoreCase(rol)) {
+                return estrategia;
             }
         }
         return null;
