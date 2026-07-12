@@ -221,14 +221,14 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
             return;
         }
 
-        Paciente paciente = arbolPaciente.buscar(dniBusqueda);
+        Paciente paciente = facade.buscarPaciente(dniBusqueda);
         if (paciente == null) {
             JOptionPane.showMessageDialog(this, "Error: El paciente no existe en el sistema.");
             limpiarCajas();
             return;
         }
 
-        HistorialClinico historial = listaHistoriales.buscar(dniBusqueda);
+        HistorialClinico historial = facade.buscarHistorial(dniBusqueda);
 
         if (historial != null) {
             txtTipoSangre.setText(historial.getTipoSangre());
@@ -236,15 +236,13 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
             txtEnfermedades.setText(historial.getEnfermedadesCronicas());
             txtObservaciones.setText(historial.getObservacionesMedicas());
 
-            // Actualizar tabla
             ArrayList<HistorialClinico> listaUnica = new ArrayList<>();
             listaUnica.add(historial);
-            jTable2.setModel(gestorTablas.modeloTablaHistoriales(listaUnica));
+            jTable2.setModel(facade.modeloTablaHistoriales(listaUnica));
             
             JOptionPane.showMessageDialog(this, "Historial recuperado exitosamente.");
         } else {
             limpiarCajas();
-            // Limpia la tabla si no hay historial
             jTable2.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
                 new String [] {"Buscar DNI", "Tipo de Sangre", "Alergias", "Enfermedades", "Observaciones"}

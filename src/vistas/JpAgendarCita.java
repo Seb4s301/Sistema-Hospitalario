@@ -252,8 +252,8 @@ public class JpAgendarCita extends javax.swing.JPanel {
         try {
             String dniPaciente = tablaPaciente.getValueAt(filaPac, 0).toString();
             String dniMedico = tablaMedico.getValueAt(filaMed, 0).toString();
-            Paciente p = arbolPacientes.buscar(dniPaciente);
-            Medico m = listaMedicos.buscar(dniMedico);
+            Paciente p = facade.buscarPaciente(dniPaciente);
+            Medico m = facade.buscarMedico(dniMedico);
 
             if (p == null || m == null) {
                 JOptionPane.showMessageDialog(this, "Error: El registro seleccionado no existe en memoria.");
@@ -262,11 +262,11 @@ public class JpAgendarCita extends javax.swing.JPanel {
             
             Cita nuevaCita = new Cita(
                 p.getDni(), p.getNombres(), p.getApellidos(),
-                m.getDni(), m.getNombres(), m.getApellidos(),
+                m.getCodigo(), m.getNombres(), m.getApellidos(),
                 m.getEspecialidad(), m.getTurno()
             );
 
-            listaCitas.insertar(nuevaCita);
+            facade.insertarCita(nuevaCita);
             
             JOptionPane.showMessageDialog(this, "Cita agendada con exito");
             listar();

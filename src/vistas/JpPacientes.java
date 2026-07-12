@@ -295,7 +295,7 @@ public class JpPacientes extends javax.swing.JPanel {
        int filaSeleccionada = tablaPaciente.getSelectedRow();
         if (filaSeleccionada != -1) {
             dni = tablaPaciente.getValueAt(filaSeleccionada, 0).toString();
-            Paciente p = arbolPaciente.buscar(dni);
+            Paciente p = facade.buscarPaciente(dni);
             if (p != null) {
                 txtDni.setText(p.getDni());
                 txtNombres.setText(p.getNombres());

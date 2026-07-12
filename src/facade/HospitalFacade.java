@@ -200,6 +200,10 @@ public class HospitalFacade {
         return listaHistoriales.obtenerTodos();
     }
 
+    public DefaultTableModel modeloTablaHistoriales(ArrayList<HistorialClinico> lista) {
+        return gestorTablas.modeloTablaHistoriales(lista);
+    }
+
     // ======================== REPORTES ========================
 
     public HashMap<String, Integer> obtenerDemandaPorEspecialidad() {
