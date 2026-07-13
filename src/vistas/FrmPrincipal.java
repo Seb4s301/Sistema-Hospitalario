@@ -11,7 +11,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private JpReportesClinicos panelReportesClinicos;
     private JpLogin panelLogin;
     private JpCerrarSesion panelCerrarSesion; 
-    
+    private JpCitasMedico panelCitasMedico;
     
     /**
      * Creates new form Principal
@@ -65,6 +65,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             jTabbedPane2.addTab("Pacientes", panelPacientes);
             jTabbedPane2.addTab("Agendar Citas", panelAgendar);
         } else if (usuario.getRol().equals("Medico")) {
+            jTabbedPane2.addTab("Citas", panelCitasMedico);
             jTabbedPane2.addTab("Reportes Clinicos", panelReportesClinicos);
             jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
         }

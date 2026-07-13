@@ -7,7 +7,6 @@ import modelos.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class HospitalFacade {
