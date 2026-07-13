@@ -81,4 +81,21 @@ public class GestorTablas {
         }
         return modelo;
     }
+
+    public DefaultTableModel modeloTablaReportes(ArrayList<ReporteMedico> lista) {
+        String[] columnas = {"DNI Paciente", "Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+
+        for (ReporteMedico r : lista) {
+            modelo.addRow(new Object[]{
+                r.getDniPaciente(),
+                r.getSintomas(),
+                r.getAlergias(),
+                r.getEnfermedades(),
+                r.getTratamiento(),
+                r.getObservaciones()
+            });
+        }
+        return modelo;
+    }
 }

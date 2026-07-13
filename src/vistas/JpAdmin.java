@@ -71,13 +71,18 @@ public class JpAdmin extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(85, 60));
+        jPanel2.setPreferredSize(new java.awt.Dimension(85, 80));
 
         btnRefrescarActionPerformed.setBackground(new java.awt.Color(204, 204, 204));
         btnRefrescarActionPerformed.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRefrescarActionPerformed.setForeground(new java.awt.Color(84, 110, 122));
         btnRefrescarActionPerformed.setText("Refrescar");
         btnRefrescarActionPerformed.setPreferredSize(new java.awt.Dimension(110, 25));
+        btnRefrescarActionPerformed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarDashboard();
+            }
+        });
         jPanel2.add(btnRefrescarActionPerformed);
 
         add(jPanel2, java.awt.BorderLayout.SOUTH);

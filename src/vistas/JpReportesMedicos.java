@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class JpReportesMedicos extends javax.swing.JPanel {
     
-    private facade.HospitalFacade facade = facade.HospitalFacade.getInstancia();
+    private HospitalFacade facade = HospitalFacade.getInstancia();
     private estructuras.ListaDobleReporte listaReportes = estructuras.ListaDobleReporte.getInstancia();
             
     public JpReportesMedicos() {

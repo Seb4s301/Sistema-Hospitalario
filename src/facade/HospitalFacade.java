@@ -9,6 +9,7 @@ import estructuras.ListaDobleCita;
 import estructuras.ListaDobleHistorial;
 import estructuras.ListaDobleMedico;
 import estructuras.ListaDobleRecepcionista;
+import estructuras.ListaDobleReporte;
 import modelos.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,13 +19,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class HospitalFacade {
     private static HospitalFacade instancia;
-
+   
     private final ArbolPaciente arbolPacientes;
     private final ListaDobleAdmin listaAdmins;
     private final ListaDobleMedico listaMedicos;
     private final ListaDobleRecepcionista listaRecepcionistas;
     private final ListaDobleCita listaCitas;
     private final ListaDobleHistorial listaHistoriales;
+    private final ListaDobleReporte listaReportes;
     private final GestorAutenticacion gestorAuth;
     private final GestorTablas gestorTablas;
     private final GestorReportes gestorReportes;
@@ -36,6 +38,7 @@ public class HospitalFacade {
         listaRecepcionistas = ListaDobleRecepcionista.getInstancia();
         listaCitas = ListaDobleCita.getInstancia();
         listaHistoriales = ListaDobleHistorial.getInstancia();
+        listaReportes = ListaDobleReporte.getInstancia();
         gestorAuth = new GestorAutenticacion();
         gestorTablas = new GestorTablas();
         gestorReportes = new GestorReportes();
@@ -204,7 +207,33 @@ public class HospitalFacade {
         return gestorTablas.modeloTablaHistoriales(lista);
     }
 
-    // ======================== REPORTES ========================
+    // ======================== REPORTES MÉDICOS (ReporteMedico) ========================
+
+    public boolean insertarReporte(ReporteMedico r) {
+        if (listaReportes.buscar(r.getDniPaciente()) != null) {
+            return false;
+        }
+        listaReportes.insertar(r);
+        return true;
+    }
+
+    public ReporteMedico buscarReporte(String dniPaciente) {
+        return listaReportes.buscar(dniPaciente);
+    }
+
+    public boolean modificarReporte(ReporteMedico r) {
+        return listaReportes.modificar(r);
+    }
+
+    public ArrayList<ReporteMedico> obtenerReportes() {
+        return listaReportes.obtenerTodos();
+    }
+
+    public DefaultTableModel modeloTablaReportes(ArrayList<ReporteMedico> lista) {
+        return gestorTablas.modeloTablaReportes(lista);
+    }
+
+    // ======================== REPORTES (gráficos) ========================
 
     public HashMap<String, Integer> obtenerDemandaPorEspecialidad() {
         return gestorReportes.obtenerDemandaPorEspecialidad(listaCitas.obtenerTodos());
