@@ -7,12 +7,12 @@ import modelos.ReporteMedico;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class JpReportesMedicos extends javax.swing.JPanel {
+public class JpReportesClinicos extends javax.swing.JPanel {
     
     private HospitalFacade facade = HospitalFacade.getInstancia();
     private estructuras.ListaDobleReporte listaReportes = estructuras.ListaDobleReporte.getInstancia();
             
-    public JpReportesMedicos() {
+    public JpReportesClinicos() {
         initComponents();
     }
     
