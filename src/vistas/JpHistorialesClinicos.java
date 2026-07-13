@@ -12,15 +12,7 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
     public JpHistorialesClinicos() {
         initComponents();
     }
-
-    private void limpiarCajas() {
-        txtTipoSangre.setText("");
-        txtAlergias.setText("");
-        txtEnfermedades.setText("");
-        txtObservaciones.setText("");
-    }
-
-    
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -127,9 +119,9 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(btnBuscar)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(56, 56, 56)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
