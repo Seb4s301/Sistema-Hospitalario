@@ -8,7 +8,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private JpMedicos panelMedicos;
     private JpHistorialesClinicos panelHistoriales; 
     private JpAgendarCita panelAgendar;
+    private JpReportesClinicos panelReportesClinicos;
     private JpLogin panelLogin;
+    
     
     /**
      * Creates new form Principal
@@ -24,6 +26,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             panelMedicos = new JpMedicos(); 
             panelHistoriales = new JpHistorialesClinicos();
             panelAgendar = new JpAgendarCita(); 
+            panelReportesClinicos = new JpReportesClinicos();
             panelLogin = new JpLogin(this);
 
             if (jTabbedPane2 != null) {
@@ -58,6 +61,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             jTabbedPane2.addTab("Pacientes", panelPacientes);
             jTabbedPane2.addTab("Agendar Citas", panelAgendar);
         } else if (usuario.getRol().equals("Medico")) {
+            jTabbedPane2.addTab("Reportes Clinicos", panelReportesClinicos);
             jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
         }
     }
@@ -71,30 +75,29 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane2 = new javax.swing.JTabbedPane();
         jTabbedPane3 = new javax.swing.JTabbedPane();
-        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jTabbedPane6 = new javax.swing.JTabbedPane();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane2.addTab("Principal", jTabbedPane3);
-        jTabbedPane2.addTab("Pacientes", jTabbedPane4);
         jTabbedPane2.addTab("Medicos", jTabbedPane5);
         jTabbedPane2.addTab("Historiales Clinicos", jTabbedPane6);
+        jTabbedPane2.addTab("Pacientes", jTabbedPane4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

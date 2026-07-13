@@ -77,4 +77,16 @@ public class ListaDobleHistorial {
         }
         return false; 
     }
+    
+    public java.util.ArrayList<modelos.HistorialClinico> obtenerTodos() {
+        java.util.ArrayList<modelos.HistorialClinico> listaExportada = new java.util.ArrayList<>();
+        nodos.NodoHistorial actual = ini;
+        
+        while (actual != null) {
+            listaExportada.add(actual.getDato());
+            actual = actual.getSgte();
+        }
+        
+        return listaExportada;
+    }
 }

@@ -3,12 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/GitHub/Sistema-Hospitalario/src/Arbol/ArbolPaciente.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/GitHub/Sistema-Hospitalario/src/vistas/JpAdmin.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/GitHub/Sistema-Hospitalario/src/vistas/JpMedicos.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/GitHub/Sistema-Hospitalario/src/hospitaljy/main.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/GitHub/Sistema-Hospitalario/src/vistas/JpLogin.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/GitHub/Sistema-Hospitalario/src/vistas/JpPacientes.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/estrategias/EstrategiaRecepcionista.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/estrategias/EstrategiaMedico.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/estrategias/EstrategiaAutenticacion.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/estrategias/EstrategiaAdmin.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/AdminAutenticacionStrategy.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/GestorAutenticacion.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/AutenticacionStrategy.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/MedicoAutenticacionStrategy.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/controladores/RecepcionistaAutenticacionStrategy.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/hospitaljy/Precargador.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/hospitaljy/PrecargadorAdmins.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/hospitaljy/PrecargadorMedicos.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/hospitaljy/PrecargadorPacientes.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/hospitaljy/PrecargadorRecepcionistas.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/hospitaljy/main.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/facade/HospitalFacade.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/vistas/JpAdmin.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/vistas/JpHistorialesClinicos.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/estructuras/ListaDobleCita.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/vistas/JpAgendarCita.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/estructuras/ListaDobleMedico.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/estructuras/ListaDobleRecepcionista.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/estructuras/ListaDobleHistorial.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/vistas/JpReportesMedicos.java</file>
+            <file>file:/C:/Users/Jean/Documents/GitHub/Sistema-Hospitalario/Sistema-Hospitalario/src/vistas/FrmPrincipal.java</file>
         </group>
     </open-files>
 </project-private>

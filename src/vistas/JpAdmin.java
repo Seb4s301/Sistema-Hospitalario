@@ -71,7 +71,7 @@ public class JpAdmin extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(85, 60));
+        jPanel2.setPreferredSize(new java.awt.Dimension(85, 80));
 
         btnRefrescarActionPerformed.setBackground(new java.awt.Color(204, 204, 204));
         btnRefrescarActionPerformed.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
