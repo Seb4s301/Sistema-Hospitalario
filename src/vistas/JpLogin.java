@@ -194,6 +194,11 @@ public class JpLogin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
+    public void limpiarCampos() {
+        txtUsuario.setText("");
+        txtPassword.setText("");
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;

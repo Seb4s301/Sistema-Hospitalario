@@ -10,6 +10,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private JpAgendarCita panelAgendar;
     private JpReportesClinicos panelReportesClinicos;
     private JpLogin panelLogin;
+    private JpCerrarSesion panelCerrarSesion; 
     
     
     /**
@@ -28,6 +29,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             panelAgendar = new JpAgendarCita(); 
             panelReportesClinicos = new JpReportesClinicos();
             panelLogin = new JpLogin(this);
+            panelCerrarSesion = new JpCerrarSesion(this);
 
             if (jTabbedPane2 != null) {
                 jTabbedPane2.removeAll();
@@ -51,6 +53,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public void iniciarSesion(Usuario usuario) {
         jTabbedPane2.removeAll();
 
+        panelCerrarSesion.mostrarCredenciales(usuario.getUsername(), usuario.getRol());
+
         if (usuario.getRol().equals("Administrador")) {
             jTabbedPane2.addTab("Dashboard", new JpAdmin());
             jTabbedPane2.addTab("Medicos", panelMedicos);
@@ -64,10 +68,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
             jTabbedPane2.addTab("Reportes Clinicos", panelReportesClinicos);
             jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
         }
+        jTabbedPane2.addTab("Sesión Actual", panelCerrarSesion);
     }
-
+    
     public void cerrarSesion() {
         jTabbedPane2.removeAll();
+        panelLogin.limpiarCampos();
         jTabbedPane2.addTab("Login", panelLogin);
     }
     
@@ -105,9 +111,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane2;

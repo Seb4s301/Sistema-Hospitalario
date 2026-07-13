@@ -1,19 +1,10 @@
 package facade;
 
 import arbol.ArbolPaciente;
-import controladores.GestorAutenticacion;
-import controladores.GestorReportes;
-import controladores.GestorTablas;
-import estructuras.ListaDobleAdmin;
-import estructuras.ListaDobleCita;
-import estructuras.ListaDobleHistorial;
-import estructuras.ListaDobleMedico;
-import estructuras.ListaDobleRecepcionista;
-import estructuras.ListaDobleReporte;
+import controladores.*;
+import estructuras.*;
 import modelos.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,15 +41,12 @@ public class HospitalFacade {
         }
         return instancia;
     }
-
-    // ======================== AUTENTICACIÓN ========================
-
+    //autenticación
     public Usuario login(String codigo, String password) {
         return gestorAuth.validarLogin(codigo, password);
     }
-
-    // ======================== PACIENTES ========================
-
+    
+    //pacientes
     public boolean insertarPaciente(Paciente p) {
         arbolPacientes.insertar(p);
         return true;
@@ -87,9 +75,8 @@ public class HospitalFacade {
     public DefaultTableModel modeloTablaPacientes(ArrayList<Paciente> lista) {
         return gestorTablas.modeloTablaPacientes(lista);
     }
-
-    // ======================== MÉDICOS ========================
-
+    
+    //medicos
     public boolean insertarMedico(Medico m) {
         listaMedicos.insertar(m);
         return true;
@@ -119,8 +106,7 @@ public class HospitalFacade {
         return gestorTablas.modeloTablaMedicos(lista);
     }
 
-    // ======================== RECEPCIONISTAS ========================
-
+    //recepcionista
     public boolean insertarRecepcionista(Recepcionista r) {
         listaRecepcionistas.insertar(r);
         return true;
@@ -142,8 +128,7 @@ public class HospitalFacade {
         return listaRecepcionistas.obtenerTodos();
     }
 
-    // ======================== ADMINISTRADORES ========================
-
+    //administradores
     public boolean insertarAdmin(Admin a) {
         listaAdmins.insertar(a);
         return true;
@@ -157,8 +142,7 @@ public class HospitalFacade {
         return listaAdmins.obtenerTodos();
     }
 
-    // ======================== CITAS ========================
-
+    //citas
     public boolean insertarCita(Cita c) {
         listaCitas.insertar(c);
         return true;
@@ -180,8 +164,7 @@ public class HospitalFacade {
         return gestorTablas.modeloTablaCitas(listaCitas.obtenerTodos());
     }
 
-    // ======================== HISTORIALES ========================
-
+    //historiales
     public boolean insertarHistorial(HistorialClinico h) {
         listaHistoriales.insertar(h);
         return true;
@@ -207,8 +190,7 @@ public class HospitalFacade {
         return gestorTablas.modeloTablaHistoriales(lista);
     }
 
-    // ======================== REPORTES MÉDICOS (ReporteMedico) ========================
-
+    //reportes medicos
     public boolean insertarReporte(ReporteMedico r) {
         if (listaReportes.buscar(r.getDniPaciente()) != null) {
             return false;
@@ -233,8 +215,7 @@ public class HospitalFacade {
         return gestorTablas.modeloTablaReportes(lista);
     }
 
-    // ======================== REPORTES (gráficos) ========================
-
+    //gráficos
     public HashMap<String, Integer> obtenerDemandaPorEspecialidad() {
         return gestorReportes.obtenerDemandaPorEspecialidad(listaCitas.obtenerTodos());
     }
