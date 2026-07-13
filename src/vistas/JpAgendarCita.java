@@ -25,7 +25,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
     public void limpiar(){
         txtDni.setText("");
         txtDniMedico.setText("");
-        txtTurno.setValue(null);
+        txtTurno.setText("");
     }
     
     private void imprimirPaciente(){
@@ -40,7 +40,6 @@ public class JpAgendarCita extends javax.swing.JPanel {
             ArrayList<Paciente> listaUnica = new ArrayList<>();
             listaUnica.add(p);
             tablaPaciente.setModel(facade.modeloTablaPacientes(listaUnica));
-            facade.aplicarRendererFechaPacientes(tablaPaciente);
         } else {
             JOptionPane.showMessageDialog(this, "Paciente no encontrado");
         }
@@ -58,7 +57,6 @@ public class JpAgendarCita extends javax.swing.JPanel {
             ArrayList<Medico> listaUnica = new ArrayList<>();
             listaUnica.add(m);
             tablaMedico.setModel(facade.modeloTablaMedicos(listaUnica));
-            facade.aplicarRendererTurnoMedicos(tablaMedico);
         } else {
             JOptionPane.showMessageDialog(this, "Medico no encontrado");
         }
@@ -80,7 +78,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtDniMedico = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtTurno = new javax.swing.JFormattedTextField();
+        txtTurno = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaCita = new javax.swing.JTable();
@@ -137,12 +135,6 @@ public class JpAgendarCita extends javax.swing.JPanel {
         jLabel2.setText("Codigo Doctor");
 
         jLabel3.setText("Horario");
-
-        try {
-            txtTurno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setText("Cita Agendada");
@@ -243,19 +235,19 @@ public class JpAgendarCita extends javax.swing.JPanel {
         int filaPac = tablaPaciente.getSelectedRow();
         int filaMed = tablaMedico.getSelectedRow();
 
+        if (filaMed == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un medico de la tabla central.");
+            return;
+        }
+
         if (filaPac == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un paciente de la tabla superior.");
             return;
         }
         
-        if (filaMed == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un medico de la tabla central.");
-            return;
-        }
-        
         // Validar que se haya ingresado fecha/hora para la cita
         String turnoTexto = txtTurno.getText().trim();
-        if (turnoTexto.isEmpty() || turnoTexto.equals("  /  /       :  ")) {
+        if (turnoTexto.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ingrese la fecha y hora de la cita (dd/MM/yyyy HH:mm).");
             return;
         }
@@ -273,12 +265,14 @@ public class JpAgendarCita extends javax.swing.JPanel {
             
             // Parsear la fecha/hora ingresada por el usuario para la cita
             SimpleDateFormat formatoCita = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            formatoCita.setLenient(false);
             Date fechaCita = formatoCita.parse(turnoTexto);
             
             // Validar separación de 15 minutos con otras citas del mismo médico
             if (!facade.validarSeparacionCita(m.getCodigo(), fechaCita)) {
                 JOptionPane.showMessageDialog(this, 
-                    "El médico ya tiene una cita en ese horario.\nDebe haber al menos 15 minutos de diferencia entre citas.",
+                    "El médico ya tiene una cita en ese horario.\n"
+                            + "Debe haber al menos 15 minutos de diferencia entre citas.",
                     "Conflicto de horario", 
                     JOptionPane.WARNING_MESSAGE);
                 return;
@@ -296,7 +290,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
             listar();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al agendar: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Formato de fecha invalido. Use dd/MM/yyyy HH:mm");
         }
     }//GEN-LAST:event_btnAgendarActionPerformed
 
@@ -317,6 +311,6 @@ public class JpAgendarCita extends javax.swing.JPanel {
     private javax.swing.JTable tablaPaciente;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDniMedico;
-    private javax.swing.JFormattedTextField txtTurno;
+    private javax.swing.JTextField txtTurno;
     // End of variables declaration//GEN-END:variables
 }

@@ -232,17 +232,4 @@ public class HospitalFacade {
     public HashMap<String, Integer> obtenerPacientesPorSeguro() {
         return gestorReportes.obtenerPacientesPorSeguro(arbolPacientes.obtenerTodos());
     }
-    
-    //renderers para fechas en tablas
-    public void aplicarRendererFechaPacientes(JTable tabla) {
-        gestorTablas.asignarRenderersFechas(tabla, new int[]{3}, gestorTablas.formatoFechaNac);
-    }
-    
-    public void aplicarRendererTurnoMedicos(JTable tabla) {
-        gestorTablas.asignarRenderersFechas(tabla, new int[]{3}, gestorTablas.formatoTurno);
-    }
-    
-    public void aplicarRendererFechaCitas(JTable tabla) {
-        gestorTablas.asignarRenderersFechas(tabla, new int[]{5}, gestorTablas.formatoTurno);
-    }
 }

@@ -24,7 +24,7 @@ public class JpMedicos extends javax.swing.JPanel {
         txtDni.setText("");
         txtNombres.setText("");
         txtApellidos.setText("");
-        txtTurno.setValue(null);
+        txtTurno.setText("");
         txtCelular.setText("");
         txtEspecialidad.setSelectedIndex(0);
         txtDni.requestFocus();
@@ -48,7 +48,7 @@ public class JpMedicos extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNombres = new javax.swing.JTextPane();
-        txtTurno = new javax.swing.JFormattedTextField();
+        txtTurno = new javax.swing.JTextField();
         btnInsertar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtApellidos = new javax.swing.JTextPane();
@@ -81,12 +81,6 @@ public class JpMedicos extends javax.swing.JPanel {
         jLabel11.setText("Turno:");
 
         jScrollPane3.setViewportView(txtNombres);
-
-        try {
-            txtTurno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         btnInsertar.setText("Insertar");
         btnInsertar.addActionListener(new java.awt.event.ActionListener() {
@@ -342,6 +336,6 @@ public class JpMedicos extends javax.swing.JPanel {
     private javax.swing.JTextPane txtDni;
     private javax.swing.JComboBox<String> txtEspecialidad;
     private javax.swing.JTextPane txtNombres;
-    private javax.swing.JFormattedTextField txtTurno;
+    private javax.swing.JTextField txtTurno;
     // End of variables declaration//GEN-END:variables
 }
