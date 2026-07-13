@@ -1,5 +1,6 @@
 package estructuras;
 
+import java.util.Date;
 import modelos.Cita;
 import nodos.NodoCita;
 
@@ -91,5 +92,23 @@ public class ListaDobleCita {
         }
         
         return listaExportada;
+    }
+    
+    public boolean validarSeparacion15Minutos(String dniMedico, Date nuevaFecha) {
+        if (nuevaFecha == null) return true;
+        
+        nodos.NodoCita actual = ini;
+        while (actual != null) {
+            Cita cita = actual.getDato();
+            if (cita.getDniMedico().equals(dniMedico) && cita.getFecha() != null) {
+                long diffMillis = Math.abs(nuevaFecha.getTime() - cita.getFecha().getTime());
+                long diffMinutes = diffMillis / (60 * 1000);
+                if (diffMinutes < 15) {
+                    return false; // Hay una cita a menos de 15 minutos
+                }
+            }
+            actual = actual.getSgte();
+        }
+        return true;
     }
 }

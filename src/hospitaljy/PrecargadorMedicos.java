@@ -1,6 +1,8 @@
 package hospitaljy;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import modelos.Medico;
 import estructuras.ListaDobleMedico;
@@ -30,14 +32,26 @@ public class PrecargadorMedicos extends Precargador {
         for (int i = 0; i < 5; i++) {
             String dni = generarDniString(70000000L);
             String cel = generarCelular();
+            Date turno = generarTurnoAleatorio();
             lista.insertar(new Medico(dni, nombres[i], apellidos[i],
-                formatoTurno.parse("15/07/2026 09:00"), cel, especialidades[i]));
+                turno, cel, especialidades[i]));
             cantidad++;
         }
     }
+    
+    private Date generarTurnoAleatorio() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2026, Calendar.JULY, 1 + rand.nextInt(92), 0, 0, 0); // jul - sep 2026
+        cal.set(Calendar.MILLISECOND, 0);
+        int hora = 8 + rand.nextInt(10);  // 08:00 - 17:00
+        int minuto = (rand.nextInt(4)) * 15; // 00, 15, 30, 45
+        cal.set(Calendar.HOUR_OF_DAY, hora);
+        cal.set(Calendar.MINUTE, minuto);
+        return cal.getTime();
+    }
 
     @Override
-    protected String getNombre() { return "Médicos"; }
+    protected String getNombre() { return "Medicos"; }
 
     @Override
     protected int getCantidad() { return cantidad; }

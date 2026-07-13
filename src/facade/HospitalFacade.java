@@ -5,7 +5,9 @@ import controladores.*;
 import estructuras.*;
 import modelos.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class HospitalFacade {
@@ -144,8 +146,15 @@ public class HospitalFacade {
 
     //citas
     public boolean insertarCita(Cita c) {
+        if (!listaCitas.validarSeparacion15Minutos(c.getDniMedico(), c.getFecha())) {
+            return false;
+        }
         listaCitas.insertar(c);
         return true;
+    }
+    
+    public boolean validarSeparacionCita(String dniMedico, Date fecha) {
+        return listaCitas.validarSeparacion15Minutos(dniMedico, fecha);
     }
 
     public boolean modificarCita(Cita c) {
@@ -222,5 +231,18 @@ public class HospitalFacade {
 
     public HashMap<String, Integer> obtenerPacientesPorSeguro() {
         return gestorReportes.obtenerPacientesPorSeguro(arbolPacientes.obtenerTodos());
+    }
+    
+    //renderers para fechas en tablas
+    public void aplicarRendererFechaPacientes(JTable tabla) {
+        gestorTablas.asignarRenderersFechas(tabla, new int[]{3}, gestorTablas.formatoFechaNac);
+    }
+    
+    public void aplicarRendererTurnoMedicos(JTable tabla) {
+        gestorTablas.asignarRenderersFechas(tabla, new int[]{3}, gestorTablas.formatoTurno);
+    }
+    
+    public void aplicarRendererFechaCitas(JTable tabla) {
+        gestorTablas.asignarRenderersFechas(tabla, new int[]{5}, gestorTablas.formatoTurno);
     }
 }

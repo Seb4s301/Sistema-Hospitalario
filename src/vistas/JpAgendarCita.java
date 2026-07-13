@@ -1,8 +1,10 @@
 package vistas;
 
 import facade.HospitalFacade;
+import java.text.SimpleDateFormat;
 import modelos.*;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class JpAgendarCita extends javax.swing.JPanel {
@@ -38,6 +40,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
             ArrayList<Paciente> listaUnica = new ArrayList<>();
             listaUnica.add(p);
             tablaPaciente.setModel(facade.modeloTablaPacientes(listaUnica));
+            facade.aplicarRendererFechaPacientes(tablaPaciente);
         } else {
             JOptionPane.showMessageDialog(this, "Paciente no encontrado");
         }
@@ -55,6 +58,7 @@ public class JpAgendarCita extends javax.swing.JPanel {
             ArrayList<Medico> listaUnica = new ArrayList<>();
             listaUnica.add(m);
             tablaMedico.setModel(facade.modeloTablaMedicos(listaUnica));
+            facade.aplicarRendererTurnoMedicos(tablaMedico);
         } else {
             JOptionPane.showMessageDialog(this, "Medico no encontrado");
         }
@@ -249,6 +253,13 @@ public class JpAgendarCita extends javax.swing.JPanel {
             return;
         }
         
+        // Validar que se haya ingresado fecha/hora para la cita
+        String turnoTexto = txtTurno.getText().trim();
+        if (turnoTexto.isEmpty() || turnoTexto.equals("  /  /       :  ")) {
+            JOptionPane.showMessageDialog(this, "Ingrese la fecha y hora de la cita (dd/MM/yyyy HH:mm).");
+            return;
+        }
+        
         try {
             String dniPaciente = tablaPaciente.getValueAt(filaPac, 0).toString();
             String dniMedico = tablaMedico.getValueAt(filaMed, 0).toString();
@@ -260,10 +271,23 @@ public class JpAgendarCita extends javax.swing.JPanel {
                 return;
             }
             
+            // Parsear la fecha/hora ingresada por el usuario para la cita
+            SimpleDateFormat formatoCita = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date fechaCita = formatoCita.parse(turnoTexto);
+            
+            // Validar separación de 15 minutos con otras citas del mismo médico
+            if (!facade.validarSeparacionCita(m.getCodigo(), fechaCita)) {
+                JOptionPane.showMessageDialog(this, 
+                    "El médico ya tiene una cita en ese horario.\nDebe haber al menos 15 minutos de diferencia entre citas.",
+                    "Conflicto de horario", 
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             Cita nuevaCita = new Cita(
                 p.getDni(), p.getNombres(), p.getApellidos(),
                 m.getCodigo(), m.getNombres(), m.getApellidos(),
-                m.getEspecialidad(), m.getTurno()
+                m.getEspecialidad(), fechaCita
             );
 
             facade.insertarCita(nuevaCita);

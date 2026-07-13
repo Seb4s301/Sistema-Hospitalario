@@ -3,24 +3,55 @@ package controladores;
 import modelos.*;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import java.awt.Component;
+import javax.swing.JLabel;
 
 public class GestorTablas {
-    private final SimpleDateFormat formatoFechaNac = new SimpleDateFormat("dd/MM/yyyy");
-    private final SimpleDateFormat formatoTurno = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    public final SimpleDateFormat formatoFechaNac = new SimpleDateFormat("dd/MM/yyyy");
+    public final SimpleDateFormat formatoTurno = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    
+    public void asignarRenderersFechas(JTable tabla, int[] columnasFecha, SimpleDateFormat formato) {
+        TableCellRenderer renderer = new TableCellRenderer() {
+            private final SimpleDateFormat fmt = formato;
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel label = new JLabel();
+                label.setOpaque(true);
+                if (isSelected) {
+                    label.setBackground(table.getSelectionBackground());
+                    label.setForeground(table.getSelectionForeground());
+                } else {
+                    label.setBackground(table.getBackground());
+                    label.setForeground(table.getForeground());
+                }
+                if (value instanceof Date) {
+                    label.setText(fmt.format((Date) value));
+                }
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                return label;
+            }
+        };
+        for (int col : columnasFecha) {
+            tabla.getColumnModel().getColumn(col).setCellRenderer(renderer);
+        }
+    }
 
     public DefaultTableModel modeloTablaPacientes(ArrayList<Paciente> lista) {
         String[] columnas = {"DNI", "Nombres", "Apellidos", "Fecha Nac.", "Celular", "Seguro"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         
         for (Paciente p : lista) {
-            String fechaFormateada = (p.getFechaNacimiento() != null) ? formatoFechaNac.format(p.getFechaNacimiento()) : "";
-            
             modelo.addRow(new Object[]{
                 p.getDni(), 
                 p.getNombres(), 
                 p.getApellidos(), 
-                fechaFormateada, 
+                p.getFechaNacimiento(),
                 p.getCelular(), 
                 p.getSeguro()
             });
@@ -33,13 +64,11 @@ public class GestorTablas {
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         
         for (Medico m : lista) {
-            String turnoFormateado = (m.getTurno() != null) ? formatoTurno.format(m.getTurno()) : "";
-            
             modelo.addRow(new Object[]{
                 m.getDni(),
                 m.getNombres(),
                 m.getApellidos(),
-                turnoFormateado,
+                m.getTurno(),
                 m.getCelular(),
                 m.getEspecialidad()
             });
@@ -52,15 +81,13 @@ public class GestorTablas {
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         
         for (Cita c : lista) {
-            String fechaCita = (c.getFecha() != null) ? formatoTurno.format(c.getFecha()) : "";
-
             modelo.addRow(new Object[]{
                 c.getDniPaciente(),
                 c.getNombrePaciente() + " " + c.getApellidoPaciente(),
                 c.getDniMedico(),
                 c.getNombreMedico() + " " + c.getApellidoMedico(),
                 c.getEspecialidad(),
-                fechaCita
+                c.getFecha()
             });
         }
         return modelo;

@@ -1,6 +1,8 @@
 package hospitaljy;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import modelos.Paciente;
 import arbol.ArbolPaciente;
@@ -23,7 +25,7 @@ public class PrecargadorPacientes extends Precargador {
 
     @Override
     protected void precargarAleatorios() throws Exception {
-        String[] seguros = {"Essalud", "Rimac", "La Positiva", "Sanitas", "Pacífico"};
+        String[] seguros = {"Essalud", "Rimac", "La Positiva", "Sanitas", "Pacifico"};
         String[] nombres = getNombres();
         String[] apellidos = getApellidos();
 
@@ -31,10 +33,21 @@ public class PrecargadorPacientes extends Precargador {
             String dni = generarDniString(40000000L);
             String cel = generarCelular();
             String seguro = seguros[rand.nextInt(seguros.length)];
+            Date fechaNac = generarFechaNacimientoAleatoria();
             arbol.insertar(new Paciente(dni, nombres[i], apellidos[i],
-                formatoNac.parse("01/01/1990"), cel, seguro));
+                fechaNac, cel, seguro));
             cantidad++;
         }
+    }
+    
+    private Date generarFechaNacimientoAleatoria() {
+        Calendar cal = Calendar.getInstance();
+        int anio = 1950 + rand.nextInt(56);   // 1950 - 2005
+        int mes = rand.nextInt(12);              // 0 - 11
+        int dia = 1 + rand.nextInt(28);          // 1 - 28 (evita problemas con febrero)
+        cal.set(anio, mes, dia, 0, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 
     @Override
