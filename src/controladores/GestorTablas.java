@@ -110,8 +110,13 @@ public class GestorTablas {
     }
 
     public DefaultTableModel modeloTablaReportes(ArrayList<ReporteMedico> lista) {
-        String[] columnas = {"DNI Paciente", "Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones"};
-        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        String[] columnas = {"DNI Paciente", "Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones", "Fecha"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         for (ReporteMedico r : lista) {
             modelo.addRow(new Object[]{
@@ -120,7 +125,8 @@ public class GestorTablas {
                 r.getAlergias(),
                 r.getEnfermedades(),
                 r.getTratamiento(),
-                r.getObservaciones()
+                r.getObservaciones(),
+                r.getFecha() != null ? formatoTurno.format(r.getFecha()) : ""
             });
         }
         return modelo;

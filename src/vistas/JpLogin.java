@@ -182,6 +182,11 @@ public class JpLogin extends javax.swing.JPanel {
         String user = txtUsuario.getText().trim();
         String pass = new String(txtPassword.getPassword());
 
+        if (user.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos");
+            return;
+        }
+
         Usuario usuario = facade.login(user, pass);
         if (usuario != null) {
             ventanaPadre.iniciarSesion(usuario);

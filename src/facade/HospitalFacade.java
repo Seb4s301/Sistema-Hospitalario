@@ -87,6 +87,10 @@ public class HospitalFacade {
         return listaMedicos.buscar(dni);
     }
 
+    public Medico buscarMedicoTurno(Date turno){
+        return listaMedicos.buscarPorTurno(turno);
+    }
+        
     public boolean modificarMedico(Medico m) {
         return listaMedicos.modificar(m);
     }
@@ -200,15 +204,12 @@ public class HospitalFacade {
 
     //reportes medicos
     public boolean insertarReporte(ReporteMedico r) {
-        if (listaReportes.buscar(r.getDniPaciente()) != null) {
-            return false;
-        }
         listaReportes.insertar(r);
         return true;
     }
 
-    public ReporteMedico buscarReporte(String dniPaciente) {
-        return listaReportes.buscar(dniPaciente);
+    public ReporteMedico buscarReporte(String dniPaciente, Date fecha) {
+        return listaReportes.buscar(dniPaciente, fecha);
     }
 
     public boolean modificarReporte(ReporteMedico r) {
@@ -217,6 +218,14 @@ public class HospitalFacade {
 
     public ArrayList<ReporteMedico> obtenerReportes() {
         return listaReportes.obtenerTodos();
+    }
+
+    public ArrayList<ReporteMedico> obtenerReportesPorMedico(String dniMedico) {
+        return listaReportes.buscarPorMedico(dniMedico);
+    }
+
+    public ArrayList<ReporteMedico> obtenerReportesPorPaciente(String dniPaciente) {
+        return listaReportes.buscarPorPaciente(dniPaciente);
     }
 
     public DefaultTableModel modeloTablaReportes(ArrayList<ReporteMedico> lista) {

@@ -33,11 +33,15 @@ public class Medico {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = "M" + codigo;
+        if (codigo != null && !codigo.startsWith("M")) {
+            this.codigo = "M" + codigo;
+        } else {
+            this.codigo = codigo;
+        }
     }
 
     public String getDni() {
-        return codigo.replace("M", "");
+        return codigo.substring(1);
     }
 
     public void setDni(String dni) {

@@ -1,5 +1,6 @@
 package estructuras;
 
+import java.util.Date;
 import modelos.Medico;
 import nodos.NodoMedico;
 
@@ -52,7 +53,18 @@ public class ListaDobleMedico {
         }
         return null;
     }
-
+    
+    public Medico buscarPorTurno(Date turno) {
+        NodoMedico actual = ini;
+        while (actual != null) {
+            if (actual.getDato().getTurno().equals(turno)) {
+                return actual.getDato();
+            }
+            actual = actual.getSgte();
+        }
+        return null;
+    }
+    
     public boolean modificar(Medico MedicoModificado) {
         NodoMedico actual = ini;
         while (actual != null) {

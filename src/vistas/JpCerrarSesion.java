@@ -33,7 +33,7 @@ public class JpCerrarSesion extends javax.swing.JPanel {
         txtCodigo = new javax.swing.JTextField();
         txtCargo = new javax.swing.JTextField();
         Credenciales = new javax.swing.JLabel();
-        btnIngresar1 = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hospital.png"))); // NOI18N
 
@@ -62,13 +62,13 @@ public class JpCerrarSesion extends javax.swing.JPanel {
         Credenciales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Credenciales.setText("Credenciales");
 
-        btnIngresar1.setBackground(new java.awt.Color(204, 204, 204));
-        btnIngresar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnIngresar1.setForeground(new java.awt.Color(84, 110, 122));
-        btnIngresar1.setText("Cerrar Sesión");
-        btnIngresar1.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarSesion.setBackground(new java.awt.Color(204, 204, 204));
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCerrarSesion.setForeground(new java.awt.Color(84, 110, 122));
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresar1ActionPerformed(evt);
+                btnCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -86,7 +86,7 @@ public class JpCerrarSesion extends javax.swing.JPanel {
                         .addComponent(Credenciales, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,7 +100,7 @@ public class JpCerrarSesion extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
-                .addComponent(btnIngresar1)
+                .addComponent(btnCerrarSesion)
                 .addGap(0, 159, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -109,16 +109,16 @@ public class JpCerrarSesion extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-    private void btnIngresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresar1ActionPerformed
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         if (ventanaPadre != null) {
             ventanaPadre.cerrarSesion();
         }
-    }//GEN-LAST:event_btnIngresar1ActionPerformed
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Credenciales;
-    private javax.swing.JButton btnIngresar1;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCargo;

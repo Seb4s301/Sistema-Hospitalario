@@ -238,7 +238,7 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
         }
 
         HistorialClinico historial = facade.buscarHistorial(dniBusqueda);
-        ReporteMedico reporte = facade.buscarReporte(dniBusqueda);
+        ArrayList<ReporteMedico> reportes = facade.obtenerReportesPorPaciente(dniBusqueda);
 
         if (historial != null) {
             ArrayList<HistorialClinico> listaUnica = new ArrayList<>();
@@ -251,18 +251,16 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
             ));
         }
 
-        if (reporte != null) {
-            ArrayList<ReporteMedico> listaReporteUnica = new ArrayList<>();
-            listaReporteUnica.add(reporte);
-            jTable1.setModel(facade.modeloTablaReportes(listaReporteUnica));
+        if (reportes != null && !reportes.isEmpty()) {
+            jTable1.setModel(facade.modeloTablaReportes(reportes));
         } else {
             jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
-                new String [] {"DNI Paciente", "Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones"}
+                new String [] {"DNI Paciente", "Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones", "Fecha"}
             ));
         }
 
-        if (historial == null && reporte == null) {
+        if (historial == null && reportes == null) {
             JOptionPane.showMessageDialog(this, "Paciente encontrado, pero no tiene historial ni reporte médico registrado.");
         } else {
             JOptionPane.showMessageDialog(this, "Información recuperada exitosamente.");

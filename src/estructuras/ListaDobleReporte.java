@@ -2,6 +2,7 @@
 package estructuras;
 
 import java.util.ArrayList;
+import java.util.Date;
 import modelos.ReporteMedico;
 import nodos.NodoReporte;
 
@@ -33,10 +34,11 @@ public class ListaDobleReporte {
         }
     }
 
-    public ReporteMedico buscar(String dniPaciente) {
+    public ReporteMedico buscar(String dniPaciente, Date fecha) {
         NodoReporte actual = ini;
         while (actual != null) {
-            if (actual.getDato().getDniPaciente().equals(dniPaciente)) {
+            if (actual.getDato().getDniPaciente().equals(dniPaciente)
+                && actual.getDato().getFecha().equals(fecha)) {
                 return actual.getDato();
             }
             actual = actual.getSgte();
@@ -44,10 +46,35 @@ public class ListaDobleReporte {
         return null;
     }
 
+    public ArrayList<ReporteMedico> buscarPorMedico(String dniMedico) {
+        ArrayList<ReporteMedico> lista = new ArrayList<>();
+        NodoReporte actual = ini;
+        while (actual != null) {
+            if (actual.getDato().getDniMedico().equals(dniMedico)) {
+                lista.add(actual.getDato());
+            }
+            actual = actual.getSgte();
+        }
+        return lista;
+    }
+
+    public ArrayList<ReporteMedico> buscarPorPaciente(String dniPaciente) {
+        ArrayList<ReporteMedico> lista = new ArrayList<>();
+        NodoReporte actual = ini;
+        while (actual != null) {
+            if (actual.getDato().getDniPaciente().equals(dniPaciente)) {
+                lista.add(actual.getDato());
+            }
+            actual = actual.getSgte();
+        }
+        return lista;
+    }
+
     public boolean modificar(ReporteMedico reporteModificado) {
         NodoReporte actual = ini;
         while (actual != null) {
-            if (actual.getDato().getDniPaciente().equals(reporteModificado.getDniPaciente())) {
+            if (actual.getDato().getDniPaciente().equals(reporteModificado.getDniPaciente())
+                && actual.getDato().getFecha().equals(reporteModificado.getFecha())) {
                 actual.setDato(reporteModificado);
                 return true;
             }
@@ -56,10 +83,11 @@ public class ListaDobleReporte {
         return false;
     }
 
-    public boolean eliminar(String dniPaciente) {
+    public boolean eliminar(String dniPaciente, Date fecha) {
         NodoReporte actual = ini;
         while (actual != null) {
-            if (actual.getDato().getDniPaciente().equals(dniPaciente)) {
+            if (actual.getDato().getDniPaciente().equals(dniPaciente)
+                && actual.getDato().getFecha().equals(fecha)) {
                 if (actual == ini && actual == fin) {
                     ini = fin = null;
                 } else if (actual == ini) {

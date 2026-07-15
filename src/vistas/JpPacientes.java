@@ -124,6 +124,11 @@ public class JpPacientes extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtFechaNac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaNacActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -222,6 +227,15 @@ public class JpPacientes extends javax.swing.JPanel {
                 return;
             }
 
+            if (!dni.matches("\\d{8}")) {
+                JOptionPane.showMessageDialog(this, "DNI invalido. Debe tener 8 digitos");
+                return;
+            }
+            if (!celular.matches("\\d{9}")) {
+                JOptionPane.showMessageDialog(this, "Celular invalido. Debe tener 9 digitos");
+                return;
+            }
+
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date fechaParsada = formato.parse(fecha);
 
@@ -309,6 +323,10 @@ public class JpPacientes extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tablaPacienteMouseClicked
+
+    private void txtFechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaNacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaNacActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

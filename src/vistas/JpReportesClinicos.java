@@ -1,19 +1,25 @@
 
 package vistas;
 
-import estructuras.ListaDobleReporte;
 import facade.HospitalFacade;
-import modelos.ReporteMedico;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class JpReportesClinicos extends javax.swing.JPanel {
     
     private HospitalFacade facade = HospitalFacade.getInstancia();
-    private estructuras.ListaDobleReporte listaReportes = estructuras.ListaDobleReporte.getInstancia();
+    private String dniMedico;
+    private Date fechaSeleccionada;
+    private SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             
-    public JpReportesClinicos() {
+    public JpReportesClinicos(String dniMedico) {
+        this.dniMedico = dniMedico;
         initComponents();
+        listar();
+    }
+    
+    public void listar() {
+        jTable2.setModel(facade.modeloTablaReportes(facade.obtenerReportesPorMedico(dniMedico)));
     }
     
     private void limpiarCajas() {
@@ -23,14 +29,13 @@ public class JpReportesClinicos extends javax.swing.JPanel {
         txtEnfermedades.setText("");
         txtTratamiento.setText("");
         txtObservaciones.setText("");
+        fechaSeleccionada = null;
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         btnInsertar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -54,10 +59,6 @@ public class JpReportesClinicos extends javax.swing.JPanel {
         txtDNIPaciente = new javax.swing.JTextPane();
         jLabel9 = new javax.swing.JLabel();
 
-        jLabel2.setText("Sintomas:");
-
-        jLabel5.setText("Observaciones:");
-
         btnInsertar.setText("Insertar");
         btnInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +81,7 @@ public class JpReportesClinicos extends javax.swing.JPanel {
 
         jScrollPane7.setViewportView(txtAlergias);
 
-        jLabel6.setText("Observaciones:");
+        jLabel6.setText("Observaciones (opcional):");
 
         txtObservaciones.setColumns(20);
         txtObservaciones.setRows(5);
@@ -95,22 +96,22 @@ public class JpReportesClinicos extends javax.swing.JPanel {
         jScrollPane9.setViewportView(txtEnfermedades);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
+            new Object [][] {},
             new String [] {
-                "Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones"
+                "DNI Paciente", "Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -206,8 +207,8 @@ public class JpReportesClinicos extends javax.swing.JPanel {
             String observaciones = txtObservaciones.getText().trim();
 
             if (dni.isEmpty() || sintomas.isEmpty() || alergias.isEmpty()
-                || enfermedades.isEmpty() || tratamiento.isEmpty() || observaciones.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos");
+                || enfermedades.isEmpty() || tratamiento.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos obligatorios");
                 return;
             }
             
@@ -220,27 +221,13 @@ public class JpReportesClinicos extends javax.swing.JPanel {
                 javax.swing.JOptionPane.showMessageDialog(this, "El paciente no existe en el sistema");
                 return;
             }
-            
-            if (listaReportes.buscar(dni) != null) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Este paciente ya tiene un reporte. Use Modificar.");
-                return;
-            }
 
+            Date fechaActual = new Date();
             modelos.ReporteMedico nuevo = new modelos.ReporteMedico(
-                 dni, sintomas, alergias, enfermedades, tratamiento, observaciones);
-            listaReportes.insertar(nuevo);
+                 dni, dniMedico, sintomas, alergias, enfermedades, tratamiento, observaciones, fechaActual);
+            facade.insertarReporte(nuevo);
 
-            
-            javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
-                new String[]{"Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones"}, 0);
-            for (modelos.ReporteMedico r : listaReportes.obtenerTodos()) {
-                modelo.addRow(new Object[]{
-                    r.getSintomas(), r.getAlergias(), r.getEnfermedades(),
-                    r.getTratamiento(), r.getObservaciones()
-                });
-            }
-            jTable2.setModel(modelo);
-
+            listar();
             limpiarCajas();
             javax.swing.JOptionPane.showMessageDialog(this, "Reporte registrado correctamente");
 
@@ -251,6 +238,11 @@ public class JpReportesClinicos extends javax.swing.JPanel {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
+            if (fechaSeleccionada == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un reporte de la tabla para modificar");
+                return;
+            }
+
             String dni = txtDNIPaciente.getText().trim();
             String sintomas = txtSintomas.getText().trim();
             String alergias = txtAlergias.getText().trim();
@@ -258,28 +250,20 @@ public class JpReportesClinicos extends javax.swing.JPanel {
             String tratamiento = txtTratamiento.getText().trim();
             String observaciones = txtObservaciones.getText().trim();
 
-            if (dni.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Ingrese el DNI del paciente a modificar");
+            if (dni.isEmpty() || sintomas.isEmpty() || alergias.isEmpty()
+                || enfermedades.isEmpty() || tratamiento.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos obligatorios");
                 return;
             }
 
             modelos.ReporteMedico modificado = new modelos.ReporteMedico(
-                dni, sintomas, alergias, enfermedades, tratamiento, observaciones);
-            boolean resultado = listaReportes.modificar(modificado);
+                dni, dniMedico, sintomas, alergias, enfermedades, tratamiento, observaciones, fechaSeleccionada);
+            boolean resultado = facade.modificarReporte(modificado);
 
             if (resultado) {
-                
-                javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
-                    new String[]{"Sintomas", "Alergias", "Enfermedades", "Tratamiento", "Observaciones"}, 0);
-                for (modelos.ReporteMedico r : listaReportes.obtenerTodos()) {
-                    modelo.addRow(new Object[]{
-                        r.getSintomas(), r.getAlergias(), r.getEnfermedades(),
-                        r.getTratamiento(), r.getObservaciones()
-                    });
-                }
-                jTable2.setModel(modelo);
+                listar();
                 limpiarCajas();
-                    javax.swing.JOptionPane.showMessageDialog(this, "Reporte modificado correctamente");
+                javax.swing.JOptionPane.showMessageDialog(this, "Reporte modificado correctamente");
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "No se encontro el reporte");
             }
@@ -289,14 +273,29 @@ public class JpReportesClinicos extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        int fila = jTable2.getSelectedRow();
+        if (fila >= 0) {
+            txtDNIPaciente.setText(jTable2.getValueAt(fila, 0).toString());
+            txtSintomas.setText(jTable2.getValueAt(fila, 1).toString());
+            txtAlergias.setText(jTable2.getValueAt(fila, 2).toString());
+            txtEnfermedades.setText(jTable2.getValueAt(fila, 3).toString());
+            txtTratamiento.setText(jTable2.getValueAt(fila, 4).toString());
+            txtObservaciones.setText(jTable2.getValueAt(fila, 5) != null ? jTable2.getValueAt(fila, 5).toString() : "");
+            try {
+                fechaSeleccionada = formatoFecha.parse(jTable2.getValueAt(fila, 6).toString());
+            } catch (Exception e) {
+                fechaSeleccionada = null;
+            }
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

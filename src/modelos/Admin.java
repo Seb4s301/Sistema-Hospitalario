@@ -33,7 +33,11 @@ public class Admin {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = "A" + codigo;
+        if (codigo != null && !codigo.startsWith("A")) {
+            this.codigo = "A" + codigo;
+        } else {
+            this.codigo = codigo;
+        }
     }
 
     public String getNombres() {
@@ -77,6 +81,6 @@ public class Admin {
     }
 
     public String getDni() {
-        return codigo.replace("A", "");
+        return codigo.substring(1);
     }
 }

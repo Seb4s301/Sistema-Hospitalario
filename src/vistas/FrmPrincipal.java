@@ -27,10 +27,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
             panelMedicos = new JpMedicos(); 
             panelHistoriales = new JpHistorialesClinicos();
             panelAgendar = new JpAgendarCita(); 
-            panelReportesClinicos = new JpReportesClinicos();
             panelLogin = new JpLogin(this);
             panelCerrarSesion = new JpCerrarSesion(this);
-
+            panelCitasMedico = new JpCitasMedico();
+            
             if (jTabbedPane2 != null) {
                 jTabbedPane2.removeAll();
                 jTabbedPane2.setVisible(true);
@@ -65,6 +65,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             jTabbedPane2.addTab("Pacientes", panelPacientes);
             jTabbedPane2.addTab("Agendar Citas", panelAgendar);
         } else if (usuario.getRol().equals("Medico")) {
+            String dniMedico = usuario.getUsername().substring(1);
+            panelReportesClinicos = new JpReportesClinicos(dniMedico);
             jTabbedPane2.addTab("Citas", panelCitasMedico);
             jTabbedPane2.addTab("Reportes Clinicos", panelReportesClinicos);
             jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);

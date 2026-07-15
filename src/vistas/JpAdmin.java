@@ -97,9 +97,9 @@ public class JpAdmin extends javax.swing.JPanel {
         );
 
         ChartPanel chartPanel = new ChartPanel(graficoBarras);
-        panelGraficoEspecialidades.removeAll();
         panelGraficoEspecialidades.add(chartPanel, BorderLayout.CENTER);
         panelGraficoEspecialidades.validate();
+        panelGraficoEspecialidades.repaint();
     }
     
     private void generarGraficoSeguros() {
@@ -118,9 +118,9 @@ public class JpAdmin extends javax.swing.JPanel {
         );
 
         ChartPanel chartPanel = new ChartPanel(graficoCircular);
-        panelGraficoSeguros.removeAll();
         panelGraficoSeguros.add(chartPanel, BorderLayout.CENTER);
         panelGraficoSeguros.validate();
+        panelGraficoSeguros.repaint();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

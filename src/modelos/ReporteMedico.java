@@ -1,27 +1,29 @@
 
 package modelos;
 
-/**
- *
- * @author Usuario
- */
+import java.util.Date;
+
 public class ReporteMedico {
     private String dniPaciente;
+    private String dniMedico;
     private String sintomas;
     private String alergias;
     private String enfermedades;
     private String tratamiento;
     private String observaciones;
+    private Date fecha;
 
     public ReporteMedico() {}
 
-    public ReporteMedico(String dniPaciente, String sintomas, String alergias, String enfermedades, String tratamiento, String observaciones) {
+    public ReporteMedico(String dniPaciente, String dniMedico, String sintomas, String alergias, String enfermedades, String tratamiento, String observaciones, Date fecha) {
         this.dniPaciente = dniPaciente;
+        this.dniMedico = dniMedico;
         this.sintomas = sintomas;
         this.alergias = alergias;
         this.enfermedades = enfermedades;
         this.tratamiento = tratamiento;
         this.observaciones = observaciones;
+        this.fecha = fecha;
     }
 
     public String getDniPaciente() {
@@ -30,6 +32,14 @@ public class ReporteMedico {
 
     public void setDniPaciente(String dniPaciente) {
         this.dniPaciente = dniPaciente;
+    }
+
+    public String getDniMedico() {
+        return dniMedico;
+    }
+
+    public void setDniMedico(String dniMedico) {
+        this.dniMedico = dniMedico;
     }
 
     public String getSintomas() {
@@ -71,6 +81,12 @@ public class ReporteMedico {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
-    
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 }

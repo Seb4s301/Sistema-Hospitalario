@@ -47,18 +47,28 @@ public class JpAgendarCita extends javax.swing.JPanel {
     
     private void imprimirMedico(){
         String dniBusqueda = txtDniMedico.getText().trim();
-        if (dniBusqueda.isEmpty()) {
-            listar();
-            return;
-        }
+        String turnoBusqueda = txtTurno.getText().trim();
         
-        Medico m = facade.buscarMedico(dniBusqueda);
-        if (m != null) {
-            ArrayList<Medico> listaUnica = new ArrayList<>();
-            listaUnica.add(m);
-            tablaMedico.setModel(facade.modeloTablaMedicos(listaUnica));
+        if (!dniBusqueda.isEmpty()) {
+            Medico m = facade.buscarMedico(dniBusqueda);
+            
+        } else if (!turnoBusqueda.isEmpty()) {
+            try {
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                Date fechaParsada = formato.parse(turnoBusqueda);
+                Medico m = facade.buscarMedicoTurno(fechaParsada);
+                if (m != null) {
+                    ArrayList<Medico> listaUnica = new ArrayList<>();
+                    listaUnica.add(m);
+                    tablaMedico.setModel(facade.modeloTablaMedicos(listaUnica));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Medico no encontrado en ese turno");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Formato de fecha invalido. Use dd/MM/yyyy HH:mm");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Medico no encontrado");
+            listar();
         }
     }
     

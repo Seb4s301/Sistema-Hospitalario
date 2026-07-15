@@ -33,11 +33,15 @@ public class Recepcionista {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = "R" + codigo;
+        if (codigo != null && !codigo.startsWith("R")) {
+            this.codigo = "R" + codigo;
+        } else {
+            this.codigo = codigo;
+        }
     }
 
     public String getDni() {
-        return codigo.replace("R", "");
+        return codigo.substring(1);
     }
 
     public void setDni(String dni) {

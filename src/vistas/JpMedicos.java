@@ -266,6 +266,15 @@ public class JpMedicos extends javax.swing.JPanel {
                 return;
             }
             
+            if (!dni.matches("\\d{8}")) {
+                JOptionPane.showMessageDialog(this, "DNI invalido. Debe tener 8 digitos");
+                return;
+            }
+            if (!celular.matches("\\d{9}")) {
+                JOptionPane.showMessageDialog(this, "Celular invalido. Debe tener 9 digitos");
+                return;
+            }
+            
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date fechaParsada = formato.parse(turno);
             

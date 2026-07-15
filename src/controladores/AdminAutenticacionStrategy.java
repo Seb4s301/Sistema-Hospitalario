@@ -9,11 +9,9 @@ public class AdminAutenticacionStrategy implements AutenticacionStrategy {
 
     @Override
     public Usuario autenticar(String codigo, String password) {
-        // Buscar por código (ej: A1234567) o por DNI (ej: 1234567)
         Admin admin = listaAdmins.buscarPorCodigo(codigo);
         if (admin == null) {
-            // Intentar buscar por DNI sin el prefijo
-            admin = listaAdmins.buscar(codigo.replace("A", ""));
+            admin = listaAdmins.buscar(codigo);
         }
         
         if (admin != null && password.equals("12345")) {
