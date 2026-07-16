@@ -29,14 +29,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
             panelAgendar = new JpAgendarCita(); 
             panelLogin = new JpLogin(this);
             panelCerrarSesion = new JpCerrarSesion(this);
-            panelCitasMedico = new JpCitasMedico();
             
             if (jTabbedPane2 != null) {
                 jTabbedPane2.removeAll();
                 jTabbedPane2.setVisible(true);
                 jTabbedPane2.addTab("Login", panelLogin);
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error: jTabbedPane2 fue borrado del diseño.");
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: Tabla fue borrada del diseño.");
             }
             
         } catch (Throwable t) {
@@ -59,7 +58,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             jTabbedPane2.addTab("Dashboard", new JpAdmin());
             jTabbedPane2.addTab("Medicos", panelMedicos);
             jTabbedPane2.addTab("Pacientes", panelPacientes);
-            jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
+            jTabbedPane2.addTab("Historiales Hospitalarios", panelHistoriales);
             jTabbedPane2.addTab("Agendar Citas", panelAgendar);
         } else if (usuario.getRol().equals("Recepcionista")) {
             jTabbedPane2.addTab("Pacientes", panelPacientes);
@@ -67,9 +66,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } else if (usuario.getRol().equals("Medico")) {
             String dniMedico = usuario.getUsername().substring(1);
             panelReportesClinicos = new JpReportesClinicos(dniMedico);
+            panelCitasMedico = new JpCitasMedico(usuario.getUsername());
             jTabbedPane2.addTab("Citas", panelCitasMedico);
-            jTabbedPane2.addTab("Reportes Clinicos", panelReportesClinicos);
-            jTabbedPane2.addTab("Historiales Clinicos", panelHistoriales);
+            jTabbedPane2.addTab("Reportes Hospitalarios", panelReportesClinicos);
+            jTabbedPane2.addTab("Historiales Hospitalarios", panelHistoriales);
         }
         jTabbedPane2.addTab("Sesión Actual", panelCerrarSesion);
     }

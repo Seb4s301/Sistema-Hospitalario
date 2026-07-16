@@ -34,10 +34,6 @@ public class JpMedicos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
@@ -48,7 +44,7 @@ public class JpMedicos extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNombres = new javax.swing.JTextPane();
-        txtTurno = new javax.swing.JTextField();
+        txtTurno = new javax.swing.JFormattedTextField();
         btnInsertar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtApellidos = new javax.swing.JTextPane();
@@ -59,14 +55,6 @@ public class JpMedicos extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtEspecialidad = new javax.swing.JComboBox<>();
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        jButton1.setText("jButton1");
 
         jLabel9.setText("Celular:");
 
@@ -81,6 +69,12 @@ public class JpMedicos extends javax.swing.JPanel {
         jLabel11.setText("Turno:");
 
         jScrollPane3.setViewportView(txtNombres);
+
+        try {
+            txtTurno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         btnInsertar.setText("Insertar");
         btnInsertar.addActionListener(new java.awt.event.ActionListener() {
@@ -324,16 +318,12 @@ public class JpMedicos extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -345,6 +335,6 @@ public class JpMedicos extends javax.swing.JPanel {
     private javax.swing.JTextPane txtDni;
     private javax.swing.JComboBox<String> txtEspecialidad;
     private javax.swing.JTextPane txtNombres;
-    private javax.swing.JTextField txtTurno;
+    private javax.swing.JFormattedTextField txtTurno;
     // End of variables declaration//GEN-END:variables
 }

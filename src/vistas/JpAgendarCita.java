@@ -50,8 +50,14 @@ public class JpAgendarCita extends javax.swing.JPanel {
         String turnoBusqueda = txtTurno.getText().trim();
         
         if (!dniBusqueda.isEmpty()) {
-            Medico m = facade.buscarMedico(dniBusqueda);
-            
+            Medico m = facade.buscarMedicoPorCodigo(dniBusqueda);
+            if (m != null) {
+                ArrayList<Medico> listaUnica = new ArrayList<>();
+                listaUnica.add(m);
+                tablaMedico.setModel(facade.modeloTablaMedicos(listaUnica));
+            } else {
+                JOptionPane.showMessageDialog(this, "Medico no encontrado");
+            }
         } else if (!turnoBusqueda.isEmpty()) {
             try {
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -248,38 +254,45 @@ public class JpAgendarCita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarMedicoActionPerformed
 
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
-        if (tablaPaciente.getSelectedRow() == -1) {
-        JOptionPane.showMessageDialog(this, "Seleccione un paciente de la tabla.");
-        return;
+        int filaPac = tablaPaciente.getSelectedRow();
+        int filaMed = tablaMedico.getSelectedRow();
+
+        if (filaPac == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente de la tabla.");
+            return;
         }
         
-        if (tablaMedico.getSelectedRow() == -1) {
-        JOptionPane.showMessageDialog(this, "Seleccione un médico de la tabla.");
-        return;
+        if (filaMed == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un médico de la tabla.");
+            return;
         }
         
         try {
-        String dniPaciente = tablaPaciente.getValueAt(tablaPaciente.getSelectedRow(), 0).toString();
-        String dniMedico = tablaMedico.getValueAt(tablaMedico.getSelectedRow(), 0).toString();
-        
-        facade.buscarPaciente(dniMedico);
-        facade.buscarMedico(dniMedico);
-        
-        Cita nuevaCita = new Cita(
-                facade.buscarPaciente(dniPaciente).getDni(), facade.buscarPaciente(dniPaciente).getNombres(), facade.buscarPaciente(dniPaciente).getApellidos(),
-                facade.buscarMedico(dniMedico).getCodigo(), facade.buscarMedico(dniMedico).getNombres(), facade.buscarMedico(dniMedico).getApellidos(),
-                facade.buscarMedico(dniMedico).getEspecialidad(), facade.buscarMedico(dniMedico).getTurno());
-
-        facade.insertarCita(nuevaCita);
-        //imprime en la tabla
-        facade.modeloTablaCitas();
-        
-        JOptionPane.showMessageDialog(this, "Cita agendada con exito");
-        listar();
-        limpiar();
+            String dniPaciente = tablaPaciente.getValueAt(filaPac, 0).toString();
+            String codigoMedico = tablaMedico.getValueAt(filaMed, 0).toString();
             
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Formato de fecha invalido. Use dd/MM/yyyy HH:mm");
+            Paciente p = facade.buscarPaciente(dniPaciente);
+            Medico m = facade.buscarMedicoPorCodigo(codigoMedico);
+
+            if (p == null || m == null) {
+                JOptionPane.showMessageDialog(this, "Error: El registro ya no existe en memoria.");
+                return;
+            }
+            
+            Cita nuevaCita = new Cita(
+                p.getDni(), p.getNombres(), p.getApellidos(),
+                m.getCodigo(), m.getNombres(), m.getApellidos(),
+                m.getEspecialidad(), m.getTurno()
+            );
+
+            facade.insertarCita(nuevaCita);
+            
+            JOptionPane.showMessageDialog(this, "Cita agendada con exito");
+            listar();
+            limpiar();
+                
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al agendar: " + e.getMessage());
         }
     }//GEN-LAST:event_btnAgendarActionPerformed
 

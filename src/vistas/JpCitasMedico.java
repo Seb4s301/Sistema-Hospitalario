@@ -1,13 +1,58 @@
 package vistas;
 
-/**
- *
- * @author Ariana
- */
+import facade.HospitalFacade;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import javax.swing.table.DefaultTableModel;
+import modelos.Cita;
+
 public class JpCitasMedico extends javax.swing.JPanel {
     
-    public JpCitasMedico() {
+    private final String codigoMedico;
+    private final HospitalFacade facade;
+    private final DefaultTableModel modeloTabla;
+    
+    public JpCitasMedico(String codigoMedico) {
+        this.codigoMedico = codigoMedico;
+        this.facade = HospitalFacade.getInstancia();
+        this.modeloTabla = new DefaultTableModel(null, new String[]{
+            "DNI Paciente", "Paciente", "Especialidad", "Fecha"
+        }) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         initComponents();
+        tblCitasMedico.setModel(modeloTabla);
+        cargarCitasMedico();
+    }
+    
+    private void cargarCitasMedico() {
+        ArrayList<Cita> todas = facade.obtenerCitas();
+        ArrayList<Cita> filtradas = new ArrayList<>();
+        for (Cita c : todas) {
+            if (c.getDniMedico().equals(codigoMedico)) {
+                filtradas.add(c);
+            }
+        }
+        mostrarCitas(filtradas);
+    }
+    
+    private void mostrarCitas(ArrayList<Cita> citas) {
+        modeloTabla.setRowCount(0);
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "PE"));
+        for (Cita c : citas) {
+            modeloTabla.addRow(new Object[]{
+                c.getDniPaciente(),
+                c.getNombrePaciente() + " " + c.getApellidoPaciente(),
+                c.getEspecialidad(),
+                c.getFecha() != null ? fmt.format(c.getFecha()) : ""
+            });
+        }
     }
 
     
@@ -27,13 +72,13 @@ public class JpCitasMedico extends javax.swing.JPanel {
 
         tblCitasMedico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Paciente", "DNI", "Teléfono", "Seguro", "Fecha y Hora "
+                "DNI Paciente", "Paciente", "Especialidad", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(tblCitasMedico);
@@ -43,7 +88,7 @@ public class JpCitasMedico extends javax.swing.JPanel {
         jLabel1.setText("Citas Programadas");
 
         try {
-            txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##")));
+            txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -118,11 +163,42 @@ public class JpCitasMedico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnBuscarDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarDNIActionPerformed
-        // TODO add your handling code here:
+        String dni = txtDNI.getText().trim();
+        if (dni.isEmpty()) {
+            cargarCitasMedico();
+            return;
+        }
+        ArrayList<Cita> todas = facade.obtenerCitas();
+        ArrayList<Cita> filtradas = new ArrayList<>();
+        for (Cita c : todas) {
+            if (c.getDniMedico().equals(codigoMedico) && c.getDniPaciente().equals(dni)) {
+                filtradas.add(c);
+            }
+        }
+        mostrarCitas(filtradas);
     }//GEN-LAST:event_BtnBuscarDNIActionPerformed
 
     private void btnBuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFechaActionPerformed
-        // TODO add your handling code here:
+        String fechaTexto = txtFecha.getText().trim();
+        if (fechaTexto.equals("  /  /    ") || fechaTexto.trim().isEmpty()) {
+            cargarCitasMedico();
+            return;
+        }
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "PE"));
+        try {
+            Date fechaBusqueda = fmt.parse(fechaTexto);
+            ArrayList<Cita> todas = facade.obtenerCitas();
+            ArrayList<Cita> filtradas = new ArrayList<>();
+            for (Cita c : todas) {
+                if (c.getDniMedico().equals(codigoMedico) && c.getFecha() != null
+                        && fmt.format(c.getFecha()).equals(fmt.format(fechaBusqueda))) {
+                    filtradas.add(c);
+                }
+            }
+            mostrarCitas(filtradas);
+        } catch (ParseException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Fecha inválida. Use formato dd/MM/yyyy");
+        }
     }//GEN-LAST:event_btnBuscarFechaActionPerformed
 
     

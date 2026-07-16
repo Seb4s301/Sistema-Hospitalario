@@ -87,6 +87,10 @@ public class HospitalFacade {
         return listaMedicos.buscar(dni);
     }
 
+    public Medico buscarMedicoPorCodigo(String codigo) {
+        return listaMedicos.buscarPorCodigo(codigo);
+    }
+
     public Medico buscarMedicoTurno(Date turno){
         return listaMedicos.buscarPorTurno(turno);
     }
@@ -230,6 +234,18 @@ public class HospitalFacade {
 
     public DefaultTableModel modeloTablaReportes(ArrayList<ReporteMedico> lista) {
         return gestorTablas.modeloTablaReportes(lista);
+    }
+
+    public DefaultTableModel modeloTablaHistorialCompleto(String dniPaciente) {
+        ArrayList<Cita> todasCitas = listaCitas.obtenerTodos();
+        ArrayList<Cita> citasPaciente = new ArrayList<>();
+        for (Cita c : todasCitas) {
+            if (c.getDniPaciente().equals(dniPaciente)) {
+                citasPaciente.add(c);
+            }
+        }
+        ArrayList<ReporteMedico> reportes = listaReportes.buscarPorPaciente(dniPaciente);
+        return gestorTablas.modeloTablaHistorialCompleto(citasPaciente, reportes);
     }
 
     //gráficos

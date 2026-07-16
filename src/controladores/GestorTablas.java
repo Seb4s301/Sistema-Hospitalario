@@ -4,6 +4,7 @@ import modelos.*;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.JTable;
@@ -65,7 +66,7 @@ public class GestorTablas {
         
         for (Medico m : lista) {
             modelo.addRow(new Object[]{
-                m.getDni(),
+                m.getCodigo(),
                 m.getNombres(),
                 m.getApellidos(),
                 m.getTurno(),
@@ -127,6 +128,47 @@ public class GestorTablas {
                 r.getTratamiento(),
                 r.getObservaciones(),
                 r.getFecha() != null ? formatoTurno.format(r.getFecha()) : ""
+            });
+        }
+        return modelo;
+    }
+
+    public DefaultTableModel modeloTablaHistorialCompleto(ArrayList<Cita> citas, ArrayList<ReporteMedico> reportes) {
+        String[] columnas = {"Fecha", "Medico", "Especialidad", "Sintomas", "Enfermedades", "Tratamiento", "Observaciones"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "PE"));
+
+        for (ReporteMedico r : reportes) {
+            String fechaStr = r.getFecha() != null ? fmt.format(r.getFecha()) : "";
+            String medico = "";
+            String especialidad = "";
+
+            for (Cita c : citas) {
+                String codigoMedicoCita = c.getDniMedico();
+                String dniMedicoCita = (codigoMedicoCita != null && codigoMedicoCita.length() > 1)
+                        ? codigoMedicoCita.substring(1) : codigoMedicoCita;
+
+                if (dniMedicoCita != null && dniMedicoCita.equals(r.getDniMedico())) {
+                    medico = c.getNombreMedico() + " " + c.getApellidoMedico();
+                    especialidad = c.getEspecialidad();
+                    break;
+                }
+            }
+
+            modelo.addRow(new Object[]{
+                fechaStr,
+                medico,
+                especialidad,
+                r.getSintomas(),
+                r.getEnfermedades(),
+                r.getTratamiento(),
+                r.getObservaciones()
             });
         }
         return modelo;
