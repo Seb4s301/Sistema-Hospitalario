@@ -3,45 +3,12 @@ package controladores;
 import modelos.*;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.JLabel;
 
 public class GestorTablas {
     public final SimpleDateFormat formatoFechaNac = new SimpleDateFormat("dd/MM/yyyy");
     public final SimpleDateFormat formatoTurno = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    
-    public void asignarRenderersFechas(JTable tabla, int[] columnasFecha, SimpleDateFormat formato) {
-        TableCellRenderer renderer = new TableCellRenderer() {
-            private final SimpleDateFormat fmt = formato;
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value,
-                    boolean isSelected, boolean hasFocus, int row, int column) {
-                JLabel label = new JLabel();
-                label.setOpaque(true);
-                if (isSelected) {
-                    label.setBackground(table.getSelectionBackground());
-                    label.setForeground(table.getSelectionForeground());
-                } else {
-                    label.setBackground(table.getBackground());
-                    label.setForeground(table.getForeground());
-                }
-                if (value instanceof Date) {
-                    label.setText(fmt.format((Date) value));
-                }
-                label.setHorizontalAlignment(SwingConstants.CENTER);
-                return label;
-            }
-        };
-        for (int col : columnasFecha) {
-            tabla.getColumnModel().getColumn(col).setCellRenderer(renderer);
-        }
-    }
 
     public DefaultTableModel modeloTablaPacientes(ArrayList<Paciente> lista) {
         String[] columnas = {"DNI", "Nombres", "Apellidos", "Fecha Nac.", "Celular", "Seguro"};
@@ -168,7 +135,7 @@ public class GestorTablas {
                 r.getSintomas(),
                 r.getEnfermedades(),
                 r.getTratamiento(),
-                r.getObservaciones()
+                (r.getObservaciones() != null && !r.getObservaciones().trim().isEmpty()) ? "SI" : "N/A"
             });
         }
         return modelo;

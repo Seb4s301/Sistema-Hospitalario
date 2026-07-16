@@ -53,12 +53,6 @@ public class JpCerrarSesion extends javax.swing.JPanel {
                 .addComponent(jLabel2))
         );
 
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
-            }
-        });
-
         Credenciales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Credenciales.setText("Credenciales");
 
@@ -104,10 +98,6 @@ public class JpCerrarSesion extends javax.swing.JPanel {
                 .addGap(0, 159, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         if (ventanaPadre != null) {

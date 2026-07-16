@@ -1,15 +1,17 @@
 package vistas;
 
 import facade.HospitalFacade;
-import modelos.HistorialClinico;
 import modelos.Paciente;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class JpHistorialesClinicos extends javax.swing.JPanel {
+public class JpHistorialesHospitalarios extends javax.swing.JPanel {
     private final HospitalFacade facade = HospitalFacade.getInstancia();
 
-    public JpHistorialesClinicos() {
+    public JpHistorialesHospitalarios() {
         initComponents();
     }
 
@@ -23,9 +25,10 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         txtBuscarDNI = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
+        btnBuscarObservaciones = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -59,11 +62,18 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
 
         jScrollPane5.setViewportView(txtBuscarDNI);
 
-        jButton1.setText("jButton1");
+        btnBuscarObservaciones.setText("Buscar Observaciones");
+        btnBuscarObservaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarObservacionesActionPerformed(evt);
+            }
+        });
 
         txtObservaciones.setColumns(20);
         txtObservaciones.setRows(5);
         jScrollPane1.setViewportView(txtObservaciones);
+
+        jLabel2.setText("Historiales Hospitalarios");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -84,44 +94,56 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
                         .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(btnBuscar)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton1)
+                .addComponent(btnBuscarObservaciones)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBuscarObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarObservacionesActionPerformed
         int fila = tablaHistoriales.getSelectedRow();
         if (fila < 0) {
             JOptionPane.showMessageDialog(this, "Seleccione una cita de la tabla.");
             return;
         }
 
-        String observaciones = tablaHistoriales.getValueAt(fila, 6) != null
+        String indicador = tablaHistoriales.getValueAt(fila, 6) != null
                 ? tablaHistoriales.getValueAt(fila, 6).toString().trim() : "";
 
-        if (observaciones.isEmpty()) {
+        if (indicador.equals("N/A")) {
             txtObservaciones.setText("El paciente no cuenta con observaciones en esta cita");
         } else {
-            txtObservaciones.setText(observaciones);
+            String dniBusqueda = txtBuscarDNI.getText().trim();
+            String fechaStr = tablaHistoriales.getValueAt(fila, 0).toString();
+            ArrayList<modelos.ReporteMedico> reportes = facade.obtenerReportesPorPaciente(dniBusqueda);
+            for (modelos.ReporteMedico r : reportes) {
+                if (r.getFecha() != null && new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "PE")).format(r.getFecha()).equals(fechaStr)) {
+                    txtObservaciones.setText(r.getObservaciones() != null ? r.getObservaciones() : "");
+                    return;
+                }
+            }
+            txtObservaciones.setText("No se encontraron observaciones");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBuscarObservacionesActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String dniBusqueda = txtBuscarDNI.getText().trim();
@@ -135,8 +157,7 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
         if (paciente == null) {
             JOptionPane.showMessageDialog(this, "El paciente no existe en el sistema.");
             tablaHistoriales.setModel(new DefaultTableModel(null, new String[]{
-                "Fecha", "Medico", "Especialidad", "Sintomas", "Enfermedades", "Tratamiento", "Observaciones"
-            }));
+                "Fecha", "Medico", "Especialidad", "Sintomas", "Enfermedades", "Tratamiento"}));
             txtObservaciones.setText("");
             return;
         }
@@ -151,8 +172,9 @@ public class JpHistorialesClinicos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBuscarObservaciones;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;

@@ -78,11 +78,6 @@ public class JpLogin extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(37, 108, 178));
 
         txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -194,10 +189,6 @@ public class JpLogin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas");
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     public void limpiarCampos() {
         txtUsuario.setText("");

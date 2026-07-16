@@ -122,7 +122,7 @@ public class HospitalFacade {
     }
 
     public Recepcionista buscarRecepcionista(String dni) {
-        return listaRecepcionistas.buscar(dni);
+        return listaRecepcionistas.buscarPorDni(dni);
     }
 
     public boolean modificarRecepcionista(Recepcionista r) {

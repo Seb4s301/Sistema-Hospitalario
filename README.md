@@ -1,321 +1,311 @@
-# Sistema Hospitalario - Gestión de Citas Médicas
+# Sistema Hospitalario — Documentación Técnica
 
-Sistema de gestión hospitalaria para la administración de pacientes, médicos, recepcionistas, historiales clínicas y citas médicas.
+## 1. Visión General
 
----
+Sistema de gestión hospitalaria desarrollado en Java Swing, siguiendo arquitectura MVC con patrones de diseño Singleton, Facade, Strategy y Template Method. Gestiona pacientes, médicos, recepcionistas, administradores, citas médicas, historiales clínicos y reportes médicos.
 
-## Funcionalidades
-
-| Módulo | Descripción |
-|--------|-------------|
-| **Login** | Autenticación por código y contraseña según rol |
-| **Dashboard** | Gráficos de demanda por especialidad y distribución de seguros (JFreeChart) |
-| **Pacientes** | CRUD completo con búsqueda por DNI (Árbol Binario de Búsqueda) |
-| **Médicos** | CRUD completo con búsqueda por código (Lista Doblemente Enlazada) |
-| **Historiales Clínicos** | Gestión de historial médico por paciente |
-| **Agendar Citas** | Programación de citas médicas |
+**Total de archivos Java:** 46  
+**Dependencia externa:** JFreeChart (gráficos del dashboard)
 
 ---
 
-## Roles y Permisos
+## 2. Arquitectura del Sistema
 
-| Rol | Código Login | Acceso |
-|-----|--------------|--------|
-| Administrador | `admin` | Dashboard, Médicos, Pacientes, Historiales, Citas |
-| Recepcionista | `R{DNI}` | Pacientes, Agendar Citas |
-| Médico | `M{DNI}` | Historiales Clínicos |
+```
+main.java (Punto de entrada)
+    │
+    ├── Precarga de datos en estructuras
+    │
+    └── FrmPrincipal (JFrame principal)
+            │
+            ├── JpLogin              → Autenticación
+            ├── JpAdmin              → Dashboard con gráficos
+            ├── JpPacientes          → CRUD Pacientes
+            ├── JpMedicos            → CRUD Médicos
+            ├── JpAgendarCita        → Agendamiento de citas
+            ├── JpCitasMedico        → Citas del médico
+            ├── JpHistorialesHospitalarios → Historiales
+            ├── JpReportesHospitalarios    → Reportes médicos
+            └── JpCerrarSesion       → Cierre de sesión
+```
 
-> **Contraseña por defecto:** `12345`
+### Capas
+
+| Capa | Paquete | Función |
+|------|---------|---------|
+| **Modelo** | `modelos/` | Entidades de dominio (POJOs) |
+| **Nodos** | `nodos/` | Nodos de estructuras de datos |
+| **Estructuras** | `estructuras/`, `arbol/` | Estructuras de datos personalizadas |
+| **Controladores** | `controladores/` | Lógica de negocio, autenticación, tablas |
+| **Fachada** | `facade/` | API unificada para las vistas |
+| **Vistas** | `vistas/` | Interfaz gráfica (Java Swing) |
+| **Precarga** | `hospitaljy/` | Carga inicial de datos de prueba |
 
 ---
 
-## Datos de Prueba (Precarga)
+## 3. Patrones de Diseño
 
-### Usuarios Fijos
-| Tipo | Código | Nombre |
-|------|--------|--------|
-| Admin | `admin` | Admin Principal |
-| Médico | `M10000000` | Dr. Carlos Vargas |
-| Recepcionista | `R10000000` | Laura Mendoza |
-| Paciente | `10000000` | Pedro García |
+### 3.1 Singleton
+Implementado en 8 clases: `ArbolPaciente`, las 6 listas dobles (`ListaDobleAdmin`, `ListaDobleMedico`, `ListaDobleRecepcionista`, `ListaDobleCita`, `ListaDobleHistorial`, `ListaDobleReporte`) y `HospitalFacade`. Inicialización lazy con método `getInstancia()`.
 
-### Datos Aleatorios
-- 10 pacientes con DNIs y seguros aleatorios
-- 5 médicos con especialidades variadas
-- 3 recepcionistas con turnos rotativos
+### 3.2 Facade
+`HospitalFacade` encapsula toda la complejidad interna (estructuras, autenticación, generación de tablas, reportes). Todas las vistas interactúan exclusivamente con esta clase.
 
----
+### 3.3 Strategy
+`AutenticacionStrategy` (interfaz) con 3 implementaciones concretas: `AdminAutenticacionStrategy`, `MedicoAutenticacionStrategy`, `RecepcionistaAutenticacionStrategy`. `GestorAutenticacion` itera las estrategias hasta encontrar una que retorne un `Usuario`.
 
-## Arquitectura del Proyecto
-
-```
-src/
-├── hospitaljy/              # Clase principal y precarga
-│   ├── main.java
-│   ├── Precargador.java     # Clase abstracta (Template Method)
-│   ├── PrecargadorPacientes.java
-│   ├── PrecargadorMedicos.java
-│   ├── PrecargadorRecepcionistas.java
-│   └── PrecargadorAdmins.java
-│
-├── facade/                  # Patrón Facade
-│   └── HospitalFacade.java  # Acceso unificado a todo el sistema
-│
-├── modelos/                 # Capa de modelos de dominio
-│   ├── Paciente.java
-│   ├── Medico.java
-│   ├── Recepcionista.java
-│   ├── Admin.java
-│   ├── Usuario.java
-│   ├── Cita.java
-│   ├── HistorialClinico.java
-│   └── Trabajador.java      # Interfaz
-│
-├── estructuras/             # Estructuras de datos (Singleton)
-│   ├── ListaDobleMedico.java
-│   ├── ListaDobleRecepcionista.java
-│   ├── ListaDobleAdmin.java
-│   ├── ListaDobleCita.java
-│   └── ListaDobleHistorial.java
-│
-├── nodos/                   # Nodos para estructuras
-│   ├── NodoMedico.java
-│   ├── NodoRecepcionista.java
-│   ├── NodoAdmin.java
-│   ├── NodoCita.java
-│   ├── NodoHistorial.java
-│   └── NodoArbolPaciente.java
-│
-├── Arbol/                   # Árbol Binario de Búsqueda
-│   └── ArbolPaciente.java   # (Singleton)
-│
-├── controladores/           # Capa de lógica de negocio
-│   ├── GestorAutenticacion.java
-│   ├── GestorTablas.java
-│   ├── GestorReportes.java
-│   ├── AutenticacionStrategy.java     # Interfaz Strategy
-│   ├── AdminAutenticacionStrategy.java
-│   ├── MedicoAutenticacionStrategy.java
-│   └── RecepcionistaAutenticacionStrategy.java
-│
-├── vistas/                  # Capa de presentación (Swing)
-│   ├── FrmPrincipal.java
-│   ├── JpLogin.java
-│   ├── JpAdmin.java
-│   ├── JpPacientes.java
-│   ├── JpMedicos.java
-│   ├── JpHistorialesClinicos.java
-│   └── JpAgendarCita.java
-│
-└── img/
-    └── hospital.png
-```
+### 3.4 Template Method
+`Precargador` (clase abstracta) define el molde: `precargarFijo()` → `precargarAleatorios()`. Las 4 subclases (`PrecargadorPacientes`, `PrecargadorAdmins`, `PrecargadorMedicos`, `PrecargadorRecepcionistas`) implementan los pasos específicos.
 
 ---
 
-## Patrones de Diseño Aplicados
+## 4. Estructuras de Datos
 
-### 1. Facade Pattern (Acceso Unificado)
-```java
-// Las vistas solo dependen del Facade
-private HospitalFacade facade = HospitalFacade.getInstancia();
+### 4.1 Árbol Binario de Búsqueda (BST)
+- **Clase:** `ArbolPaciente`
+- **Nodo:** `NodoArbolPaciente` (hijo izquierdo/derecho)
+- **Clave:** DNI del paciente (String)
+- **Operaciones:** Insertar, buscar, modificar, eliminar (sucesor in-order), recorrido in-orden
+- **Complejidad:** O(log n) promedio, O(n) peor caso
 
-// En lugar de múltiples imports y singletons:
-// private ArbolPaciente arbol = ArbolPaciente.getInstancia();
-// private ListaDobleMedico lista = ListaDobleMedico.getInstancia();
-// private GestorTablas gestor = new GestorTablas();
-// private GestorReportes reportes = new GestorReportes();
+### 4.2 Listas Doblemente Enlazadas (6)
+- **Clases:** `ListaDobleAdmin`, `ListaDobleMedico`, `ListaDobleRecepcionista`, `ListaDobleCita`, `ListaDobleHistorial`, `ListaDobleReporte`
+- **Nodos:** `NodoAdmin`, `NodoMedico`, `NodoRecepcionista`, `NodoCita`, `NodoHistorial`, `NodoReporte`
+- **Punteros:** `ini` (inicio), `fin` (final)
+- **Operaciones:** Insertar, buscar, modificar, eliminar, obtenerTodos
+- **Complejidad:** O(n) para búsqueda lineal
 
-// Operaciones simplificadas
-facade.login(codigo, password);
-facade.insertarPaciente(p);
-facade.buscarMedico(dni);
-facade.modeloTablaCitas();
-facade.obtenerDemandaPorEspecialidad();
-```
-
-### 2. Strategy Pattern (Autenticación)
-```java
-// Interfaz
-public interface AutenticacionStrategy {
-    Usuario autenticar(String codigo, String password);
-    String getRol();
-}
-
-// Implementaciones concretas
-AdminAutenticacionStrategy
-MedicoAutenticacionStrategy
-RecepcionistaAutenticacionStrategy
-```
-
-### 3. Template Method (Precarga de Datos)
-```java
-// Clase abstracta
-public abstract class Precargador {
-    public final void precargar() throws Exception {
-        precargarFijo();        // abstract
-        precargarAleatorios();  // abstract
-    }
-}
-
-// Implementaciones
-PrecargadorPacientes
-PrecargadorMedicos
-PrecargadorRecepcionistas
-PrecargadorAdmins
-```
-
-### 4. Singleton (Estructuras de Datos)
-```java
-ArbolPaciente.getInstancia()
-ListaDobleMedico.getInstancia()
-ListaDobleRecepcionista.getInstancia()
-ListaDobleAdmin.getInstancia()
-ListaDobleCita.getInstancia()
-ListaDobleHistorial.getInstancia()
-HospitalFacade.getInstancia()
-```
+### 4.3 Regla de Negocio en Citas
+`ListaDobleCita.validarSeparacion15Minutos()` verifica que no exista otra cita para el mismo médico dentro de 15 minutos de la fecha propuesta.
 
 ---
 
-## API del Facade
+## 5. Modelos de Dominio
+
+### 5.1 Paciente
+| Campo | Tipo | Validación |
+|-------|------|------------|
+| `dni` | String | 8 dígitos numéricos |
+| `nombres` | String | No vacío |
+| `apellidos` | String | No vacío |
+| `fechaNacimiento` | Date | Formato dd/MM/yyyy |
+| `celular` | String | 9 dígitos numéricos |
+| `seguro` | String | Nombre del asegurador |
+
+### 5.2 Medico
+| Campo | Tipo | Nota |
+|-------|------|------|
+| `codigo` | String | Prefijo "M" + DNI |
+| `nombres` | String | |
+| `apellidos` | String | |
+| `turno` | Date | Fecha/hora del turno (dd/MM/yyyy HH:mm) |
+| `celular` | String | 9 dígitos |
+| `especialidad` | String | JComboBox con 9 opciones |
+
+### 5.3 Cita
+| Campo | Tipo | Nota |
+|-------|------|------|
+| `dniPaciente` | String | DNI del paciente |
+| `nombrePaciente` | String | Datos denormalizados |
+| `apellidoPaciente` | String | |
+| `dniMedico` | String | Código con prefijo "M" |
+| `nombreMedico` | String | Datos denormalizados |
+| `apellidoMedico` | String | |
+| `especialidad` | String | |
+| `fecha` | Date | Fecha de la cita |
+
+**Clave compuesta:** dniPaciente + especialidad
+
+### 5.4 ReporteMedico
+| Campo | Tipo | Nota |
+|-------|------|------|
+| `dniPaciente` | String | |
+| `dniMedico` | String | Médico que creó el reporte |
+| `sintomas` | String | Obligatorio |
+| `alergias` | String | Obligatorio |
+| `enfermedades` | String | Obligatorio |
+| `tratamiento` | String | Obligatorio |
+| `observaciones` | String | Opcional |
+| `fecha` | Date | Auto-generada al insertar |
+
+**Clave compuesta:** dniPaciente + fecha
+
+### 5.5 HistorialClinico
+| Campo | Tipo |
+|-------|------|
+| `dniPaciente` | String |
+| `tipoSangre` | String |
+| `alergias` | String |
+| `enfermedadesCronicas` | String |
+| `observacionesMedicas` | String |
+
+### 5.6 Admin / Recepcionista
+- **Admin:** Código con prefijo "A", cargo (por defecto "Administrador")
+- **Recepcionista:** Código con prefijo "R", turno (Manana/Tarde/Noche)
+
+---
+
+## 6. Funcionalidades por Rol
+
+### 6.1 Administrador
+| Pestaña | Funcionalidad |
+|---------|---------------|
+| Dashboard | Gráfico de barras (demanda por especialidad), gráfico circular (pacientes por seguro), botón refrescar |
+| Médicos | Insertar, modificar, eliminar médicos |
+| Pacientes | Insertar, modificar, eliminar pacientes |
+| Historiales | Buscar historial por DNI, ver observaciones |
+| Agendar Citas | Buscar paciente/médico, agendar citas |
+| Sesión | Cerrar sesión |
+
+### 6.2 Médico
+| Pestaña | Funcionalidad |
+|---------|---------------|
+| Citas | Ver citas asignadas, filtrar por DNI o fecha |
+| Reportes | Crear/modificar reportes médicos (solo los suyos) |
+| Historiales | Buscar historial de pacientes |
+| Sesión | Cerrar sesión |
+
+### 6.3 Recepcionista
+| Pestaña | Funcionalidad |
+|---------|---------------|
+| Pacientes | Insertar, modificar, eliminar pacientes |
+| Agendar Citas | Buscar paciente/médico, agendar citas |
+| Sesión | Cerrar sesión |
+
+---
+
+## 7. Autenticación
+
+### Códigos de usuario
+| Rol | Formato | Ejemplo |
+|-----|---------|---------|
+| Administrador | `A` + DNI | `A10000000` |
+| Médico | `M` + DNI | `M10000000` |
+| Recepcionista | `R` + DNI | `R10000000` |
+
+### Flujo
+1. Usuario ingresa código y contraseña
+2. `GestorAutenticacion` itera las 3 estrategias
+3. Cada estrategia busca por código primero, luego por DNI
+4. Si encuentra y la contraseña es `"12345"`, retorna `Usuario` con el rol
+5. `FrmPrincipal` muestra las pestañas según el rol
+
+---
+
+## 8. Precarga de Datos
+
+Al iniciar la aplicación se cargan datos de prueba:
+
+| Entidad | Fijos | Aleatorios | Total |
+|---------|-------|------------|-------|
+| Pacientes | 1 (Pedro García, DNI 10000000) | 10 | 11 |
+| Médicos | 1 (Dr. Carlos Vargas, DNI 10000000) | 5 | 6 |
+| Recepcionistas | 1 (Laura Mendoza, DNI 10000000) | 3 | 4 |
+| Administradores | 1 (Admin Principal, DNI 10000000) | 0 | 1 |
+
+### Especialidades médicas disponibles
+Traumatología, Pediatría, Oftalmología, Neurología, Endocrinología, Oncología, Dermatología, Cardiología, Gastroenterología
+
+---
+
+## 9. API del Facade (HospitalFacade)
 
 ### Autenticación
-| Método | Retorna | Descripción |
-|--------|---------|-------------|
-| `login(codigo, password)` | `Usuario` | Valida credenciales |
+- `Usuario login(String codigo, String password)`
 
 ### Pacientes
-| Método | Retorna | Descripción |
-|--------|---------|-------------|
-| `insertarPaciente(p)` | `boolean` | Inserta paciente |
-| `buscarPaciente(dni)` | `Paciente` | Busca por DNI |
-| `modificarPaciente(p)` | `boolean` | Modifica paciente |
-| `eliminarPaciente(dni)` | `boolean` | Elimina paciente |
-| `obtenerPacientes()` | `ArrayList<Paciente>` | Lista todos |
-| `modeloTablaPacientes()` | `DefaultTableModel` | Modelo para JTable |
+- `boolean insertarPaciente(Paciente p)`
+- `Paciente buscarPaciente(String dni)`
+- `boolean modificarPaciente(Paciente p)`
+- `boolean eliminarPaciente(String dni)`
+- `ArrayList<Paciente> obtenerPacientes()`
+- `DefaultTableModel modeloTablaPacientes()`
 
 ### Médicos
-| Método | Retorna | Descripción |
-|--------|---------|-------------|
-| `insertarMedico(m)` | `boolean` | Inserta médico |
-| `buscarMedico(dni)` | `Medico` | Busca por código |
-| `modificarMedico(m)` | `boolean` | Modifica médico |
-| `eliminarMedico(dni)` | `boolean` | Elimina médico |
-| `obtenerMedicos()` | `ArrayList<Medico>` | Lista todos |
-| `modeloTablaMedicos()` | `DefaultTableModel` | Modelo para JTable |
+- `boolean insertarMedico(Medico m)`
+- `Medico buscarMedico(String dni)`
+- `Medico buscarMedicoPorCodigo(String codigo)`
+- `Medico buscarMedicoTurno(Date turno)`
+- `boolean modificarMedico(Medico m)`
+- `boolean eliminarMedico(String dni)`
+- `ArrayList<Medico> obtenerMedicos()`
+- `DefaultTableModel modeloTablaMedicos()`
 
 ### Citas
-| Método | Retorna | Descripción |
-|--------|---------|-------------|
-| `insertarCita(c)` | `boolean` | Inserta cita |
-| `modificarCita(c)` | `boolean` | Modifica cita |
-| `eliminarCita(dniPac, especialidad)` | `boolean` | Elimina cita |
-| `obtenerCitas()` | `ArrayList<Cita>` | Lista todas |
-| `modeloTablaCitas()` | `DefaultTableModel` | Modelo para JTable |
+- `boolean insertarCita(Cita c)` — con validación de 15 minutos
+- `boolean modificarCita(Cita c)`
+- `boolean eliminarCita(String dniPaciente, String especialidad)`
+- `ArrayList<Cita> obtenerCitas()`
+- `DefaultTableModel modeloTablaCitas()`
 
 ### Historiales
-| Método | Retorna | Descripción |
-|--------|---------|-------------|
-| `insertarHistorial(h)` | `boolean` | Inserta historial |
-| `buscarHistorial(dniPaciente)` | `HistorialClinico` | Busca por paciente |
-| `modificarHistorial(h)` | `boolean` | Modifica historial |
-| `eliminarHistorial(dniPaciente)` | `boolean` | Elimina historial |
+- `boolean insertarHistorial(HistorialClinico h)`
+- `HistorialClinico buscarHistorial(String dniPaciente)`
+- `boolean modificarHistorial(HistorialClinico h)`
+- `boolean eliminarHistorial(String dniPaciente)`
+- `DefaultTableModel modeloTablaHistoriales(ArrayList<HistorialClinico>)`
 
-### Reportes
-| Método | Retorna | Descripción |
-|--------|---------|-------------|
-| `obtenerDemandaPorEspecialidad()` | `HashMap<String, Integer>` | Citas por especialidad |
-| `obtenerPacientesPorSeguro()` | `HashMap<String, Integer>` | Pacientes por seguro |
+### Reportes Médicos
+- `boolean insertarReporte(ReporteMedico r)`
+- `ReporteMedico buscarReporte(String dniPaciente, Date fecha)`
+- `boolean modificarReporte(ReporteMedico r)`
+- `ArrayList<ReporteMedico> obtenerReportesPorMedico(String dniMedico)`
+- `ArrayList<ReporteMedico> obtenerReportesPorPaciente(String dniPaciente)`
+- `DefaultTableModel modeloTablaReportes(ArrayList<ReporteMedico>)`
 
----
-
-## Estructuras de Datos
-
-| Estructura | Tipo | Uso |
-|------------|------|-----|
-| `ArbolPaciente` | Árbol Binario de Búsqueda | Almacenar y buscar pacientes por DNI |
-| `ListaDobleMedico` | Lista Doblemente Enlazada | Almacenar y buscar médicos por código |
-| `ListaDobleRecepcionista` | Lista Doblemente Enlazada | Almacenar recepcionistas |
-| `ListaDobleAdmin` | Lista Doblemente Enlazada | Almacenar administradores |
-| `ListaDobleCita` | Lista Doblemente Enlazada | Almacenar citas médicas |
-| `ListaDobleHistorial` | Lista Doblemente Enlazada | Almacenar historiales clínicos |
+### Analytics
+- `HashMap<String, Integer> obtenerDemandaPorEspecialidad()`
+- `HashMap<String, Integer> obtenerPacientesPorSeguro()`
 
 ---
 
-## Credenciales de Prueba
+## 10. Tabla de Archivos
 
-| Usuario | Código | Contraseña | Rol |
-|---------|--------|------------|-----|
-| Admin | `admin` | `12345` | Administrador |
-| Médico | `M10000000` | `12345` | Médico |
-| Recepcionista | `R10000000` | `12345` | Recepcionista |
-| Paciente | `10000000` | - | Paciente |
-
----
-
-## Tecnologías Utilizadas
-
-- **Lenguaje:** Java (Swing)
-- **IDE:** Apache NetBeans 24
-- **Gráficos:** JFreeChart
-- **Construcción:** Apache Ant
-
----
-
-## Ejecución
-
-1. Abrir el proyecto en NetBeans
-2. Ejecutar `src/hospitaljy/main.java`
-3. Se cargarán automáticamente los datos de prueba
-4. Iniciar sesión con las credenciales de la tabla anterior
-
----
-
-## Diagrama de Componentes
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                      VISTAS (Swing)                     │
-│  JpLogin  JpAdmin  JpPacientes  JpMedicos  JpCitas...  │
-└─────────────────────────┬───────────────────────────────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────┐
-│              FACADE (HospitalFacade)                    │
-│         Acceso unificado a todo el sistema              │
-└───────┬──────────┬──────────┬──────────┬───────────────┘
-        │          │          │          │
-        ▼          ▼          ▼          ▼
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-│ Auth     │ │ Paciente │ │ Médico   │ │ Cita     │
-│ Strategy │ │  Árbol   │ │  Lista   │ │  Lista   │
-└──────────┘ └──────────┘ └──────────┘ └──────────┘
-```
-
----
-
-## Modelo de Datos
-
-```
-┌─────────────┐
-│  Trabajador  │ (Interfaz)
-└──────┬──────┘
-       │
-       ├── Admin
-       ├── Medico
-       └── Recepcionista
-
-┌─────────────┐
-│   Paciente   │
-└─────────────┘
-       │
-       ├── HistorialClinico (1:1)
-       └── Cita (1:N)
-
-┌─────────────┐
-│    Cita      │
-└─────────────┘
-   │       │
-Paciente  Medico
-```
+| # | Archivo | Líneas | Función |
+|---|---------|--------|---------|
+| 1 | `main.java` | 63 | Punto de entrada, precarga, configuración visual |
+| 2 | `Precargador.java` | 51 | Clase abstracta Template Method |
+| 3 | `PrecargadorPacientes.java` | 58 | Precarga 11 pacientes |
+| 4 | `PrecargadorMedicos.java` | 58 | Precarga 6 médicos |
+| 5 | `PrecargadorRecepcionistas.java` | 44 | Precarga 4 recepcionistas |
+| 6 | `PrecargadorAdmins.java` | 34 | Precarga 1 admin |
+| 7 | `Usuario.java` | 42 | DTO de sesión |
+| 8 | `Paciente.java` | 81 | Modelo paciente |
+| 9 | `Medico.java` | 90 | Modelo médico |
+| 10 | `Admin.java` | 86 | Modelo administrador |
+| 11 | `Recepcionista.java` | 90 | Modelo recepcionista |
+| 12 | `Cita.java` | 94 | Modelo cita |
+| 13 | `HistorialClinico.java` | 62 | Modelo historial |
+| 14 | `ReporteMedico.java` | 92 | Modelo reporte |
+| 15 | `NodoArbolPaciente.java` | 39 | Nodo BST |
+| 16 | `NodoAdmin.java` | 39 | Nodo lista admin |
+| 17 | `NodoMedico.java` | 39 | Nodo lista médico |
+| 18 | `NodoRecepcionista.java` | 39 | Nodo lista recepcionista |
+| 19 | `NodoCita.java` | 40 | Nodo lista cita |
+| 20 | `NodoHistorial.java` | 39 | Nodo lista historial |
+| 21 | `NodoReporte.java` | 42 | Nodo lista reporte |
+| 22 | `ArbolPaciente.java` | 115 | BST de pacientes |
+| 23 | `ListaDobleAdmin.java` | 100 | Lista admin |
+| 24 | `ListaDobleMedico.java` | 120 | Lista médico |
+| 25 | `ListaDobleRecepcionista.java` | 100 | Lista recepcionista |
+| 26 | `ListaDobleCita.java` | 114 | Lista cita |
+| 27 | `ListaDobleHistorial.java` | 94 | Lista historial |
+| 28 | `ListaDobleReporte.java` | 119 | Lista reporte |
+| 29 | `AutenticacionStrategy.java` | 8 | Interfaz Strategy |
+| 30 | `AdminAutenticacionStrategy.java` | 27 | Auth admin |
+| 31 | `MedicoAutenticacionStrategy.java` | 27 | Auth médico |
+| 32 | `RecepcionistaAutenticacionStrategy.java` | 27 | Auth recepcionista |
+| 33 | `GestorAutenticacion.java` | 24 | Orquestador auth |
+| 34 | `GestorTablas.java` | 143 | Generador de tablas |
+| 35 | `GestorReportes.java` | 43 | Analytics |
+| 36 | `HospitalFacade.java` | 259 | Fachada central |
+| 37 | `FrmPrincipal.java` | 113 | JFrame principal |
+| 38 | `JpLogin.java` | 212 | Panel login |
+| 39 | `JpAdmin.java` | 133 | Dashboard gráficos |
+| 40 | `JpPacientes.java` | 326 | CRUD pacientes |
+| 41 | `JpMedicos.java` | 331 | CRUD médicos |
+| 42 | `JpAgendarCita.java` | 318 | Agendamiento |
+| 43 | `JpCitasMedico.java` | 216 | Citas del médico |
+| 44 | `JpHistorialesHospitalarios.java` | 185 | Historiales |
+| 45 | `JpReportesHospitalarios.java` | 325 | Reportes médicos |
+| 46 | `JpCerrarSesion.java` | 117 | Cierre de sesión |

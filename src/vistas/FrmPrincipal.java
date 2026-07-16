@@ -6,9 +6,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
     private JpPacientes panelPacientes;
     private JpMedicos panelMedicos;
-    private JpHistorialesClinicos panelHistoriales; 
+    private JpHistorialesHospitalarios panelHistoriales; 
     private JpAgendarCita panelAgendar;
-    private JpReportesClinicos panelReportesClinicos;
+    private JpReportesHospitalarios panelReportesClinicos;
     private JpLogin panelLogin;
     private JpCerrarSesion panelCerrarSesion; 
     private JpCitasMedico panelCitasMedico;
@@ -25,7 +25,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             panelPacientes = new JpPacientes();
             panelMedicos = new JpMedicos(); 
-            panelHistoriales = new JpHistorialesClinicos();
+            panelHistoriales = new JpHistorialesHospitalarios();
             panelAgendar = new JpAgendarCita(); 
             panelLogin = new JpLogin(this);
             panelCerrarSesion = new JpCerrarSesion(this);
@@ -65,7 +65,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             jTabbedPane2.addTab("Agendar Citas", panelAgendar);
         } else if (usuario.getRol().equals("Medico")) {
             String dniMedico = usuario.getUsername().substring(1);
-            panelReportesClinicos = new JpReportesClinicos(dniMedico);
+            panelReportesClinicos = new JpReportesHospitalarios(dniMedico);
             panelCitasMedico = new JpCitasMedico(usuario.getUsername());
             jTabbedPane2.addTab("Citas", panelCitasMedico);
             jTabbedPane2.addTab("Reportes Hospitalarios", panelReportesClinicos);
@@ -85,17 +85,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
-        jTabbedPane4 = new javax.swing.JTabbedPane();
-        jTabbedPane5 = new javax.swing.JTabbedPane();
-        jTabbedPane6 = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTabbedPane2.addTab("Principal", jTabbedPane3);
-        jTabbedPane2.addTab("Pacientes", jTabbedPane4);
-        jTabbedPane2.addTab("Medicos", jTabbedPane5);
-        jTabbedPane2.addTab("Historiales Clinicos", jTabbedPane6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,9 +109,5 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTabbedPane jTabbedPane6;
     // End of variables declaration//GEN-END:variables
 }

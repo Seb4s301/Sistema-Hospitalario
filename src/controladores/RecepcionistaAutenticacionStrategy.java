@@ -11,7 +11,7 @@ public class RecepcionistaAutenticacionStrategy implements AutenticacionStrategy
     public Usuario autenticar(String codigo, String password) {
         Recepcionista recep = listaRecepcionistas.buscarPorCodigo(codigo);
         if (recep == null) {
-            recep = listaRecepcionistas.buscar(codigo);
+            recep = listaRecepcionistas.buscarPorDni(codigo);
         }
         
         if (recep != null && password.equals("12345")) {

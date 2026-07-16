@@ -31,17 +31,6 @@ public class ListaDobleRecepcionista {
         }
     }
 
-    public Recepcionista buscar(String dni) {
-        NodoRecepcionista actual = ini;
-        while (actual != null) {
-            if (actual.getDato().getDni().equals(dni)) {
-                return actual.getDato();
-            }
-            actual = actual.getSgte();
-        }
-        return null;
-    }
-
     public Recepcionista buscarPorDni(String dni) {
         NodoRecepcionista actual = ini;
         while (actual != null) {

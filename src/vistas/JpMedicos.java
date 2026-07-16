@@ -125,11 +125,6 @@ public class JpMedicos extends javax.swing.JPanel {
         jLabel2.setText("Nombres:");
 
         txtEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--", "Traumatología", "Pediatria", "Oftalmología", "Neurología", "Endocrinología", "Oncología", "Dermatología", "Cardiología", "Gastroenterología" }));
-        txtEspecialidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEspecialidadActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -308,10 +303,6 @@ public class JpMedicos extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void txtEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEspecialidadActionPerformed
-        
-    }//GEN-LAST:event_txtEspecialidadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

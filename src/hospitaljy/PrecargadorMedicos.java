@@ -25,7 +25,7 @@ public class PrecargadorMedicos extends Precargador {
 
     @Override
     protected void precargarAleatorios() throws Exception {
-        String[] especialidades = {"Cardiologia", "Pediatria", "Traumatologia", "Oncologia", "Dermatologia"};
+        String[] especialidades = {"Cardiología", "Pediatria", "Traumatología", "Oncología", "Dermatología"};
         String[] nombres = {"Dr. Juan", "Dr. Maria", "Dr. Pedro", "Dr. Ana", "Dr. Luis"};
         String[] apellidos = getApellidos();
 

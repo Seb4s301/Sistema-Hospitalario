@@ -21,13 +21,4 @@ public class GestorAutenticacion {
         }
         return null;
     }
-
-    public AutenticacionStrategy getEstrategia(String rol) {
-        for (AutenticacionStrategy estrategia : estrategias) {
-            if (estrategia.getRol().equalsIgnoreCase(rol)) {
-                return estrategia;
-            }
-        }
-        return null;
-    }
 }

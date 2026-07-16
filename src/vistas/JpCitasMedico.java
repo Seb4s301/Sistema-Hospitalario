@@ -72,13 +72,13 @@ public class JpCitasMedico extends javax.swing.JPanel {
 
         tblCitasMedico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "DNI Paciente", "Paciente", "Especialidad", "Fecha"
+                "Paciente", "DNI", "Teléfono", "Seguro", "Fecha y Hora "
             }
         ));
         jScrollPane1.setViewportView(tblCitasMedico);
@@ -88,7 +88,7 @@ public class JpCitasMedico extends javax.swing.JPanel {
         jLabel1.setText("Citas Programadas");
 
         try {
-            txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -156,9 +156,9 @@ public class JpCitasMedico extends javax.swing.JPanel {
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(btnBuscarFecha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
